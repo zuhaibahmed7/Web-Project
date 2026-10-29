@@ -1,0 +1,29 @@
+{
+  "name": "fixnow",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "FixNow — Find. Book. Fix. A home service marketplace for Pakistan (frontend prototype).",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-react": "^6.1.2",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.3.5"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
+    "framer-motion": "^14.7.1",
+    "lucide-react": "^1.63.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.5",
+    "recharts": "^3.10.1",
+    "three": "^0.186.1"
+  }
+}

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0F1535" />
+    <meta
+      name="description"
+      content="FixNow — Find. Book. Fix. Pakistan's home service marketplace for plumbing, electrical, AC repair, cleaning, painting, carpentry and mechanics."
+    />
+    <title>FixNow — Find. Book. Fix.</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      // Apply the saved theme before React mounts so there is no flash of the wrong colours.
+      (function () {
+        try {
+          var saved = localStorage.getItem('fixnow.theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (saved === 'dark' || (!saved && prefersDark)) document.documentElement.classList.add('dark');
+        } catch (e) {
+          /* localStorage unavailable — fall back to light mode */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
