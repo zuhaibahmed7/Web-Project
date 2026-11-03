@@ -167,7 +167,7 @@ export default function AdminUsers() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 px-1 text-[12.5px] text-content-muted">
+        <div className="flex flex-wrap items-center gap-3 px-1 text-[13px] text-content-muted">
           <span className="inline-flex items-center gap-1.5 font-semibold text-content">
             <Users className="h-3.5 w-3.5" aria-hidden="true" />
             {rows.length} of {counts.total} accounts shown
@@ -202,13 +202,13 @@ export default function AdminUsers() {
           {/* Desktop ledger */}
           <Reveal className="mt-6 hidden lg:block">
             <Card padding="none" className="overflow-hidden">
-              <table className="w-full text-left text-[13.5px]" aria-label="User accounts">
+              <table className="w-full text-left text-[14px]" aria-label="User accounts">
                 <caption className="sr-only">
                   All registered accounts with role, city, activity and access status. Suspending an account blocks it
                   at sign-in until an administrator reactivates it.
                 </caption>
                 <thead>
-                  <tr className="border-b border-line bg-canvas-2/60 text-[11px] font-bold tracking-[0.1em] text-content-muted uppercase">
+                  <tr className="border-b border-line bg-canvas-2/60 text-[12px] font-bold tracking-[0.1em] text-content-muted uppercase">
                     <th scope="col" className="px-5 py-3">Account</th>
                     <th scope="col" className="px-3 py-3">Role</th>
                     <th scope="col" className="px-3 py-3">City</th>
@@ -228,7 +228,7 @@ export default function AdminUsers() {
                             <Avatar name={user.name} size="sm" ring={user.role === 'admin'} />
                             <span className="min-w-0">
                               <span className="block truncate font-bold text-content">{user.name}</span>
-                              <span className="block truncate text-[12.5px] text-content-muted">{user.email}</span>
+                              <span className="block truncate text-[13px] text-content-muted">{user.email}</span>
                             </span>
                           </span>
                         </th>
@@ -267,7 +267,7 @@ export default function AdminUsers() {
                         <td className="px-5 py-3.5">
                           <span className="flex items-center justify-end gap-3">
                             {provider && (
-                              <LinkButton to={`/provider/${provider.slug}`} className="text-[12.5px]">
+                              <LinkButton to={`/provider/${provider.slug}`} className="text-[13px]">
                                 Business
                               </LinkButton>
                             )}
@@ -315,14 +315,14 @@ export default function AdminUsers() {
                     <Avatar name={user.name} size="sm" ring={user.role === 'admin'} />
                     <div className="min-w-0 flex-1">
                       <p className="truncate font-display text-[15px] font-bold tracking-[-0.02em]">{user.name}</p>
-                      <p className="truncate text-[12.5px] text-content-muted">{user.email}</p>
+                      <p className="truncate text-[13px] text-content-muted">{user.email}</p>
                     </div>
                     <Badge tone={user.status === 'active' ? 'success' : 'danger'} size="sm">
                       {user.status === 'active' ? 'Active' : 'Suspended'}
                     </Badge>
                   </div>
 
-                  <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2.5 text-[12.5px]">
+                  <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2.5 text-[13px]">
                     <div>
                       <dt className="text-content-muted">Role</dt>
                       <dd className="mt-0.5">
@@ -350,7 +350,7 @@ export default function AdminUsers() {
 
                   {provider && (
                     <div className="mt-3 rounded-sm border border-line bg-canvas-2/60 px-3 py-2.5">
-                      <p className="text-[10.5px] font-bold tracking-[0.1em] text-content-muted uppercase">
+                      <p className="text-[11px] font-bold tracking-[0.1em] text-content-muted uppercase">
                         Linked business
                       </p>
                       <Link
@@ -391,7 +391,7 @@ export default function AdminUsers() {
                     )}
                   </div>
                   {guard && (
-                    <p className="mt-2 text-[11.5px] leading-snug text-rejected dark:text-[#ff8a8a]">{guard}</p>
+                    <p className="mt-2 text-[12px] leading-snug text-rejected dark:text-[#ff8a8a]">{guard}</p>
                   )}
                 </Card>
               );
@@ -400,7 +400,7 @@ export default function AdminUsers() {
         </>
       )}
 
-      <p className="mt-6 flex items-start gap-2 text-[12.5px] leading-relaxed text-content-muted">
+      <p className="mt-6 flex items-start gap-2 text-[13px] leading-relaxed text-content-muted">
         <CircleCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-completed" aria-hidden="true" />
         Suspension is enforced inside the store&rsquo;s login check, not just hidden in this UI. Suspended accounts keep
         their history, and reactivating restores access immediately.
@@ -437,7 +437,7 @@ export default function AdminUsers() {
           }}
           hint="Stored with the account so the decision can be reviewed later."
         />
-        <p className="flex items-start gap-2 rounded-sm border border-rejected/30 bg-rejected/8 px-3.5 py-3 text-[12.5px] leading-relaxed text-content-soft">
+        <p className="flex items-start gap-2 rounded-sm border border-rejected/30 bg-rejected/8 px-3.5 py-3 text-[13px] leading-relaxed text-content-soft">
           <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-rejected" aria-hidden="true" />
           {pending?.email} will get &ldquo;This account is suspended. Please contact an administrator.&rdquo; at
           sign-in. Their existing bookings and reviews stay in the ledger, and reactivating restores access instantly.

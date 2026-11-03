@@ -23,6 +23,7 @@ import { decorateProvider } from '../utils/selectors';
 import { CITIES } from '../data/categories';
 import { nextDays, todayISO } from '../utils/date';
 import { formatPKR, formatDate, formatDayShort, formatTime } from '../utils/format';
+import { useI18n } from '../i18n/useI18n';
 import { minLength, required, validBookingDate, validTime } from '../utils/validation';
 import { cn } from '../utils/cn';
 import { Avatar } from '../components/ui/Avatar';
@@ -35,7 +36,7 @@ import { CategoryIcon } from '../components/ui/CategoryIcon';
 import { EmptyState } from '../components/ui/EmptyState';
 import { Reveal } from '../components/ui/Reveal';
 
-const STEPS = ['Service', 'Schedule', 'Details'];
+const STEPS = ['booking.step1', 'booking.step2', 'booking.step3'];
 
 // The customer-side booking form (FR-BM-01 … FR-BM-07).
 // Three steps so one screen does not throw eleven fields at once, and every
@@ -45,6 +46,7 @@ export default function BookingNew() {
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const toast = useToast();
+  const { t, isRtl } = useI18n();
   const reduce = useReducedMotion();
   const { state, currentUser, createBooking } = useStore();
 
@@ -71,10 +73,14 @@ export default function BookingNew() {
       <div className="mx-auto max-w-[84rem] px-4 py-20 sm:px-6 lg:px-8">
         <EmptyState
           icon={SearchX}
-          title="That provider is not on FixNow"
-          description={`No business matches “${slug}”. It may have been removed, or the link is out of date.`}
-          action={<Button to="/browse">Browse providers</Button>}
-          secondaryAction={<Button variant="outline" to="/how-it-works">How FixNow works</Button>}
+          title={t('booking.notFoundTitle')}
+          description={t('booking.notFoundBody', { slug })}
+          action={<Button to="/browse">{t('booking.browseProviders')}</Button>}
+          secondaryAction={
+            <Button variant="outline" to="/how-it-works">
+              {t('nav.how')}
+            </Button>
+          }
         />
       </div>
     );
@@ -114,7 +120,7 @@ export default function BookingNew() {
     const found = validateStep(step);
     setErrors(found);
     if (Object.keys(found).length) {
-      toast.error('Fix the highlighted field to continue.', { title: 'Almost there' });
+      toast.error(t('booking.fixFields'), { title: t('booking.fixTitle') });
       return;
     }
     setStep((s) => Math.min(s + 1, STEPS.length - 1));
@@ -127,7 +133,7 @@ export default function BookingNew() {
     const found = validateStep(2);
     setErrors(found);
     if (Object.keys(found).length) {
-      toast.error('Check the highlighted fields before sending.', { title: 'Not sent yet' });
+      toast.error(t('booking.checkFields'), { title: t('booking.notSentTitle') });
       return;
     }
     if (!service) return;
@@ -145,8 +151,8 @@ export default function BookingNew() {
       phone: values.phone.trim(),
       estimate: service.price ?? null,
     });
-    toast.success(`${booking.code} sent to ${provider.name}. They will respond shortly.`, {
-      title: 'Request sent',
+    toast.success(t('booking.sent', { code: booking.code, name: provider.name }), {
+      title: t('booking.sentTitle'),
     });
     navigate(`/booking/${booking.id}`, { replace: true });
   }
@@ -156,22 +162,22 @@ export default function BookingNew() {
       <div className="relative overflow-hidden border-b border-line bg-canvas-2/60">
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute -top-28 -right-16 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgb(108_92_231_/_0.22),transparent_65%)] blur-2xl"
+          className="pointer-events-none absolute -top-28 -end-16 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgb(9_49_141_/_0.22),transparent_65%)] blur-2xl"
         />
         <div className="relative mx-auto max-w-[84rem] px-4 py-7 sm:px-6 lg:px-8 lg:py-9">
           <Link
             to={`/provider/${provider.slug}`}
             className="group mb-5 inline-flex items-center gap-2 text-[13px] font-semibold text-content-muted transition-colors hover:text-content"
           >
-            <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
-            Back to {provider.name}
+            <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1 rtl:-scale-x-100 rtl:group-hover:translate-x-1" />
+            {t('booking.backTo', { name: provider.name })}
           </Link>
 
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
             <Avatar name={provider.name} size="xl" ring verified={provider.verificationStatus === 'verified'} />
             <div className="min-w-0">
-              <p className="text-[11px] font-bold tracking-[0.18em] text-brand-500 uppercase dark:text-brand-300">
-                Booking a service
+              <p className="text-[12px] font-bold tracking-[0.18em] text-brand-500 uppercase dark:text-brand-300">
+                {t('booking.eyebrow')}
               </p>
               <h1 className="mt-1.5 font-display text-[24px] leading-[1.08] font-extrabold sm:text-[30px]">
                 {provider.name}
@@ -183,14 +189,14 @@ export default function BookingNew() {
                     categoryId={provider.categoryId}
                     className="h-3.5 w-3.5 text-content-soft"
                   />
-                  {provider.category?.name}
+                  {t(`category.${provider.categoryId}`, null, provider.category?.name)}
                 </span>
                 <Rating value={provider.rating} count={provider.reviewCount} />
                 <span className="inline-flex items-center gap-1.5">
                   <Clock className="h-3.5 w-3.5" aria-hidden="true" />
-                  Replies in ~{provider.responseMins} min
+                  {t('profile.repliesIn', { mins: provider.responseMins })}
                 </span>
-                <span className="inline-flex items-center gap-1.5">
+                <span dir="ltr" className="inline-flex items-center gap-1.5">
                   <Phone className="h-3.5 w-3.5" aria-hidden="true" />
                   {provider.phone}
                 </span>
@@ -200,30 +206,34 @@ export default function BookingNew() {
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-[84rem] gap-7 px-4 pt-7 sm:px-6 lg:grid-cols-[minmax(0,1fr)_21rem] lg:gap-9 lg:px-8">
+      <div className="mx-auto grid grid-cols-1 max-w-[84rem] gap-7 px-4 pt-7 sm:px-6 lg:grid-cols-[minmax(0,1fr)_21rem] lg:gap-9 lg:px-8">
         <div>
           <Card className="mb-5" padding="sm">
-            <FormStepper steps={STEPS} current={step} className="px-1 py-1" />
+            <FormStepper steps={STEPS.map((key) => t(key))} current={step} className="px-1 py-1" />
           </Card>
 
           <form onSubmit={submit} noValidate>
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={step}
-                initial={reduce ? { opacity: 0 } : { opacity: 0, x: 26 }}
+                initial={reduce ? { opacity: 0 } : { opacity: 0, x: isRtl ? -26 : 26 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={reduce ? { opacity: 0 } : { opacity: 0, x: -26 }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, x: isRtl ? 26 : -26 }}
                 transition={{ duration: 0.26, ease: [0.16, 1, 0.3, 1] }}
               >
                 {step === 0 && (
                   <fieldset className="border-0 p-0">
                     <legend className="mb-1 font-display text-[19px] font-bold tracking-[-0.02em]">
-                      What needs doing?
+                      {t('booking.svcTitle')}
                     </legend>
                     <p className="mb-5 text-[14px] text-content-muted">
-                      Pick one of {provider.name}&rsquo;s listed services. Prices are indicative and confirmed on site.
+                      {t('booking.svcBody', { name: provider.name })}
                     </p>
-                    <div className="grid gap-3 sm:grid-cols-2" role="radiogroup" aria-label="Service to book">
+                    <div
+                      className="grid grid-cols-1 gap-3 sm:grid-cols-2"
+                      role="radiogroup"
+                      aria-label={t('booking.svcAria')}
+                    >
                       {provider.services.map((s) => {
                         const active = s.id === values.serviceId;
                         return (
@@ -237,7 +247,7 @@ export default function BookingNew() {
                               setErrors((e) => ({ ...e, serviceId: '' }));
                             }}
                             className={cn(
-                              'group relative flex h-full flex-col items-start gap-2 overflow-hidden rounded-lg border p-4 text-left transition-[border-color,box-shadow,background-color] duration-300',
+                              'group relative flex h-full flex-col items-start gap-2 overflow-hidden rounded-lg border p-4 text-start transition-[border-color,box-shadow,background-color] duration-300',
                               active
                                 ? 'border-brand-500 bg-brand-500/8 shadow-glow'
                                 : 'border-line bg-canvas hover:border-brand-500/45 hover:shadow-lift'
@@ -253,8 +263,8 @@ export default function BookingNew() {
                                 {active && <Check className="h-3 w-3 text-white" strokeWidth={3} aria-hidden="true" />}
                               </span>
                               <span className="min-w-0 flex-1">
-                                <span className="block text-[14.5px] font-bold leading-snug">{s.name}</span>
-                                <span className="mt-1 block text-[12.5px] leading-relaxed text-content-muted">
+                                <span className="block text-[15px] font-bold leading-snug">{s.name}</span>
+                                <span className="mt-1 block text-[13px] leading-relaxed text-content-muted">
                                   {s.description}
                                 </span>
                               </span>
@@ -272,7 +282,7 @@ export default function BookingNew() {
                               )}
                               style={{
                                 background:
-                                  'radial-gradient(340px circle at 70% 0%, rgb(0 212 200 / 0.10), transparent 70%)',
+                                  'radial-gradient(340px circle at 70% 0%, rgb(253 129 204 / 0.10), transparent 70%)',
                               }}
                             />
                           </button>
@@ -280,15 +290,12 @@ export default function BookingNew() {
                       })}
                     </div>
                     {errors.serviceId && (
-                      <p className="mt-3 text-[12.5px] font-medium text-rejected dark:text-[#ff8a8a]">
+                      <p className="mt-3 text-[13px] font-medium text-rejected dark:text-[#ff8a8a]">
                         {errors.serviceId}
                       </p>
                     )}
                     {provider.services.length === 0 && (
-                      <p className="text-[13.5px] text-content-muted">
-                        This provider has not published services yet — you can still send a request and describe the job
-                        in the next steps.
-                      </p>
+                      <p className="text-[14px] text-content-muted">{t('booking.noServices')}</p>
                     )}
                   </fieldset>
                 )}
@@ -296,10 +303,10 @@ export default function BookingNew() {
                 {step === 1 && (
                   <div>
                     <h2 className="mb-1 font-display text-[19px] font-bold tracking-[-0.02em]">
-                      When should they come?
+                      {t('booking.whenTitle')}
                     </h2>
                     <p className="mb-5 text-[14px] text-content-muted">
-                      Only the days {provider.name} works are selectable. Bookings must be today or later (SC-04).
+                      {t('booking.whenBody', { name: provider.name })}
                     </p>
 
                     <div className="no-bar -mx-1 mb-2 flex gap-2 overflow-x-auto px-1 pb-2 sm:mx-0 sm:grid sm:grid-cols-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-7">
@@ -316,39 +323,39 @@ export default function BookingNew() {
                               'flex min-w-[4.6rem] shrink-0 flex-col items-center gap-0.5 rounded-md border px-3 py-2.5 transition-[border-color,background-color,transform] duration-200 sm:min-w-0',
                               active && 'border-transparent bg-ink-800 text-white shadow-lift dark:bg-white dark:text-ink-800',
                               !active && d.bookable && 'border-line bg-canvas hover:border-brand-500/50 hover:shadow-hair',
-                              !d.bookable && 'cursor-not-allowed border-line bg-canvas-2/50 opacity-45'
+                              !d.bookable && 'cursor-not-allowed border-dashed border-line-strong bg-canvas-2 text-content-muted'
                             )}
                           >
-                            <span className="text-[10.5px] font-bold tracking-[0.1em] uppercase opacity-80">
-                              {d.isToday ? 'Today' : d.weekday}
+                            <span className="text-[11px] font-bold tracking-[0.1em] uppercase">
+                              {d.isToday ? t('profile.today') : d.weekday}
                             </span>
                             <span className="font-display text-[19px] leading-none font-extrabold tabular-nums">
                               {d.day}
                             </span>
-                            <span className="text-[10.5px] opacity-70">{d.month}</span>
+                            <span className="text-[11px] font-semibold">
+                              {d.bookable ? d.month : t('profile.closed')}
+                            </span>
                           </button>
                         );
                       })}
                     </div>
-                    <p className="mb-5 text-[12px] text-content-muted">
-                      Grey dates are outside this provider&rsquo;s working week. Need a different day? Pick it below.
-                    </p>
+                    <p className="mb-5 text-[12px] text-content-muted">{t('booking.dashedNote')}</p>
 
-                    <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <Input
-                        label="Preferred date"
+                        label={t('booking.dateLabel')}
                         type="date"
                         required
                         min={todayISO()}
                         value={values.date}
                         onChange={set('date')}
                         error={errors.date}
-                        hint="YYYY-MM-DD, today or later."
+                        hint={t('booking.dateHint')}
                       />
                       <Select
-                        label="Arrival window"
+                        label={t('booking.slotLabel')}
                         required
-                        placeholder="Choose a slot"
+                        placeholder={t('booking.slotPlaceholder')}
                         value={values.time}
                         onChange={set('time')}
                         error={errors.time}
@@ -356,7 +363,7 @@ export default function BookingNew() {
                           value: s.start,
                           label: `${formatTime(s.start)} – ${formatTime(s.end)}`,
                         }))}
-                        hint={slots.length ? '' : 'This provider has not set working slots yet.'}
+                        hint={slots.length ? '' : t('booking.noSlotsHint')}
                       />
                     </div>
 
@@ -364,12 +371,14 @@ export default function BookingNew() {
                       <Reveal className="mt-4">
                         <p className="flex flex-wrap items-center gap-2 rounded-sm border border-line bg-canvas-2/60 px-4 py-3 text-[13px]">
                           <CalendarDays className="h-4 w-4 text-brand-500" aria-hidden="true" />
-                          <span className="font-bold">
-                            {formatDate(values.date, { weekday: 'long' })}
-                          </span>
-                          {values.time && <span className="text-content-muted">· {formatTime(values.time)} arrival</span>}
-                          <span className="ml-auto text-content-muted">
-                            {provider.name} usually replies in ~{provider.responseMins} minutes
+                          <span className="font-bold">{formatDate(values.date, { weekday: 'long' })}</span>
+                          {values.time && (
+                            <span className="text-content-muted">
+                              {t('booking.arrival', { time: formatTime(values.time) })}
+                            </span>
+                          )}
+                          <span className="ms-auto text-content-muted">
+                            {t('booking.repliesUsually', { name: provider.name, mins: provider.responseMins })}
                           </span>
                         </p>
                       </Reveal>
@@ -380,45 +389,42 @@ export default function BookingNew() {
                 {step === 2 && (
                   <div>
                     <h2 className="mb-1 font-display text-[19px] font-bold tracking-[-0.02em]">
-                      Where is the job, and what is wrong?
+                      {t('booking.whereTitle')}
                     </h2>
-                    <p className="mb-5 text-[14px] text-content-muted">
-                      The more specific the note, the better the quote. Include landmarks, gate codes or the make and
-                      model.
-                    </p>
+                    <p className="mb-5 text-[14px] text-content-muted">{t('booking.whereBody')}</p>
 
-                    <div className="grid gap-4">
+                    <div className="grid grid-cols-1 gap-4">
                       <Input
-                        label="Service address"
+                        label={t('booking.addressLabel')}
                         icon={MapPin}
                         required
                         value={values.address}
                         onChange={set('address')}
                         error={errors.address}
-                        placeholder="House 42, Street 7, DHA Phase 5"
+                        placeholder={t('booking.addressPlaceholder')}
                       />
-                      <div className="grid gap-4 sm:grid-cols-2">
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <Select
-                          label="City"
+                          label={t('common.city')}
                           required
-                          placeholder="Select your city"
+                          placeholder={t('auth.cityPlaceholder')}
                           value={values.city}
                           onChange={set('city')}
                           error={errors.city}
                           options={CITIES.map((c) => ({ value: c, label: c }))}
                         />
                         <Input
-                          label="Contact number"
+                          label={t('booking.phoneLabel')}
                           icon={Phone}
                           type="tel"
                           value={values.phone}
                           onChange={set('phone')}
-                          hint="Shown to the provider only after they accept."
-                          placeholder="03001234567"
+                          hint={t('booking.phoneHint')}
+                          placeholder={t('auth.phonePlaceholder')}
                         />
                       </div>
                       <Textarea
-                        label="Job details"
+                        label={t('booking.descLabel')}
                         required
                         rows={5}
                         maxLength={400}
@@ -426,14 +432,14 @@ export default function BookingNew() {
                         value={values.description}
                         onChange={set('description')}
                         error={errors.description}
-                        placeholder="Describe the fault, when it started, and anything already tried."
+                        placeholder={t('booking.descPlaceholder')}
                       />
                     </div>
 
-                    {cityWarning(provider, values.city) && (
+                    {cityWarning(provider, values.city, t) && (
                       <p className="mt-1 flex items-start gap-2 rounded-sm border border-pending/40 bg-pending/10 px-4 py-3 text-[13px] text-content-soft">
                         <Info className="mt-0.5 h-4 w-4 shrink-0 text-pending" aria-hidden="true" />
-                        {cityWarning(provider, values.city)}
+                        {cityWarning(provider, values.city, t)}
                       </p>
                     )}
                   </div>
@@ -450,7 +456,7 @@ export default function BookingNew() {
                   onClick={() => setStep((s) => s - 1)}
                   disabled={submitting}
                 >
-                  Back
+                  {t('booking.back')}
                 </Button>
               )}
               {step < STEPS.length - 1 ? (
@@ -460,16 +466,14 @@ export default function BookingNew() {
                   onClick={goNext}
                   disabled={!canAdvance(step, values, provider)}
                 >
-                  Continue
+                  {t('booking.continue')}
                 </Button>
               ) : (
                 <Button type="submit" size="lg" loading={submitting} disabled={submitting} icon={ShieldCheck}>
-                  {submitting ? 'Sending request…' : 'Send booking request'}
+                  {submitting ? t('booking.sending') : t('booking.send')}
                 </Button>
               )}
-              <p className="text-[12.5px] text-content-muted">
-                No payment now. The provider confirms the price on site.
-              </p>
+              <p className="text-[13px] text-content-muted">{t('booking.noPayment')}</p>
             </div>
           </form>
         </div>
@@ -480,35 +484,35 @@ export default function BookingNew() {
             <div className="border-b border-line bg-canvas-2/60 px-5 py-4">
               <p className="flex items-center gap-2 font-display text-[14px] font-bold tracking-[-0.01em]">
                 <Sparkles className="h-4 w-4 text-aqua-500" aria-hidden="true" />
-                Request summary
+                {t('booking.summary')}
               </p>
             </div>
             <dl className="divide-y divide-line text-[13px]">
-              <SummaryRow icon={BadgeCheck} label="Provider" value={provider.name} />
+              <SummaryRow icon={BadgeCheck} label={t('booking.sumProvider')} value={provider.name} />
               <SummaryRow
                 icon={Wallet}
-                label="Service"
-                value={service ? `${service.name} · ${formatPKR(service.price)}` : 'Not chosen yet'}
+                label={t('booking.sumService')}
+                value={service ? `${service.name} · ${formatPKR(service.price)}` : t('booking.notChosen')}
               />
               <SummaryRow
                 icon={CalendarDays}
-                label="Date"
-                value={values.date ? formatDayShort(values.date) : 'Not chosen yet'}
+                label={t('booking.sumDate')}
+                value={values.date ? formatDayShort(values.date) : t('booking.notChosen')}
               />
               <SummaryRow
                 icon={Clock}
-                label="Arrival"
-                value={values.time ? formatTime(values.time) : 'Not chosen yet'}
+                label={t('booking.sumArrival')}
+                value={values.time ? formatTime(values.time) : t('booking.notChosen')}
               />
               <SummaryRow
                 icon={MapPin}
-                label="Address"
-                value={values.address || 'Not entered yet'}
+                label={t('booking.sumAddress')}
+                value={values.address || t('booking.notEntered')}
               />
             </dl>
             <div className="flex items-baseline justify-between gap-3 border-t border-line px-5 py-4">
-              <span className="text-[12.5px] font-semibold tracking-[0.06em] text-content-muted uppercase">
-                Indicative
+              <span className="text-[13px] font-semibold tracking-[0.06em] text-content-muted uppercase">
+                {t('card.indicative')}
               </span>
               <span className="font-display text-[22px] font-extrabold tabular-nums">
                 {service ? formatPKR(service.price) : 'PKR —'}
@@ -516,18 +520,18 @@ export default function BookingNew() {
             </div>
           </Card>
 
-          <ul className="mt-4 space-y-2.5 text-[12.5px] leading-relaxed text-content-muted">
+          <ul className="mt-4 space-y-2.5 text-[13px] leading-relaxed text-content-muted">
             <li className="flex gap-2">
               <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-completed" aria-hidden="true" />
-              Your request stays Pending until {provider.name} accepts it. Cancel free of charge any time before that.
+              {t('booking.trust1', { status: t('status.pending'), name: provider.name })}
             </li>
             <li className="flex gap-2">
               <Lock className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-              Signed in as {currentUser?.name}. Only a signed-in customer can send requests.
+              {t('booking.trust2', { name: currentUser?.name })}
             </li>
             <li className="flex gap-2">
               <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-500" aria-hidden="true" />
-              Once the job is marked Completed you can rate it — one review per booking.
+              {t('booking.trust3', { status: t('status.completed') })}
             </li>
           </ul>
         </aside>
@@ -543,7 +547,7 @@ function SummaryRow({ icon: Icon, label, value }) {
     <div className="flex items-start gap-3 px-5 py-3">
       <Icon className="mt-0.5 h-4 w-4 shrink-0 text-content-muted" aria-hidden="true" />
       <dt className="w-20 shrink-0 text-content-muted">{label}</dt>
-      <dd className="min-w-0 flex-1 text-right font-semibold break-words">{value}</dd>
+      <dd className="min-w-0 flex-1 text-end font-semibold break-words">{value}</dd>
     </div>
   );
 }
@@ -557,10 +561,14 @@ function canAdvance(step, values, provider) {
 }
 
 // Warn, but never block, when the chosen city is outside the provider's patch.
-function cityWarning(provider, city) {
+function cityWarning(provider, city, t) {
   if (!city) return '';
   if (provider.city !== city) {
-    return `${provider.name} is based in ${provider.city} and travels to ${provider.areas.slice(0, 3).join(', ')}. Booking a different city may delay the visit — ask them to confirm.`;
+    return t('booking.cityWarn', {
+      name: provider.name,
+      city: provider.city,
+      areas: provider.areas.slice(0, 3).join(', '),
+    });
   }
   return '';
 }

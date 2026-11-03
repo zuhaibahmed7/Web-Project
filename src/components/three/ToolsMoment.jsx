@@ -50,7 +50,7 @@ export default function ToolsMoment({ className, label = 'Interactive 3D tools' 
       )}
 
       <div className="absolute right-3 bottom-3 z-10 flex items-center gap-2">
-        <span className="hidden rounded-full border border-line bg-surface px-2.5 py-1 text-[11px] font-semibold tracking-[0.1em] text-content-muted uppercase sm:block">
+        <span className="hidden rounded-full border border-line bg-surface px-2.5 py-1 text-[12px] font-semibold tracking-[0.1em] text-content-muted uppercase sm:block">
           move your cursor
         </span>
         {capable && !isMobile && (
@@ -71,7 +71,7 @@ export default function ToolsMoment({ className, label = 'Interactive 3D tools' 
                   aria-pressed={active}
                   onClick={() => setDismissed(opt.value)}
                   className={cn(
-                    'rounded-full px-2.5 py-1 text-[11px] font-bold tracking-[0.06em] uppercase transition-colors',
+                    'rounded-full px-2.5 py-1 text-[12px] font-bold tracking-[0.06em] uppercase transition-colors',
                     active
                       ? 'bg-ink-800 text-white dark:bg-white dark:text-ink-800'
                       : 'text-content-muted hover:text-content'

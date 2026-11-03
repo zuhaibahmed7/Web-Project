@@ -86,11 +86,11 @@ export default function Notifications() {
             <Reveal key={group.key} delay={gi * 0.05}>
               <Card padding="none" className="overflow-hidden">
                 <div className="flex flex-wrap items-center justify-between gap-x-3 border-b border-line px-4 py-3 sm:px-5">
-                  <h2 className="font-display text-[11px] font-bold tracking-[0.16em] text-content-muted uppercase">
+                  <h2 className="font-display text-[12px] font-bold tracking-[0.16em] text-content-muted uppercase">
                     {group.label}
                     <span className="ml-2 tabular-nums text-content-soft">{group.items.length}</span>
                   </h2>
-                  <p className="text-[11.5px] text-content-muted">{group.subline}</p>
+                  <p className="text-[12px] text-content-muted">{group.subline}</p>
                 </div>
                 <ul className="flex flex-col gap-1 p-2 sm:p-3">
                   {group.items.map((n) => (
@@ -105,7 +105,7 @@ export default function Notifications() {
         </div>
       )}
 
-      <p className="mt-6 text-[12.5px] leading-relaxed text-content-muted">
+      <p className="mt-6 text-[13px] leading-relaxed text-content-muted">
         Opening a message marks it read; booking messages also link straight to that booking. Everything is stored in
         this browser only and disappears when the demo data is reset (DR-09).
       </p>

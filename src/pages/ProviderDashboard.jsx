@@ -188,7 +188,7 @@ export default function ProviderDashboard() {
           title="No business profile linked to this account"
           description={`${currentUser.name} is signed in as a service provider, but no provider record is attached to the account yet. Register again choosing "Service provider", or ask an administrator to link your business profile.`}
           action={<Button to="/login">Sign in with another account</Button>}
-          secondaryAction={<Button variant="outline" to="/how-it-works">See how FixNow works</Button>}
+          secondaryAction={<Button variant="outline" to="/how-it-works">See how Kaarigar works</Button>}
         />
       </>
     );
@@ -229,10 +229,10 @@ export default function ProviderDashboard() {
                     ? 'Awaiting verification — your business is hidden from search'
                     : `Verification was declined — your business is hidden from search`}
                 </p>
-                <p className="mt-1.5 text-[13.5px] leading-relaxed text-content-soft">
+                <p className="mt-1.5 text-[14px] leading-relaxed text-content-soft">
                   Only verified providers appear in the marketplace, so customers cannot find {provider.name} through
                   search yet. Requests made from a direct link still arrive normally. Keep your services, contact
-                  details and availability complete while the FixNow team reviews your documents
+                  details and availability complete while the Kaarigar team reviews your documents
                   {provider.verificationStatus === 'rejected' ? ', then ask them to reconsider.' : '.'}
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -250,7 +250,7 @@ export default function ProviderDashboard() {
       )}
 
       {/* ------------------------------------------------ headline numbers */}
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
         <StatCard
           label="Open requests"
           value={requests.length}
@@ -284,7 +284,7 @@ export default function ProviderDashboard() {
         />
       </div>
 
-      <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)]">
+      <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)]">
         <div className="min-w-0 space-y-8">
           {/* ------------------------------------------------ decisions needed */}
           <section aria-labelledby="dash-requests">
@@ -322,7 +322,7 @@ export default function ProviderDashboard() {
                             </span>
                             <StatusBadge status={booking.status} size="sm" showDot={false} />
                           </p>
-                          <p className="mt-1 truncate text-[12.5px] text-content-muted">
+                          <p className="mt-1 truncate text-[13px] text-content-muted">
                             {serviceNameFor(state, booking)} ·{' '}
                             {formatDate(booking.date, { weekday: 'short' })} at {formatTime(booking.time)} ·{' '}
                             {booking.estimate ? formatPKR(booking.estimate) : 'Estimate pending'} · asked{' '}
@@ -395,7 +395,7 @@ export default function ProviderDashboard() {
                         >
                           {isToday ? 'Today' : formatDayShort(booking.date).split(',')[0]}
                         </span>
-                        <span className="mt-0.5 block text-[11.5px] tabular-nums text-content-muted">
+                        <span className="mt-0.5 block text-[12px] tabular-nums text-content-muted">
                           {formatTime(booking.time)}
                         </span>
                       </span>
@@ -404,7 +404,7 @@ export default function ProviderDashboard() {
                           <span className="truncate text-[14px] font-bold">{serviceNameFor(state, booking)}</span>
                           <StatusBadge status={booking.status} size="sm" showDot={false} />
                         </span>
-                        <span className="mt-1 block truncate text-[12.5px] text-content-muted">
+                        <span className="mt-1 block truncate text-[13px] text-content-muted">
                           {customer?.name ?? 'Customer'} · {booking.address}
                         </span>
                       </span>
@@ -424,7 +424,7 @@ export default function ProviderDashboard() {
             <h2 id="dash-shortcuts" className="mb-3.5 font-display text-[19px] font-bold tracking-[-0.02em] sm:text-[22px]">
               Manage your business
             </h2>
-            <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
               {SHORTCUTS.map(({ to, label, hint, icon: Icon }) => (
                 <li key={to}>
                   <Link
@@ -436,7 +436,7 @@ export default function ProviderDashboard() {
                     </span>
                     <span className="min-w-0">
                       <span className="block text-[14px] font-bold tracking-[-0.01em]">{label}</span>
-                      <span className="mt-0.5 block text-[12.5px] leading-snug text-content-muted">{hint}</span>
+                      <span className="mt-0.5 block text-[13px] leading-snug text-content-muted">{hint}</span>
                     </span>
                   </Link>
                 </li>
@@ -455,7 +455,7 @@ export default function ProviderDashboard() {
                 <Rating value={provider.rating} count={provider.reviewCount} className="mt-1" />
               </div>
             </div>
-            <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 text-[12.5px]">
+            <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 text-[13px]">
               <MiniStat label="Response time" value={`${provider.responseMins} min`} />
               <MiniStat label="Experience" value={`${provider.yearsExperience} yrs`} />
               <MiniStat label="Services live" value={`${provider.services?.length ?? 0}`} />
@@ -468,7 +468,7 @@ export default function ProviderDashboard() {
                 </Badge>
               ))}
               {!provider.badges?.length && (
-                <p className="text-[12.5px] text-content-muted">No badges yet — add them on your public profile.</p>
+                <p className="text-[13px] text-content-muted">No badges yet — add them on your public profile.</p>
               )}
             </div>
             <LinkButton to="/partner/profile" className="mt-4">
@@ -478,12 +478,12 @@ export default function ProviderDashboard() {
 
           <Card padding="md">
             <div className="flex items-baseline justify-between gap-3">
-              <h2 className="font-display text-[15.5px] font-bold tracking-[-0.02em]">Your availability</h2>
+              <h2 className="font-display text-[16px] font-bold tracking-[-0.02em]">Your availability</h2>
               <LinkButton to="/partner/availability" icon={ArrowUpRight}>
                 Edit
               </LinkButton>
             </div>
-            <p className="mt-1 text-[12.5px] text-content-muted">
+            <p className="mt-1 text-[13px] text-content-muted">
               {provider.nextAvailable ? (
                 <>
                   Next bookable day:{' '}
@@ -505,7 +505,7 @@ export default function ProviderDashboard() {
                 </Badge>
               )}
             </div>
-            <ul className="mt-3.5 space-y-1.5 text-[12.5px]">
+            <ul className="mt-3.5 space-y-1.5 text-[13px]">
               {(provider.availability?.slots ?? []).map((slot) => (
                 <li key={`${slot.start}-${slot.end}`} className="flex items-center gap-2 text-content-soft">
                   <Clock className="h-3.5 w-3.5 text-content-muted" aria-hidden="true" />
@@ -519,7 +519,7 @@ export default function ProviderDashboard() {
           <div>
             <div className="mb-3.5 flex items-end justify-between gap-3">
               <h2 className="font-display text-[17px] font-bold tracking-[-0.02em]">Latest reviews</h2>
-              <span className="text-[12.5px] text-content-muted">{provider.reviewCount} total</span>
+              <span className="text-[13px] text-content-muted">{provider.reviewCount} total</span>
             </div>
             {reviews.length === 0 ? (
               <EmptyState
@@ -573,7 +573,7 @@ const DOW_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 function DayChip({ dow }) {
   return (
-    <span className="inline-flex h-7 min-w-9 items-center justify-center rounded-full border border-line bg-canvas-2 px-2 text-[11.5px] font-bold text-content-soft">
+    <span className="inline-flex h-7 min-w-9 items-center justify-center rounded-full border border-line bg-canvas-2 px-2 text-[12px] font-bold text-content-soft">
       {DOW_LABELS[dow]}
     </span>
   );

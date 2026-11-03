@@ -4,6 +4,7 @@ import { useStore } from '../store/StoreContext';
 import { useToast } from '../components/ui/Toast';
 import { decorateProvider } from '../utils/selectors';
 import { CITIES } from '../data/categories';
+import { providerAddress } from '../data/locations';
 import { minLength, required, validEmail, validPhone } from '../utils/validation';
 import { PageHeader } from '../components/layout/PageHeader';
 import { Card } from '../components/ui/Card';
@@ -55,7 +56,7 @@ export default function ProviderProfileEdit() {
           action={<Button to="/login">Sign in with another account</Button>}
           secondaryAction={
             <Button variant="outline" to="/how-it-works">
-              How FixNow works
+              How Kaarigar works
             </Button>
           }
         />
@@ -120,7 +121,7 @@ export default function ProviderProfileEdit() {
               <span className="grid h-10 w-10 shrink-0 place-items-center rounded-sm bg-glow-400/18 text-glow-700 dark:text-glow-300">
                 <ShieldCheck className="h-5 w-5" aria-hidden="true" />
               </span>
-              <p className="text-[13.5px] leading-relaxed text-content-soft">
+              <p className="text-[14px] leading-relaxed text-content-soft">
                 <span className="font-bold text-content">
                   Verification is {currentProvider.verificationStatus}.{' '}
                 </span>
@@ -133,7 +134,7 @@ export default function ProviderProfileEdit() {
         </Reveal>
       )}
 
-      <form onSubmit={submit} className="grid gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+      <form onSubmit={submit} className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
         <div className="min-w-0 space-y-6">
           {/* ------------------------------------------------ basics */}
           <Reveal>
@@ -179,7 +180,7 @@ export default function ProviderProfileEdit() {
           <Reveal>
             <Card padding="md">
               <SectionTitle title="Contact & coverage" hint="Customers and our support team use these to reach you." />
-              <div className="mt-4 grid gap-x-4 sm:grid-cols-2">
+              <div className="mt-4 grid grid-cols-1 gap-x-4 sm:grid-cols-2">
                 <Input
                   id="profile-owner"
                   label="Owner name"
@@ -228,13 +229,23 @@ export default function ProviderProfileEdit() {
                 >
                   <input
                     id="profile-areas"
-                    className="h-11 w-full rounded-sm border border-line bg-surface px-3.5 text-[15px] text-content outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-content-muted/70 hover:border-line-strong focus:border-brand-500 focus:shadow-[0_0_0_3px_rgb(108_92_231_/_0.18)]"
+                    className="h-11 w-full rounded-sm border border-line bg-surface px-3.5 text-[15px] text-content outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-content-muted/70 hover:border-line-strong focus:border-brand-500 focus:shadow-[0_0_0_3px_rgb(9_49_141_/_0.18)]"
                     value={draft.areas}
                     onChange={set('areas')}
                     aria-invalid={errors.areas ? 'true' : undefined}
                     placeholder="Satellite Town, Bahria Town, Westridge"
                   />
                 </Field>
+                <div className="sm:col-span-2">
+                  <Input
+                    id="profile-address"
+                    label="Shop or base address"
+                    value={draft.address}
+                    onChange={set('address')}
+                    placeholder="Shop 8-C, Khokhelta Road, DHA Phase 4"
+                    hint="Optional. Shown on your public profile under “Shop / base”. Leave blank to show only your city and areas."
+                  />
+                </div>
               </div>
             </Card>
           </Reveal>
@@ -243,7 +254,7 @@ export default function ProviderProfileEdit() {
           <Reveal>
             <Card padding="md">
               <SectionTitle title="Track record & trust" hint="Numbers customers weigh before choosing you." />
-              <div className="mt-4 grid gap-x-4 sm:grid-cols-2">
+              <div className="mt-4 grid grid-cols-1 gap-x-4 sm:grid-cols-2">
                 <Input
                   id="profile-years"
                   label="Years of experience"
@@ -279,7 +290,7 @@ export default function ProviderProfileEdit() {
                   >
                     <input
                       id="profile-badges"
-                      className="h-11 w-full rounded-sm border border-line bg-surface px-3.5 text-[15px] text-content outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-content-muted/70 hover:border-line-strong focus:border-brand-500 focus:shadow-[0_0_0_3px_rgb(108_92_231_/_0.18)]"
+                      className="h-11 w-full rounded-sm border border-line bg-surface px-3.5 text-[15px] text-content outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-content-muted/70 hover:border-line-strong focus:border-brand-500 focus:shadow-[0_0_0_3px_rgb(9_49_141_/_0.18)]"
                       value={draft.badges}
                       onChange={set('badges')}
                       aria-invalid={errors.badges ? 'true' : undefined}
@@ -293,7 +304,7 @@ export default function ProviderProfileEdit() {
                       </Badge>
                     ))}
                     {!splitList(draft.badges).length && (
-                      <p className="text-[12.5px] text-content-muted">No badges yet.</p>
+                      <p className="text-[13px] text-content-muted">No badges yet.</p>
                     )}
                   </div>
                 </div>
@@ -304,7 +315,7 @@ export default function ProviderProfileEdit() {
           {/* ------------------------------------------------ read-only governance */}
           <Reveal>
             <Card padding="md">
-              <SectionTitle title="Managed by FixNow" hint="Fields a provider cannot change from here." />
+              <SectionTitle title="Managed by Kaarigar" hint="Fields a provider cannot change from here." />
               <div className="mt-4 space-y-3 text-[13px]">
                 <ReadOnly label="Category" value={currentProvider.category?.name ?? 'Uncategorised'}>
                   Categories are created and assigned by administrators, so listings stay comparable across the
@@ -332,7 +343,7 @@ export default function ProviderProfileEdit() {
                 <Button type="button" variant="ghost" onClick={revert}>
                   Discard changes
                 </Button>
-                <span className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-glow-700 dark:text-glow-300">
+                <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-glow-700 dark:text-glow-300">
                   <CircleAlert className="h-3.5 w-3.5" aria-hidden="true" /> Unsaved changes
                 </span>
               </>
@@ -342,7 +353,7 @@ export default function ProviderProfileEdit() {
 
         {/* ------------------------------------------------ live preview */}
         <div className="min-w-0 space-y-4 lg:sticky lg:top-24 lg:self-start">
-          <p className="flex items-center gap-2 text-[11px] font-bold tracking-[0.14em] text-content-muted uppercase">
+          <p className="flex items-center gap-2 text-[12px] font-bold tracking-[0.14em] text-content-muted uppercase">
             <Eye className="h-3.5 w-3.5" aria-hidden="true" /> Live preview
           </p>
           {preview && <ProviderCard provider={preview} />}
@@ -351,7 +362,7 @@ export default function ProviderProfileEdit() {
               <Info className="h-4 w-4 text-brand-500" aria-hidden="true" />
               Preview notes
             </p>
-            <ul className="mt-2 space-y-1.5 text-[12.5px] leading-relaxed text-content-soft">
+            <ul className="mt-2 space-y-1.5 text-[13px] leading-relaxed text-content-soft">
               <li>Prices come from your catalogue, not this form — edit them under Services &amp; prices.</li>
               <li>
                 The next-slot line follows your availability calendar; {preview?.nextAvailable ? 'a booking window exists.' : 'it currently reads “no open slots”.'}
@@ -379,21 +390,21 @@ function SectionTitle({ title, hint }) {
 function ReadOnly({ label, value, children }) {
   return (
     <div className="rounded-sm border border-line bg-canvas-2/50 px-4 py-3">
-      <p className="flex flex-wrap items-center gap-2 text-[11px] font-bold tracking-[0.12em] text-content-muted uppercase">
+      <p className="flex flex-wrap items-center gap-2 text-[12px] font-bold tracking-[0.12em] text-content-muted uppercase">
         {label}
-        <span className="rounded-full bg-ink-800/8 px-2 py-0.5 text-[10px] tracking-normal normal-case dark:bg-white/10">
+        <span className="rounded-full bg-ink-800/8 px-2 py-0.5 text-[11px] tracking-normal normal-case dark:bg-white/10">
           Read only
         </span>
       </p>
       <p className="mt-1.5 font-display text-[14px] font-bold tracking-[-0.01em] capitalize">{value}</p>
-      <p className="mt-1 text-[12.5px] leading-relaxed text-content-muted">{children}</p>
+      <p className="mt-1 text-[13px] leading-relaxed text-content-muted">{children}</p>
     </div>
   );
 }
 
 function toDraft(provider) {
   if (!provider) {
-    return { name: '', tagline: '', bio: '', ownerName: '', phone: '', email: '', city: '', areas: '', yearsExperience: '0', responseMins: '30', badges: '' };
+    return { name: '', tagline: '', bio: '', ownerName: '', phone: '', email: '', city: '', address: '', areas: '', yearsExperience: '0', responseMins: '30', badges: '' };
   }
   return {
     name: provider.name ?? '',
@@ -403,6 +414,7 @@ function toDraft(provider) {
     phone: provider.phone ?? '',
     email: provider.email ?? '',
     city: provider.city ?? '',
+    address: providerAddress(provider) ?? '',
     areas: (provider.areas ?? []).join(', '),
     yearsExperience: String(provider.yearsExperience ?? 0),
     responseMins: String(provider.responseMins ?? 30),
@@ -420,6 +432,7 @@ function fromDraft(draft) {
     phone: draft.phone.trim(),
     email: draft.email.trim().toLowerCase(),
     city: draft.city,
+    address: draft.address.trim(),
     areas: splitList(draft.areas),
     yearsExperience: Number(draft.yearsExperience) || 0,
     responseMins: Number(draft.responseMins) || 30,
@@ -455,7 +468,7 @@ function validate(draft) {
   if (email) found.email = email;
 
   if (!CITIES.includes(draft.city)) {
-    found.city = 'Pick one of the cities FixNow covers.';
+    found.city = 'Pick one of the cities Kaarigar covers.';
   }
 
   if (!splitList(draft.areas).length) {

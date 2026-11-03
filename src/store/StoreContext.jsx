@@ -37,7 +37,7 @@ function labelOf(status) {
   return STATUS_META[status]?.label ?? status.replace('_', ' ');
 }
 
-// Used inside a sentence: "Ayesha Khan cancelled booking FN-…".
+// Used inside a sentence: "Ayesha Khan cancelled booking KA-…".
 function verbOf(status) {
   return labelOf(status).toLowerCase();
 }
@@ -78,6 +78,17 @@ function reducer(state, action) {
         users: state.users.map((u) => (u.id === action.id ? { ...u, status: action.status } : u)),
       };
 
+    case 'user/remove':
+      return {
+        ...state,
+        users: state.users.filter((u) => u.id !== action.id),
+        bookings: state.bookings.filter((b) => b.customerId !== action.id),
+        reviews: state.reviews.filter((r) => r.customerId !== action.id),
+        complaints: state.complaints.filter((c) => c.complainantId !== action.id),
+        notifications: state.notifications.filter((n) => n.userId !== action.id),
+        session: state.session?.userId === action.id ? null : state.session,
+      };
+
     /* ---------------- providers ---------------- */
     case 'provider/add':
       return { ...state, providers: [...state.providers, action.provider] };
@@ -104,7 +115,7 @@ function reducer(state, action) {
           read: false,
           createdAt: action.at,
           title: `Verification ${verb}`,
-          message: `${provider?.name ?? 'Your business'} was ${verb} by the FixNow team.`,
+          message: `${provider?.name ?? 'Your business'} was ${verb} by the Kaarigar team.`,
         });
       }
       return { ...state, providers, notifications };
@@ -315,10 +326,15 @@ export function StoreProvider({ children }) {
     const user = stateRef.current.users.find(
       (u) => u.email.toLowerCase() === String(email).trim().toLowerCase()
     );
-    if (!user) return { ok: false, error: 'No account found with that email address.' };
-    if (user.password !== password) return { ok: false, error: 'Incorrect password. Try again.' };
+    if (!user) return { ok: false, key: 'auth.errNoAccount', error: 'No account found with that email address.' };
+    if (user.password !== password)
+      return { ok: false, key: 'auth.errWrongPassword', error: 'Incorrect password. Try again.' };
     if (user.status === 'suspended') {
-      return { ok: false, error: 'This account is suspended. Please contact an administrator.' };
+      return {
+        ok: false,
+        key: 'auth.errSuspended',
+        error: 'This account is suspended. Please contact an administrator.',
+      };
     }
     dispatch({ type: 'session/set', userId: user.id, at: new Date().toISOString() });
     return { ok: true, user };
@@ -327,7 +343,8 @@ export function StoreProvider({ children }) {
   const register = useCallback((payload) => {
     const email = String(payload.email).trim().toLowerCase();
     const exists = stateRef.current.users.some((u) => u.email.toLowerCase() === email);
-    if (exists) return { ok: false, error: 'Account already exists. Please log in.' };
+    if (exists)
+      return { ok: false, key: 'auth.errEmailTaken', error: 'Account already exists. Please log in.' };
 
     const id = uid('u');
     const user = {
@@ -353,7 +370,7 @@ export function StoreProvider({ children }) {
         slug: `${payload.name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${id.slice(-4)}`,
         name: payload.businessName?.trim() || `${payload.name.trim()}'s Services`,
         ownerName: payload.name.trim(),
-        tagline: 'New on FixNow',
+        tagline: 'New on Kaarigar',
         bio: payload.bio?.trim() || 'This provider has not added a description yet.',
         categoryId: payload.categoryId,
         city: payload.city,
@@ -388,7 +405,7 @@ export function StoreProvider({ children }) {
     const now = new Date().toISOString();
     const booking = {
       id: uid('bk'),
-      code: `FN-${Math.floor(2410 + Math.random() * 5000)}`,
+      code: `KA-${Math.floor(2410 + Math.random() * 5000)}`,
       status: STATUS.PENDING, // BRL-03
       createdAt: now,
       updatedAt: now,
@@ -443,6 +460,10 @@ export function StoreProvider({ children }) {
     dispatch({ type: 'user/setStatus', id, status });
   }, []);
 
+  const deleteAccount = useCallback((id) => {
+    dispatch({ type: 'user/remove', id });
+  }, []);
+
   const removeBooking = useCallback((id) => {
     dispatch({ type: 'booking/remove', id });
   }, []);
@@ -489,6 +510,7 @@ export function StoreProvider({ children }) {
       setVerification,
       updateUser,
       setUserStatus,
+      deleteAccount,
       removeBooking,
       addCategory,
       updateCategory,
@@ -513,6 +535,7 @@ export function StoreProvider({ children }) {
       setVerification,
       updateUser,
       setUserStatus,
+      deleteAccount,
       removeBooking,
       addCategory,
       updateCategory,

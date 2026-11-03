@@ -65,9 +65,11 @@ export default function MyComplaints() {
 
   const bookingOptions = eligibleBookings.map((b) => {
     const provider = findProvider(state, b.providerId);
+    const status = b.status.replace('_', ' ');
     return {
       value: b.id,
-      label: `${b.code} · ${provider?.name ?? 'Provider removed'} · ${formatDate(b.date)} (${b.status.replace('_', ' ')})`,
+      label: b.code,
+      description: `${provider?.name ?? 'Provider removed'} · ${formatDate(b.date)} · ${status[0].toUpperCase()}${status.slice(1)}`,
     };
   });
 
@@ -111,7 +113,7 @@ export default function MyComplaints() {
         title="My complaints"
         description={
           mine.length
-            ? `${mine.length} complaint${mine.length === 1 ? '' : 's'} raised on this account · ${openCount} still with the FixNow team. An admin reply appears on the card as a written resolution.`
+            ? `${mine.length} complaint${mine.length === 1 ? '' : 's'} raised on this account · ${openCount} still with the Kaarigar team. An admin reply appears on the card as a written resolution.`
             : 'Something went wrong on a completed, cancelled or rejected job? Raise it here — an administrator is notified immediately and their answer is recorded against your complaint.'
         }
         actions={
@@ -125,7 +127,7 @@ export default function MyComplaints() {
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <Segmented options={STATUS_TABS} value={tab} onChange={setTab} ariaLabel="Filter my complaints by status" />
         {mine.length > 0 && (
-          <p className="flex flex-wrap items-center gap-2 text-[12.5px] text-content-muted" role="status">
+          <p className="flex flex-wrap items-center gap-2 text-[13px] text-content-muted" role="status">
             <Badge tone="danger" size="sm">
               {mine.filter((c) => c.status === 'open').length} open
             </Badge>
@@ -187,8 +189,8 @@ export default function MyComplaints() {
         </ul>
       )}
 
-      <p className="mt-6 text-[12.5px] leading-relaxed text-content-muted">
-        Complaints are visible to FixNow administrators only — the provider is not sent your text. Priority sets the
+      <p className="mt-6 text-[13px] leading-relaxed text-content-muted">
+        Complaints are visible to Kaarigar administrators only — the provider is not sent your text. Priority sets the
         order admins work through, not a guarantee of outcome, and everything is stored in this browser for the demo.
       </p>
 
@@ -212,7 +214,7 @@ export default function MyComplaints() {
       >
         {eligibleBookings.length === 0 ? (
           <Card padding="sm">
-            <p className="text-[13.5px] leading-relaxed text-content-soft">
+            <p className="text-[14px] leading-relaxed text-content-soft">
               You have no decided bookings yet. A complaint needs a booking that the provider has already responded to,
               because there is nothing to assess while a request is still Pending.
             </p>
@@ -253,7 +255,7 @@ export default function MyComplaints() {
               rows={5}
               maxLength={600}
               showCount
-              placeholder="Times, what was agreed, what actually happened, and what you would like FixNow to do."
+              placeholder="Times, what was agreed, what actually happened, and what you would like Kaarigar to do."
               value={form.details}
               error={errors.details}
               hint="Facts in order. Avoid phone numbers or CNIC details — they are not needed to resolve it."
@@ -274,7 +276,7 @@ export default function MyComplaints() {
                 onChange={(v) => setForm((f) => ({ ...f, priority: v }))}
                 ariaLabel="Complaint priority"
               />
-              <p className="mt-2 text-[12.5px] text-content-muted">
+              <p className="mt-2 text-[13px] text-content-muted">
                 High means the visit never happened or money changed hands wrongly. Choose honestly — every high flag is
                 read before the next one.
               </p>

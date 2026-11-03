@@ -20,7 +20,7 @@ export const SEED_BOOKINGS = [
   /* ---------- Ayesha Khan (demo customer, u-customer) ---------- */
   {
     id: 'bk-01',
-    code: 'FN-2401',
+    code: 'KA-2401',
     customerId: 'u-customer',
     providerId: 'p-01',
     serviceId: 's-0101',
@@ -39,7 +39,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-02',
-    code: 'FN-2402',
+    code: 'KA-2402',
     customerId: 'u-customer',
     providerId: 'p-09',
     serviceId: 's-0901',
@@ -60,7 +60,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-03',
-    code: 'FN-2403',
+    code: 'KA-2403',
     customerId: 'u-customer',
     providerId: 'p-05',
     serviceId: 's-0501',
@@ -83,7 +83,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-06',
-    code: 'FN-2396',
+    code: 'KA-2396',
     customerId: 'u-customer',
     providerId: 'p-09',
     serviceId: 's-0902',
@@ -106,7 +106,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-07',
-    code: 'FN-2397',
+    code: 'KA-2397',
     customerId: 'u-customer',
     providerId: 'p-01',
     serviceId: 's-0102',
@@ -129,7 +129,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-10',
-    code: 'FN-2399',
+    code: 'KA-2399',
     customerId: 'u-customer',
     providerId: 'p-13',
     serviceId: 's-1301',
@@ -152,7 +152,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-11',
-    code: 'FN-2404',
+    code: 'KA-2404',
     customerId: 'u-customer',
     providerId: 'p-23',
     serviceId: 's-2302',
@@ -174,7 +174,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-12',
-    code: 'FN-2405',
+    code: 'KA-2405',
     customerId: 'u-customer',
     providerId: 'p-12',
     serviceId: 's-1201',
@@ -198,7 +198,7 @@ export const SEED_BOOKINGS = [
   /* ---------- Bilal Electrical Works (demo provider, p-05) ---------- */
   {
     id: 'bk-04',
-    code: 'FN-2406',
+    code: 'KA-2406',
     customerId: 'u-customer-2',
     providerId: 'p-05',
     serviceId: 's-0504',
@@ -216,7 +216,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-05',
-    code: 'FN-2407',
+    code: 'KA-2407',
     customerId: 'u-customer-3',
     providerId: 'p-05',
     serviceId: 's-0503',
@@ -234,7 +234,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-08',
-    code: 'FN-2408',
+    code: 'KA-2408',
     customerId: 'u-customer-2',
     providerId: 'p-05',
     serviceId: 's-0505',
@@ -255,7 +255,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-09',
-    code: 'FN-2409',
+    code: 'KA-2409',
     customerId: 'u-customer-4',
     providerId: 'p-05',
     serviceId: 's-0502',
@@ -277,7 +277,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-13',
-    code: 'FN-2390',
+    code: 'KA-2390',
     customerId: 'u-customer-2',
     providerId: 'p-05',
     serviceId: 's-0501',
@@ -300,7 +300,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-14',
-    code: 'FN-2391',
+    code: 'KA-2391',
     customerId: 'u-customer-3',
     providerId: 'p-05',
     serviceId: 's-0504',
@@ -323,7 +323,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-15',
-    code: 'FN-2392',
+    code: 'KA-2392',
     customerId: 'u-customer-4',
     providerId: 'p-05',
     serviceId: 's-0502',
@@ -345,7 +345,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-16',
-    code: 'FN-2393',
+    code: 'KA-2393',
     customerId: 'u-customer-2',
     providerId: 'p-05',
     serviceId: 's-0503',
@@ -369,7 +369,7 @@ export const SEED_BOOKINGS = [
   /* ---------- Marketplace volume for the admin charts ---------- */
   {
     id: 'bk-17',
-    code: 'FN-2384',
+    code: 'KA-2384',
     customerId: 'u-customer-3',
     providerId: 'p-06',
     serviceId: 's-0601',
@@ -390,7 +390,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-18',
-    code: 'FN-2385',
+    code: 'KA-2385',
     customerId: 'u-customer-2',
     providerId: 'p-17',
     serviceId: 's-1701',
@@ -408,7 +408,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-19',
-    code: 'FN-2386',
+    code: 'KA-2386',
     customerId: 'u-customer-3',
     providerId: 'p-20',
     serviceId: 's-2002',
@@ -426,7 +426,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-20',
-    code: 'FN-2387',
+    code: 'KA-2387',
     customerId: 'u-customer-2',
     providerId: 'p-24',
     serviceId: 's-2401',
@@ -449,7 +449,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-21',
-    code: 'FN-2388',
+    code: 'KA-2388',
     customerId: 'u-customer-3',
     providerId: 'p-13',
     serviceId: 's-1302',
@@ -472,7 +472,7 @@ export const SEED_BOOKINGS = [
   },
   {
     id: 'bk-22',
-    code: 'FN-2389',
+    code: 'KA-2389',
     customerId: 'u-customer-2',
     providerId: 'p-02',
     serviceId: 's-0202',

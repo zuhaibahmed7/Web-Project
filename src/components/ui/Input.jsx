@@ -1,12 +1,13 @@
 import { forwardRef, useId } from 'react';
-import { ChevronDown, CircleAlert } from 'lucide-react';
+import { CircleAlert } from 'lucide-react';
 import { cn } from '../../utils/cn';
+import { Dropdown } from './Dropdown';
 
 const FIELD_BASE =
   'w-full rounded-sm border bg-surface px-3.5 text-[15px] text-content placeholder:text-content-muted/70 ' +
   'transition-[border-color,box-shadow,background-color] duration-200 outline-none ' +
   'border-line hover:border-line-strong ' +
-  'focus:border-brand-500 focus:shadow-[0_0_0_3px_rgb(108_92_231_/_0.18)] ' +
+  'focus:border-brand-500 focus:shadow-[0_0_0_3px_rgb(9_49_141_/_0.18)] ' +
   'disabled:cursor-not-allowed disabled:opacity-55';
 
 // Label + hint + error wrapper. Every form control in the app uses this so
@@ -31,12 +32,12 @@ export function Field({ label, htmlFor, error, hint, required, children, classNa
       {children}
       <div className="flex min-h-[16px] items-start justify-between gap-3">
         {error ? (
-          <p id={`${htmlFor}-error`} className="flex items-center gap-1 text-[12.5px] font-medium text-rejected dark:text-[#ff8a8a]">
+          <p id={`${htmlFor}-error`} className="flex items-center gap-1 text-[13px] font-medium text-rejected dark:text-[#ff8a8a]">
             <CircleAlert className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
             {error}
           </p>
         ) : (
-          hint && <p className="text-[12.5px] text-content-muted">{hint}</p>
+          hint && <p className="text-[13px] text-content-muted">{hint}</p>
         )}
         {counter && <span className="shrink-0 text-[12px] tabular-nums text-content-muted">{counter}</span>}
       </div>
@@ -55,7 +56,7 @@ export const Input = forwardRef(function Input(
       <div className="relative">
         {Icon && (
           <Icon
-            className="pointer-events-none absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-content-muted"
+            className="pointer-events-none absolute top-1/2 start-3.5 h-4 w-4 -translate-y-1/2 text-content-muted"
             aria-hidden="true"
           />
         )}
@@ -69,8 +70,8 @@ export const Input = forwardRef(function Input(
           className={cn(
             FIELD_BASE,
             'h-11',
-            Icon && 'pl-10',
-            suffix && 'pr-14',
+            Icon && 'ps-10',
+            suffix && 'pe-14',
             error && 'border-rejected focus:border-rejected focus:shadow-[0_0_0_3px_rgb(239_68_68_/_0.18)]',
             inputClassName,
             className
@@ -78,7 +79,7 @@ export const Input = forwardRef(function Input(
           {...rest}
         />
         {suffix && (
-          <span className="pointer-events-none absolute top-1/2 right-3.5 -translate-y-1/2 text-[12px] font-semibold text-content-muted">
+          <span className="pointer-events-none absolute top-1/2 end-3.5 -translate-y-1/2 text-[12px] font-semibold text-content-muted">
             {suffix}
           </span>
         )}
@@ -123,38 +124,46 @@ export const Textarea = forwardRef(function Textarea(
   );
 });
 
-export const Select = forwardRef(function Select(
-  { label, error, hint, required, className, id, options = [], placeholder, ...rest },
-  ref
-) {
+export function Select({
+  label,
+  error,
+  hint,
+  required,
+  className,
+  id,
+  options = [],
+  placeholder,
+  disabled,
+  value,
+  onChange,
+}) {
   const autoId = useId();
   const fieldId = id ?? autoId;
+  const textLabel = typeof label === 'string' ? label : undefined;
   return (
     <Field label={label} htmlFor={fieldId} error={error} hint={hint} required={required}>
-      <div className="relative">
-        <select
-          ref={ref}
-          id={fieldId}
-          required={required}
-          aria-invalid={error ? 'true' : undefined}
-          className={cn(FIELD_BASE, 'h-11 appearance-none pr-10', error && 'border-rejected', className)}
-          {...rest}
-        >
-          {placeholder && <option value="">{placeholder}</option>}
-          {options.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
-        <ChevronDown
-          className="pointer-events-none absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-content-muted"
-          aria-hidden="true"
-        />
-      </div>
+      <Dropdown
+        id={fieldId}
+        value={value}
+        onChange={onChange}
+        options={options}
+        placeholder={placeholder}
+        disabled={disabled}
+        required={required}
+        invalid={Boolean(error)}
+        describedBy={error ? `${fieldId}-error` : undefined}
+        ariaLabel={textLabel}
+        variant="bare"
+        triggerClassName={cn(
+          FIELD_BASE,
+          'h-11 text-start',
+          error && 'border-rejected',
+          className
+        )}
+      />
     </Field>
   );
-});
+}
 
 // Checkbox with a proper label, used for filters and confirmations.
 export function Checkbox({ label, description, id, className, ...rest }) {
@@ -170,7 +179,7 @@ export function Checkbox({ label, description, id, className, ...rest }) {
         {...rest}
       />
       <div className="min-w-0">
-        <label htmlFor={fieldId} className="cursor-pointer text-[13.5px] font-medium text-content">
+        <label htmlFor={fieldId} className="cursor-pointer text-[14px] font-medium text-content">
           {label}
         </label>
         {description && (
@@ -230,7 +239,7 @@ export function Toggle({ checked, onChange, label, description, disabled }) {
       disabled={disabled}
       onClick={() => onChange(!checked)}
       className={cn(
-        'group inline-flex items-center gap-3 text-left disabled:opacity-50',
+        'group inline-flex items-center gap-3 text-start disabled:opacity-50',
         label && 'cursor-pointer'
       )}
     >
@@ -242,14 +251,14 @@ export function Toggle({ checked, onChange, label, description, disabled }) {
       >
         <span
           className={cn(
-            'absolute top-0.5 left-0.5 h-[18px] w-[18px] rounded-full bg-white shadow-hair transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]',
-            checked && 'translate-x-5'
+            'absolute top-0.5 start-0.5 h-[18px] w-[18px] rounded-full bg-white shadow-hair transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]',
+            checked && 'translate-x-5 rtl:-translate-x-5'
           )}
         />
       </span>
       {label && (
         <span className="min-w-0">
-          <span className="block text-[13.5px] font-semibold text-content">{label}</span>
+          <span className="block text-[14px] font-semibold text-content">{label}</span>
           {description && <span className="block text-[12px] text-content-muted">{description}</span>}
         </span>
       )}

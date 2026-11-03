@@ -1,11 +1,15 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
+import { useI18n } from '../../i18n/useI18n';
 import { formatPKR } from '../../utils/format';
+import { categoryArt } from '../../assets/icons/index.js';
 import { CategoryIcon } from '../ui/CategoryIcon';
 
 // Category entry tile: one bold gradient panel per service family.
 export function CategoryTile({ category, count, href, dense = false }) {
-  const [from, to] = category.accent ?? ['#6C5CE7', '#00D4C8'];
+  const { t } = useI18n();
+  const [from, to] = category.accent ?? ['#09318D', '#4A6FD0'];
+  const art = categoryArt(category.slug);
   return (
     <Link
       to={href ?? `/browse?category=${category.slug}`}
@@ -18,24 +22,35 @@ export function CategoryTile({ category, count, href, dense = false }) {
       />
       <span className="grad-ring" aria-hidden="true" />
 
-      <span
-        aria-hidden="true"
-        className="relative grid h-11 w-11 place-items-center rounded-sm text-white transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-105"
-        style={{ backgroundImage: `linear-gradient(135deg, ${from}, ${to})` }}
-      >
-        <CategoryIcon icon={category.icon} className="h-5 w-5" />
-      </span>
+      {art ? (
+        <span
+          aria-hidden="true"
+          className="relative grid h-16 w-16 place-items-center overflow-hidden rounded-md bg-white ring-1 ring-line shadow-hair transition-transform duration-500 group-hover:-rotate-3 group-hover:scale-105"
+        >
+          <img src={art} alt="" loading="lazy" decoding="async" className="h-full w-full object-contain" />
+        </span>
+      ) : (
+        <span
+          aria-hidden="true"
+          className="relative grid h-16 w-16 place-items-center rounded-sm text-white transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-105"
+          style={{ backgroundImage: `linear-gradient(135deg, ${from}, ${to})` }}
+        >
+          <CategoryIcon icon={category.icon} className="h-7 w-7" />
+        </span>
+      )}
 
-      <h3 className="relative mt-4 font-display text-[17px] font-bold tracking-[-0.02em]">{category.name}</h3>
+      <h3 className="relative mt-4 font-display text-[17px] font-bold tracking-[-0.02em]">
+        {t(`category.${category.id}`, null, category.name)}
+      </h3>
       {!dense && <p className="relative mt-1 text-[13px] leading-snug text-content-muted">{category.tagline}</p>}
 
       <div className="relative mt-auto flex items-center justify-between gap-2 pt-4">
-        <span className="text-[12.5px] font-semibold text-content-soft">
-          from <span className="text-content">{formatPKR(category.from)}</span>
+        <span className="text-[13px] font-semibold text-content-soft">
+          {t('common.from')} <span className="text-content">{formatPKR(category.from)}</span>
         </span>
         <span className="inline-flex items-center gap-1 text-[12px] text-content-muted">
-          {count > 0 ? `${count} pro${count === 1 ? '' : 's'}` : 'No pros listed'}
-          <ArrowUpRight className="h-3.5 w-3.5 text-brand-500 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          {count > 0 ? t(count === 1 ? 'tile.proOne' : 'tile.proN', { count }) : t('tile.noPros')}
+          <ArrowUpRight className="h-3.5 w-3.5 text-brand-500 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
         </span>
       </div>
     </Link>

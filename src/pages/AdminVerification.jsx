@@ -148,7 +148,7 @@ export default function AdminVerification() {
         options={TABS.map((t) => ({ value: t.value, label: `${t.label} (${counts[t.value]})` }))}
       />
 
-      <p className="mt-3 text-[12.5px] leading-relaxed text-content-muted">
+      <p className="mt-3 text-[13px] leading-relaxed text-content-muted">
         {tab === 'pending'
           ? 'Approve to publish the business, or reject with a written reason that is stored on the profile.'
           : tab === 'verified'
@@ -208,9 +208,9 @@ export default function AdminVerification() {
                           </Badge>
                         )}
                       </div>
-                      <p className="mt-1 text-[13.5px] text-content-muted">{provider.tagline}</p>
+                      <p className="mt-1 text-[14px] text-content-muted">{provider.tagline}</p>
 
-                      <dl className="mt-4 grid gap-x-6 gap-y-3 text-[12.5px] sm:grid-cols-2 lg:grid-cols-3">
+                      <dl className="mt-4 grid grid-cols-1 gap-x-6 gap-y-3 text-[13px] sm:grid-cols-2 lg:grid-cols-3">
                         <DetailRow icon={Building} term="Owner">
                           {provider.ownerName}
                         </DetailRow>
@@ -235,9 +235,9 @@ export default function AdminVerification() {
                   </div>
 
                   {/* Services offered — evidence used to judge readiness */}
-                  <div className="grid gap-5 p-5 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+                  <div className="grid grid-cols-1 gap-5 p-5 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
                     <div>
-                      <p className="text-[11px] font-bold tracking-[0.12em] text-content-muted uppercase">
+                      <p className="text-[12px] font-bold tracking-[0.12em] text-content-muted uppercase">
                         Services published ({provider.services?.length ?? 0})
                       </p>
                       {provider.services?.length ? (
@@ -255,7 +255,7 @@ export default function AdminVerification() {
                                   {service.description}
                                 </span>
                               </span>
-                              <span className="shrink-0 text-[12.5px] font-bold whitespace-nowrap text-content">
+                              <span className="shrink-0 text-[13px] font-bold whitespace-nowrap text-content">
                                 {formatPKR(service.price)}
                                 <span className="ml-1 font-normal text-content-muted">/{service.unit}</span>
                               </span>
@@ -301,20 +301,20 @@ export default function AdminVerification() {
                           {gaps.length ? 'Insufficient profile data' : 'Profile complete'}
                         </p>
                         {gaps.length ? (
-                          <ul className="mt-2 list-disc space-y-1 pl-5 text-[12.5px] leading-snug text-content-soft">
+                          <ul className="mt-2 list-disc space-y-1 pl-5 text-[13px] leading-snug text-content-soft">
                             {gaps.map((gap) => (
                               <li key={gap}>{gap}</li>
                             ))}
                           </ul>
                         ) : (
-                          <p className="mt-1.5 text-[12.5px] leading-snug text-content-soft">
+                          <p className="mt-1.5 text-[13px] leading-snug text-content-soft">
                             Description, priced services and service areas are all present.
                           </p>
                         )}
                       </div>
 
                       {provider.verificationNote && (
-                        <p className="rounded-sm border-l-2 border-rejected bg-rejected/8 px-3.5 py-3 text-[12.5px] leading-relaxed text-content-soft">
+                        <p className="rounded-sm border-l-2 border-rejected bg-rejected/8 px-3.5 py-3 text-[13px] leading-relaxed text-content-soft">
                           <span className="block font-bold text-content">Reason on file</span>
                           {provider.verificationNote}
                         </p>
@@ -396,7 +396,7 @@ export default function AdminVerification() {
           placeholder="e.g. Trade certificate unclear and no service prices published yet."
         />
         {rejectTarget && profileGaps(rejectTarget).length > 0 && (
-          <p className="mt-1 flex items-start gap-2 rounded-sm border border-line bg-canvas-2/60 px-3.5 py-3 text-[12.5px] leading-relaxed text-content-soft">
+          <p className="mt-1 flex items-start gap-2 rounded-sm border border-line bg-canvas-2/60 px-3.5 py-3 text-[13px] leading-relaxed text-content-soft">
             <CircleAlert className="mt-0.5 h-3.5 w-3.5 shrink-0 text-glow-600 dark:text-glow-300" aria-hidden="true" />
             Detected gaps you can quote directly: {profileGaps(rejectTarget).join('; ')}.
           </p>

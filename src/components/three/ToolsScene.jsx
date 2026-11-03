@@ -17,8 +17,8 @@ export default function ToolsScene({ active = true, reduced = false }) {
     >
       <ambientLight intensity={0.85} />
       <directionalLight position={[4, 6, 5]} intensity={1.5} color="#ffffff" />
-      <pointLight position={[-5, -2, 3]} intensity={45} color="#6C5CE7" />
-      <pointLight position={[5, 3, -4]} intensity={35} color="#00D4C8" />
+      <pointLight position={[-5, -2, 3]} intensity={45} color="#09318D" />
+      <pointLight position={[5, 3, -4]} intensity={35} color="#4A6FD0" />
 
       <PointerRig>
         <Suspense fallback={null}>
@@ -48,8 +48,8 @@ export default function ToolsScene({ active = true, reduced = false }) {
             </Tool>
           </group>
 
-          <Sparkles count={26} scale={[7, 4, 3]} size={2.4} speed={reduced ? 0 : 0.28} opacity={0.5} color="#8df7ef" />
-          <ContactShadows position={[0, -2.15, 0]} opacity={0.32} scale={11} blur={2.8} far={4.4} resolution={512} color="#0f1535" />
+          <Sparkles count={26} scale={[7, 4, 3]} size={2.4} speed={reduced ? 0 : 0.28} opacity={0.5} color="#ffd9ee" />
+          <ContactShadows position={[0, -2.15, 0]} opacity={0.32} scale={11} blur={2.8} far={4.4} resolution={512} color="#05133A" />
         </Suspense>
       </PointerRig>
     </Canvas>

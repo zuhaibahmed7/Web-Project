@@ -98,12 +98,12 @@ export default function CustomerDashboard() {
         <Card padding="none" className="relative mb-6 overflow-hidden">
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute -top-32 -right-20 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgb(108_92_231_/_0.20),transparent_65%)] blur-2xl"
+            className="pointer-events-none absolute -top-32 -right-20 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgb(9_49_141_/_0.20),transparent_65%)] blur-2xl"
           />
           <span aria-hidden="true" className="dot-grid pointer-events-none absolute inset-0 opacity-50" />
-          <div className="relative grid gap-6 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+          <div className="relative grid grid-cols-1 gap-6 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
             <div className="min-w-0">
-              <p className="text-[11px] font-bold tracking-[0.18em] text-brand-500 uppercase dark:text-brand-300">
+              <p className="text-[12px] font-bold tracking-[0.18em] text-brand-500 uppercase dark:text-brand-300">
                 {greeting}, {currentUser.name.split(' ')[0]}
               </p>
               <h1 className="mt-2.5 font-display text-[26px] leading-[1.05] font-extrabold tracking-[-0.03em] sm:text-[34px]">
@@ -118,7 +118,7 @@ export default function CustomerDashboard() {
                   </>
                 )}
               </h1>
-              <p className="mt-3 max-w-xl text-[14.5px] leading-relaxed text-content-muted">
+              <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-content-muted">
                 {upcoming
                   ? `${upcoming.service?.name ?? 'Your job'} at ${upcoming.booking.address}. Arrival window ${formatTime(
                       upcoming.booking.time
@@ -145,7 +145,7 @@ export default function CustomerDashboard() {
                 <div className="flex items-center gap-3">
                   <Avatar name={upcoming.provider?.name ?? '?'} size="sm" ring />
                   <div className="min-w-0">
-                    <p className="truncate text-[13.5px] font-bold">{upcoming.provider?.name}</p>
+                    <p className="truncate text-[14px] font-bold">{upcoming.provider?.name}</p>
                     <p className="truncate text-[12px] text-content-muted">
                       {upcoming.service?.name ?? 'Service'}
                     </p>
@@ -153,7 +153,7 @@ export default function CustomerDashboard() {
                   <StatusBadge status={upcoming.booking.status} size="sm" className="ml-auto" />
                 </div>
                 <StatusRail status={upcoming.booking.status} className="mt-4" />
-                <div className="mt-4 space-y-2 text-[12.5px]">
+                <div className="mt-4 space-y-2 text-[13px]">
                   <Line icon={MapPin} value={upcoming.booking.address} />
                   <Line icon={Clock} value={`${formatDayShort(upcoming.booking.date)} · ${formatTime(upcoming.booking.time)}`} />
                   <Line
@@ -171,11 +171,11 @@ export default function CustomerDashboard() {
               </div>
             ) : (
               <div className="w-full shrink-0 rounded-xl border border-dashed border-line-strong bg-canvas-2/50 p-5 lg:w-80">
-                <p className="flex items-center gap-2 font-display text-[14.5px] font-bold">
+                <p className="flex items-center gap-2 font-display text-[15px] font-bold">
                   <Sparkles className="h-4 w-4 text-aqua-500" aria-hidden="true" />
                   Try a real flow
                 </p>
-                <p className="mt-2 text-[12.5px] leading-relaxed text-content-muted">
+                <p className="mt-2 text-[13px] leading-relaxed text-content-muted">
                   Book a plumbing visit from Karachi PipeCare, then sign in as the provider to accept it — the status
                   changes for both sides instantly.
                 </p>
@@ -189,7 +189,7 @@ export default function CustomerDashboard() {
       </Reveal>
 
       {/* ----------------------------------------------------------- numbers */}
-      <div className="mb-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
           label="Active bookings"
           value={active.length}
@@ -233,14 +233,14 @@ export default function CustomerDashboard() {
                 .filter(({ booking }) => booking.status === STATUS.PENDING)
                 .map(({ booking, provider }) => (
                   <li key={booking.id} className="flex flex-wrap items-center gap-3 py-3.5 first:pt-0">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-sm bg-pending/15 text-[#8a6500] dark:text-glow-300">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-sm bg-pending/15 text-[#8a6500] dark:text-pending">
                       <Clock className="h-4 w-4" aria-hidden="true" />
                     </span>
                     <div className="min-w-0 flex-1">
                       <p className="text-[14px] font-bold">
                         {provider?.name ?? 'A provider'} has not answered {booking.code} yet
                       </p>
-                      <p className="mt-0.5 text-[12.5px] text-content-muted">
+                      <p className="mt-0.5 text-[13px] text-content-muted">
                         Sent {relativeTime(booking.createdAt)} · you can still cancel free of charge
                       </p>
                     </div>
@@ -258,7 +258,7 @@ export default function CustomerDashboard() {
                     <p className="text-[14px] font-bold">
                       Rate {provider?.name ?? 'your recent provider'} for {service?.name ?? 'the job'}
                     </p>
-                    <p className="mt-0.5 text-[12.5px] text-content-muted">
+                    <p className="mt-0.5 text-[13px] text-content-muted">
                       Completed {relativeTime(booking.updatedAt)} · one review per booking
                     </p>
                   </div>
@@ -277,13 +277,13 @@ export default function CustomerDashboard() {
         <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
           <div>
             <h2 className="font-display text-[19px] font-bold tracking-[-0.02em]">What broke today?</h2>
-            <p className="mt-1 text-[13.5px] text-content-muted">
+            <p className="mt-1 text-[14px] text-content-muted">
               Seven verified categories, priced in PKR, filtered by your city.
             </p>
           </div>
           <SectionLink to="/browse">Full directory</SectionLink>
         </div>
-        <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" as="ul">
+        <Stagger className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4" as="ul">
           {CATEGORIES.map((category) => (
             <StaggerItem key={category.id} as="li" className="h-full">
               <CategoryTile category={category} count={providerCounts[category.id] ?? 0} dense />
@@ -311,18 +311,18 @@ export default function CustomerDashboard() {
       </Reveal>
 
       {/* -------------------------------------------------------- two columns */}
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <div>
           <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
             <div>
               <h2 className="font-display text-[19px] font-bold tracking-[-0.02em]">Highest rated near you</h2>
-              <p className="mt-1 text-[13.5px] text-content-muted">
+              <p className="mt-1 text-[14px] text-content-muted">
                 Scores are recalculated from live reviews — including yours.
               </p>
             </div>
             <SectionLink to="/providers">See all providers</SectionLink>
           </div>
-          <Stagger className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3" as="ul">
+          <Stagger className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3" as="ul">
             {suggestions.map((provider) => (
               <StaggerItem key={provider.id} as="li" className="h-full">
                 <ProviderCard provider={provider} compact />
@@ -337,7 +337,7 @@ export default function CustomerDashboard() {
               <h2 className="font-display text-[16px] font-bold tracking-[-0.02em]">Latest updates</h2>
               <Link
                 to="/notifications"
-                className="text-[12.5px] font-bold text-brand-600 dark:text-brand-300"
+                className="text-[13px] font-bold text-brand-600 dark:text-brand-300"
               >
                 All
               </Link>
@@ -359,8 +359,8 @@ export default function CustomerDashboard() {
                     />
                     <div className="min-w-0">
                       <p className="text-[13px] font-bold leading-snug">{n.title}</p>
-                      <p className="mt-0.5 text-[12.5px] leading-relaxed text-content-muted">{n.message}</p>
-                      <p className="mt-1 text-[11.5px] text-content-muted">{relativeTime(n.createdAt)}</p>
+                      <p className="mt-0.5 text-[13px] leading-relaxed text-content-muted">{n.message}</p>
+                      <p className="mt-1 text-[12px] text-content-muted">{relativeTime(n.createdAt)}</p>
                     </div>
                   </li>
                 ))}
@@ -369,7 +369,7 @@ export default function CustomerDashboard() {
           </Card>
 
           <Card padding="lg" className="bg-canvas-2/60">
-            <h2 className="mb-3 font-display text-[15.5px] font-bold tracking-[-0.02em]">Your activity</h2>
+            <h2 className="mb-3 font-display text-[16px] font-bold tracking-[-0.02em]">Your activity</h2>
             <dl className="space-y-2.5 text-[13px]">
               <Stat label="Bookings sent" value={bookings.length} />
               <Stat label="Reviews written" value={myReviews.length} />
@@ -386,8 +386,8 @@ export default function CustomerDashboard() {
 
           {bookings.length > 0 && (
             <Card padding="lg">
-              <h2 className="mb-1 font-display text-[15.5px] font-bold tracking-[-0.02em]">Booking history</h2>
-              <p className="mb-4 text-[12.5px] text-content-muted">Last five requests, newest first.</p>
+              <h2 className="mb-1 font-display text-[16px] font-bold tracking-[-0.02em]">Booking history</h2>
+              <p className="mb-4 text-[13px] text-content-muted">Last five requests, newest first.</p>
               <ul className="space-y-3">
                 {bookings.slice(0, 5).map((booking) => (
                   <li key={booking.id}>
@@ -395,8 +395,8 @@ export default function CustomerDashboard() {
                       to={`/booking/${booking.id}`}
                       className="group flex items-center gap-3 rounded-sm border border-line px-3 py-2.5 transition-colors duration-300 hover:border-brand-500/50 hover:bg-brand-500/6"
                     >
-                      <span className="font-display text-[12.5px] font-bold tabular-nums">{booking.code}</span>
-                      <span className="min-w-0 flex-1 truncate text-[12.5px] text-content-muted">
+                      <span className="font-display text-[13px] font-bold tabular-nums">{booking.code}</span>
+                      <span className="min-w-0 flex-1 truncate text-[13px] text-content-muted">
                         {formatDayShort(booking.date)}
                       </span>
                       <StatusBadge status={booking.status} size="sm" />

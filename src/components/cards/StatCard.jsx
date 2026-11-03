@@ -19,13 +19,13 @@ export function StatCard({ label, value, suffix = '', prefix = '', hint, icon: I
     <TiltCard tilt={5} className="h-full">
       <div ref={ref} className="flex items-start gap-4 p-5">
         <div className="min-w-0 flex-1">
-          <p className="text-[11px] font-bold tracking-[0.14em] text-content-muted uppercase">{label}</p>
+          <p className="text-[12px] font-bold tracking-[0.14em] text-content-muted uppercase">{label}</p>
           <p className="mt-2 font-display text-[26px] leading-none font-extrabold tracking-[-0.03em] sm:text-[30px]">
             {prefix}
             {format ? format(value) : display}
             {suffix}
           </p>
-          {hint && <p className="mt-2 text-[12.5px] leading-snug text-content-muted">{hint}</p>}
+          {hint && <p className="mt-2 text-[13px] leading-snug text-content-muted">{hint}</p>}
         </div>
         <div className="flex shrink-0 flex-col items-end gap-2">
           {Icon && (
@@ -36,7 +36,7 @@ export function StatCard({ label, value, suffix = '', prefix = '', hint, icon: I
           {delta !== undefined && delta !== null && (
             <span
               className={cn(
-                'inline-flex items-center gap-1 text-[11.5px] font-bold',
+                'inline-flex items-center gap-1 text-[12px] font-bold',
                 delta >= 0 ? 'text-completed' : 'text-rejected'
               )}
             >

@@ -31,11 +31,11 @@ export default function NotFound() {
       {/* Cold-start glow so the page still feels designed at 375px with no images. */}
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(90%_60%_at_50%_-10%,rgb(108_92_231_/_0.18),transparent_62%),radial-gradient(50%_40%_at_85%_100%,rgb(0_212_200_/_0.14),transparent)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(90%_60%_at_50%_-10%,rgb(9_49_141_/_0.18),transparent_62%),radial-gradient(50%_40%_at_85%_100%,rgb(253_129_204_/_0.14),transparent)]"
       />
 
       <div className="relative mx-auto max-w-[84rem] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="min-w-0">
             <Badge tone="glass" size="sm" icon={Wrench}>
               Error 404 · nothing here to fix
@@ -58,9 +58,9 @@ export default function NotFound() {
 
             <Reveal delay={0.08}>
               <h1 className="mt-7 max-w-xl font-display text-[26px] leading-[1.1] font-extrabold tracking-[-0.03em] sm:text-[34px]">
-                This page isn’t part of FixNow
+                This page isn’t part of Kaarigar
               </h1>
-              <p className="mt-4 max-w-xl text-[15.5px] leading-relaxed text-content-soft text-pretty">
+              <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-content-soft text-pretty">
                 The address you followed does not exist in this prototype — it may be an old bookmark, a typo, or a
                 link to a screen the app never shipped. Nothing is broken on your side: your account, bookings and
                 saved data are untouched.
@@ -83,7 +83,7 @@ export default function NotFound() {
           <Reveal delay={0.1} y={24}>
             <Card padding="none" className="overflow-hidden">
               <div className="dot-grid border-b border-line px-5 py-4">
-                <p className="font-display text-[11px] font-bold tracking-[0.18em] text-content-muted uppercase">
+                <p className="font-display text-[12px] font-bold tracking-[0.18em] text-content-muted uppercase">
                   Popular exits
                 </p>
               </div>
@@ -99,7 +99,7 @@ export default function NotFound() {
                       </span>
                       <span className="min-w-0 flex-1">
                         <span className="block font-display text-[15px] font-bold">{route.label}</span>
-                        <span className="block text-[12.5px] leading-snug text-content-muted">{route.blurb}</span>
+                        <span className="block text-[13px] leading-snug text-content-muted">{route.blurb}</span>
                       </span>
                       <ArrowRight
                         className="h-4 w-4 shrink-0 text-content-muted transition-transform duration-300 group-hover:translate-x-1 group-hover:text-brand-500"
@@ -109,8 +109,8 @@ export default function NotFound() {
                   </li>
                 ))}
               </ul>
-              <div className="border-t border-line bg-canvas-2/60 px-5 py-4 text-[12.5px] leading-relaxed text-content-muted">
-                FixNow is a frontend prototype: all state lives in this browser’s localStorage and there is no server
+              <div className="border-t border-line bg-canvas-2/60 px-5 py-4 text-[13px] leading-relaxed text-content-muted">
+                Kaarigar is a frontend prototype: all state lives in this browser’s localStorage and there is no server
                 to look up an old URL on (DR-09). If you got here from a link someone shared, ask them for the current
                 address.
               </div>

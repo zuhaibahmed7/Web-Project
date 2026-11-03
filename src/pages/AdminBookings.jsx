@@ -212,7 +212,7 @@ export default function AdminBookings() {
 
       {/* ------------------------------------------------------------- filters */}
       <Card padding="sm">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <Input
             label="Search"
             value={query}
@@ -266,7 +266,7 @@ export default function AdminBookings() {
           </div>
         </div>
 
-        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-line pt-3 text-[12.5px] text-content-muted">
+        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-line pt-3 text-[13px] text-content-muted">
           <span className="inline-flex items-center gap-1.5 font-semibold text-content">
             <Funnel className="h-3.5 w-3.5" aria-hidden="true" />
             {totals.count} result{totals.count === 1 ? '' : 's'}
@@ -298,7 +298,7 @@ export default function AdminBookings() {
                   follow the booking state machine; completed, rejected and cancelled bookings are terminal.
                 </caption>
                 <thead>
-                  <tr className="border-b border-line bg-canvas-2/60 text-[11px] font-bold tracking-[0.1em] text-content-muted uppercase">
+                  <tr className="border-b border-line bg-canvas-2/60 text-[12px] font-bold tracking-[0.1em] text-content-muted uppercase">
                     <th scope="col" className="px-4 py-3">Code</th>
                     <th scope="col" className="px-3 py-3">Customer</th>
                     <th scope="col" className="px-3 py-3">Provider</th>
@@ -321,13 +321,13 @@ export default function AdminBookings() {
                           >
                             {booking.code}
                           </Link>
-                          <span className="mt-0.5 block text-[11.5px] text-content-muted">
+                          <span className="mt-0.5 block text-[12px] text-content-muted">
                             updated {relativeTime(booking.updatedAt)}
                           </span>
                         </th>
                         <td className="px-3 py-3.5">
                           <span className="block truncate font-semibold text-content">{customer?.name ?? 'Removed'}</span>
-                          <span className="block truncate text-[11.5px] text-content-muted">{booking.city}</span>
+                          <span className="block truncate text-[12px] text-content-muted">{booking.city}</span>
                         </td>
                         <td className="px-3 py-3.5">
                           {provider ? (
@@ -340,17 +340,17 @@ export default function AdminBookings() {
                           ) : (
                             <span className="text-content-muted">Provider removed</span>
                           )}
-                          <span className="mt-0.5 block text-[11.5px] text-content-muted">{categoryName(provider)}</span>
+                          <span className="mt-0.5 block text-[12px] text-content-muted">{categoryName(provider)}</span>
                         </td>
                         <td className="max-w-[14rem] px-3 py-3.5">
                           <span className="block truncate text-content-soft">{service?.name ?? 'Service deleted'}</span>
-                          <span className="mt-0.5 block line-clamp-1 text-[11.5px] text-content-muted">
+                          <span className="mt-0.5 block line-clamp-1 text-[12px] text-content-muted">
                             {booking.description}
                           </span>
                         </td>
                         <td className="px-3 py-3.5 whitespace-nowrap">
                           <span className="block font-semibold text-content">{formatDate(booking.date)}</span>
-                          <span className="block text-[11.5px] text-content-muted">{formatTime(booking.time)}</span>
+                          <span className="block text-[12px] text-content-muted">{formatTime(booking.time)}</span>
                         </td>
                         <td className="px-3 py-3.5 font-bold tabular-nums whitespace-nowrap text-content">
                           {formatPKR(booking.estimate)}
@@ -366,7 +366,7 @@ export default function AdminBookings() {
                                 type="button"
                                 onClick={() => onAction(booking, action)}
                                 className={cn(
-                                  'inline-flex h-7 items-center rounded-xs border px-2 text-[11.5px] font-bold transition-colors',
+                                  'inline-flex h-7 items-center rounded-xs border px-2 text-[12px] font-bold transition-colors',
                                   action === STATUS.REJECTED || action === STATUS.CANCELLED
                                     ? 'border-rejected/35 text-rejected hover:bg-rejected/10'
                                     : action === STATUS.COMPLETED
@@ -379,7 +379,7 @@ export default function AdminBookings() {
                             ))}
                             <Link
                               to={`/booking/${booking.id}`}
-                              className="inline-flex h-7 items-center gap-1 rounded-xs border border-line px-2 text-[11.5px] font-semibold text-content-muted transition-colors hover:border-line-strong hover:text-content"
+                              className="inline-flex h-7 items-center gap-1 rounded-xs border border-line px-2 text-[12px] font-semibold text-content-muted transition-colors hover:border-line-strong hover:text-content"
                             >
                               Open
                               <ExternalLink className="h-3 w-3" aria-hidden="true" />
@@ -424,14 +424,14 @@ export default function AdminBookings() {
                         <StatusBadge status={booking.status} size="sm" />
                       </div>
                       <p className="mt-1 text-[13px] font-semibold text-content">{service?.name ?? 'Service deleted'}</p>
-                      <p className="text-[12.5px] text-content-muted">
+                      <p className="text-[13px] text-content-muted">
                         {customer?.name ?? 'Removed'} → {provider?.name ?? 'Provider removed'} ·{' '}
                         {categoryName(provider)}
                       </p>
                     </div>
                   </div>
 
-                  <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2.5 text-[12.5px]">
+                  <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2.5 text-[13px]">
                     <div>
                       <dt className="text-content-muted">Service date</dt>
                       <dd className="font-semibold text-content">{formatDate(booking.date)}</dd>
@@ -451,7 +451,7 @@ export default function AdminBookings() {
                   </dl>
 
                   {booking.description && (
-                    <p className="mt-2.5 line-clamp-2 text-[12.5px] leading-relaxed text-content-muted">
+                    <p className="mt-2.5 line-clamp-2 text-[13px] leading-relaxed text-content-muted">
                       {booking.description}
                     </p>
                   )}
@@ -496,7 +496,7 @@ export default function AdminBookings() {
                     </Button>
                   </div>
                   {!available.length && (
-                    <p className="mt-2 text-[11.5px] text-content-muted">
+                    <p className="mt-2 text-[12px] text-content-muted">
                       {STATUS_META[booking.status].blurb} No further transitions are permitted for admin here.
                     </p>
                   )}

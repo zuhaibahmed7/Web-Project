@@ -4,62 +4,63 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ------------------------------------------------------------------ *
- * FixNow design tokens
+ * Kaarigar design tokens
  * Palette, type scale, radii, shadows and semantic surface colours.
  * ------------------------------------------------------------------ */
 @theme {
   --font-display: 'Sora', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
 
-  /* Midnight Indigo scale */
-  --color-ink-950: #05081a;
-  --color-ink-900: #0a0e26;
-  --color-ink-800: #0f1535;
-  --color-ink-700: #1a2150;
-  --color-ink-600: #262e6b;
-  --color-ink-500: #3a4390;
-  --color-ink-400: #5b64ad;
+  /* Navy neutral scale — dark panels, inked text (was deep teal-black) */
+  --color-ink-950: #02061a;
+  --color-ink-900: #050d24;
+  --color-ink-800: #0b1c46;
+  --color-ink-700: #12285c;
+  --color-ink-600: #1a3572;
+  --color-ink-500: #2a4a8f;
+  --color-ink-400: #40639f;
 
-  /* Electric Violet scale */
-  --color-brand-50: #f2f0ff;
-  --color-brand-100: #e6e2ff;
-  --color-brand-200: #cdc4ff;
-  --color-brand-300: #ab9dff;
-  --color-brand-400: #8b78f5;
-  --color-brand-500: #6c5ce7;
-  --color-brand-600: #5a48d4;
-  --color-brand-700: #4a3aad;
-  --color-brand-800: #3a2d84;
-  --color-brand-900: #2b2260;
+  /* Deep blue scale — primary action, links, gradients */
+  --color-brand-50: #eff3fd;
+  --color-brand-100: #dde6fa;
+  --color-brand-200: #bacdf4;
+  --color-brand-300: #8aa9ea;
+  --color-brand-400: #4a6fd0;
+  --color-brand-500: #09318d;
+  --color-brand-600: #082a78;
+  --color-brand-700: #072260;
+  --color-brand-800: #051a48;
+  --color-brand-900: #03112e;
 
-  /* Aqua Teal scale */
-  --color-aqua-50: #e8fffd;
-  --color-aqua-100: #c7fffa;
-  --color-aqua-200: #8df7ef;
-  --color-aqua-300: #4ce8de;
-  --color-aqua-400: #00d4c8;
-  --color-aqua-500: #00b8ad;
-  --color-aqua-600: #00948c;
-  --color-aqua-700: #06736e;
-  --color-aqua-800: #0a5a57;
-  --color-aqua-900: #0c4745;
+  /* Bubblegum-pink accent scale. Keeps the "aqua" handle so component classes
+     stay put; low shades are for dark surfaces, high shades for light ones. */
+  --color-aqua-50: #fef3fa;
+  --color-aqua-100: #fde5f4;
+  --color-aqua-200: #fbcbe8;
+  --color-aqua-300: #fd81cc;
+  --color-aqua-400: #fb6cc2;
+  --color-aqua-500: #ee47a9;
+  --color-aqua-600: #d21f8b;
+  --color-aqua-700: #a3186b;
+  --color-aqua-800: #6d1047;
+  --color-aqua-900: #3d0826;
 
-  /* Warm Amber scale (named "glow" so it never clashes with Tailwind's amber) */
-  --color-glow-50: #fff8e8;
-  --color-glow-100: #ffedc4;
-  --color-glow-200: #ffdd8a;
-  --color-glow-300: #ffc95c;
-  --color-glow-400: #ffb020;
-  --color-glow-500: #f29b00;
-  --color-glow-600: #cc7a00;
-  --color-glow-700: #a05c05;
+  /* Hot magenta highlight — the "attention" ramp (stars, review CTAs, badges) */
+  --color-glow-50: #fdf0f8;
+  --color-glow-100: #fbdcef;
+  --color-glow-200: #f8b3dd;
+  --color-glow-300: #f479c1;
+  --color-glow-400: #f0479f;
+  --color-glow-500: #d92a80;
+  --color-glow-600: #b31e66;
+  --color-glow-700: #8a1750;
 
-  /* Soft Cloud scale */
+  /* Cool blue-tinted neutrals */
   --color-cloud-50: #ffffff;
-  --color-cloud-100: #f6f7ff;
-  --color-cloud-200: #eceefb;
-  --color-cloud-300: #dfe2f5;
-  --color-cloud-400: #c8cde8;
+  --color-cloud-100: #f4f7fd;
+  --color-cloud-200: #e8eef9;
+  --color-cloud-300: #d7e1f2;
+  --color-cloud-400: #b9c8e4;
 
   /* Booking status colours (fixed in both themes) */
   --color-pending: #f5b301;
@@ -79,10 +80,10 @@
   --radius-3xl: 36px;
 
   /* Layered soft shadows */
-  --shadow-hair: 0 1px 2px rgb(15 21 53 / 0.06);
-  --shadow-soft: 0 2px 6px rgb(15 21 53 / 0.05), 0 12px 28px -12px rgb(15 21 53 / 0.16);
-  --shadow-lift: 0 4px 10px rgb(15 21 53 / 0.06), 0 24px 48px -18px rgb(15 21 53 / 0.28);
-  --shadow-glow: 0 0 0 1px rgb(108 92 231 / 0.25), 0 18px 50px -14px rgb(108 92 231 / 0.55);
+  --shadow-hair: 0 1px 2px rgb(2 6 26 / 0.06);
+  --shadow-soft: 0 2px 6px rgb(2 6 26 / 0.05), 0 12px 28px -12px rgb(2 6 26 / 0.16);
+  --shadow-lift: 0 4px 10px rgb(2 6 26 / 0.06), 0 24px 48px -18px rgb(2 6 26 / 0.28);
+  --shadow-glow: 0 0 0 1px rgb(9 49 141 / 0.25), 0 18px 50px -14px rgb(9 49 141 / 0.55);
 
   /* Motion presets */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -104,29 +105,29 @@
 }
 
 :root {
-  --c-canvas: #f6f7ff;
-  --c-canvas-2: #eceefb;
+  --c-canvas: #f4f7fd;
+  --c-canvas-2: #e8eef9;
   --c-surface: rgb(255 255 255 / 0.78);
   --c-surface-2: rgb(255 255 255 / 0.55);
-  --c-line: rgb(15 21 53 / 0.1);
-  --c-line-strong: rgb(15 21 53 / 0.18);
-  --c-content: #0f1535;
-  --c-content-soft: #333c66;
-  --c-content-muted: #64748b;
+  --c-line: rgb(2 6 26 / 0.1);
+  --c-line-strong: rgb(2 6 26 / 0.18);
+  --c-content: #0b1c46;
+  --c-content-soft: #16295c;
+  --c-content-muted: #55679a;
 
   color-scheme: light;
 }
 
 .dark {
-  --c-canvas: #05081a;
-  --c-canvas-2: #0a0e26;
-  --c-surface: rgb(20 26 62 / 0.62);
-  --c-surface-2: rgb(15 21 53 / 0.45);
+  --c-canvas: #02061a;
+  --c-canvas-2: #050d24;
+  --c-surface: rgb(11 28 70 / 0.6);
+  --c-surface-2: rgb(5 13 36 / 0.55);
   --c-line: rgb(255 255 255 / 0.1);
   --c-line-strong: rgb(255 255 255 / 0.18);
-  --c-content: #f2f4ff;
-  --c-content-soft: #c3c9e8;
-  --c-content-muted: #94a0c4;
+  --c-content: #e8eefb;
+  --c-content-soft: #b9c8e4;
+  --c-content-muted: #8b9dc4;
 
   color-scheme: dark;
 }
@@ -146,8 +147,11 @@
     background-color: var(--c-canvas);
     color: var(--c-content);
     font-family: var(--font-sans);
+    font-optical-sizing: auto;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'ss01';
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
@@ -159,13 +163,34 @@
   h5 {
     font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.02;
     text-wrap: balance;
   }
 
+  h1 {
+    font-weight: 800;
+    letter-spacing: -0.038em;
+    line-height: 1.04;
+  }
+
+  h2 {
+    letter-spacing: -0.032em;
+    line-height: 1.08;
+  }
+
+  h3 {
+    letter-spacing: -0.022em;
+    line-height: 1.18;
+  }
+
+  h4,
+  h5 {
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    line-height: 1.32;
+  }
+
   ::selection {
-    background: rgb(108 92 231 / 0.28);
+    background: rgb(253 129 204 / 0.42);
     color: var(--c-content);
   }
 
@@ -174,6 +199,11 @@
     outline: 2px solid var(--color-brand-500);
     outline-offset: 3px;
     border-radius: 6px;
+  }
+
+  /* Deep blue disappears against the navy dark theme, so focus goes pink there. */
+  .dark :focus-visible {
+    outline-color: var(--color-aqua-300);
   }
 
   ::-webkit-scrollbar {
@@ -190,7 +220,7 @@
     background-clip: content-box;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgb(108 92 231 / 0.55);
+    background: rgb(9 49 141 / 0.55);
     background-clip: content-box;
   }
 
@@ -239,32 +269,116 @@
     pointer-events: none;
   }
 
-  /* Violet → teal brand gradient, used sparingly. */
+  /* Deep → mid blue brand gradient, used sparingly. Stays dark enough end to
+     end that white button text keeps AA contrast. */
   .grad-brand {
     background-image: linear-gradient(
       110deg,
-      var(--color-brand-500) 0%,
-      #4f7cf0 45%,
-      var(--color-aqua-400) 100%
+      #072260 0%,
+      var(--color-brand-500) 55%,
+      var(--color-brand-400) 100%
     );
   }
 
   .grad-text {
     background-image: linear-gradient(
       100deg,
-      var(--color-brand-400) 0%,
+      var(--color-brand-600) 0%,
       var(--color-brand-500) 40%,
-      var(--color-aqua-400) 100%
+      var(--color-aqua-600) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
+  .dark .grad-text {
+    background-image: linear-gradient(
+      100deg,
+      var(--color-brand-300) 0%,
+      var(--color-brand-200) 40%,
+      var(--color-aqua-300) 100%
+    );
+  }
+
   /* Fine dotted texture used behind hero sections. */
   .dot-grid {
     background-image: radial-gradient(var(--c-line-strong) 1px, transparent 1px);
     background-size: 22px 22px;
+  }
+
+  /* Layered backdrop: artwork (or a dropped-in photograph) under brand shading.
+     Override --hero-photo on .hero-photo to swap the image. */
+  .hero-scene {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hero-photo {
+    --hero-photo: url('/images/pro-at-work.jpg');
+    position: absolute;
+    inset: -2px;
+    /* Photo luminosity over a flat brand blue = duotone, so the image never
+       fights the palette no matter what the source photo looks like. */
+    background-color: #123a86;
+    background-image: var(--hero-photo);
+    background-blend-mode: luminosity;
+    background-size: cover;
+    background-position: 74% center;
+    opacity: 0.58;
+    filter: saturate(1.2) contrast(1.08);
+    /* Fade the photograph out behind the column of copy so text never fights it. */
+    -webkit-mask-image: linear-gradient(94deg, transparent 6%, rgb(0 0 0 / 0.25) 34%, #000 66%);
+    mask-image: linear-gradient(94deg, transparent 6%, rgb(0 0 0 / 0.25) 34%, #000 66%);
+  }
+
+  .hero-photo.hero-photo--alt {
+    --hero-photo: url('/images/pro-at-board.jpg');
+    background-position: center;
+  }
+
+  /* The scrim is what keeps copy readable no matter what sits behind it. */
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(58% 100% at 0% 22%, rgb(244 247 253 / 0.98) 0%, rgb(244 247 253 / 0.84) 38%, transparent 68%),
+      linear-gradient(102deg, rgb(244 247 253 / 0.42) 0%, rgb(74 111 208 / 0.2) 48%, rgb(253 129 204 / 0.3) 100%);
+  }
+
+  /* Always-dark panels shade the artwork with ink, never with the page canvas. */
+  .hero-scene.hero-scene--ink .hero-photo {
+    opacity: 0.42;
+  }
+
+  .hero-scene.hero-scene--ink .hero-scrim {
+    background:
+      radial-gradient(70% 90% at 10% 6%, rgb(11 28 70 / 0.9) 0%, transparent 62%),
+      linear-gradient(150deg, rgb(2 6 26 / 0.74) 0%, rgb(18 40 92 / 0.45) 58%, rgb(253 129 204 / 0.18) 100%);
+  }
+
+  .dark .hero-photo {
+    opacity: 0.5;
+  }
+
+  .dark .hero-scrim {
+    background:
+      radial-gradient(72% 96% at 4% 6%, rgb(2 6 26 / 0.96) 0%, transparent 58%),
+      linear-gradient(102deg, rgb(2 6 26 / 0.72) 0%, rgb(18 40 92 / 0.42) 52%, rgb(253 129 204 / 0.16) 100%);
+  }
+
+  /* Narrow viewports crop into the busiest part of the photograph, so hold it back. */
+  @media (max-width: 640px) {
+    .hero-photo {
+      opacity: 0.45;
+      background-position: 68% center;
+    }
+
+    .dark .hero-photo {
+      opacity: 0.34;
+    }
   }
 
   .noise::after {
@@ -302,7 +416,7 @@
 }
 
 /* Keyframes used by the CSS-only motion (Tailwind --animate-* can reference them). */
-@keyframes fixnow-float {
+@keyframes kaarigar-float {
   0%,
   100% {
     transform: translateY(0);
@@ -311,23 +425,23 @@
     transform: translateY(-12px);
   }
 }
-@keyframes fixnow-shimmer {
+@keyframes kaarigar-shimmer {
   100% {
     transform: translateX(100%);
   }
 }
-@keyframes fixnow-pulse-ring {
+@keyframes kaarigar-pulse-ring {
   0% {
-    box-shadow: 0 0 0 0 rgb(108 92 231 / 0.45);
+    box-shadow: 0 0 0 0 rgb(253 129 204 / 0.5);
   }
   70% {
-    box-shadow: 0 0 0 12px rgb(108 92 231 / 0);
+    box-shadow: 0 0 0 12px rgb(253 129 204 / 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgb(108 92 231 / 0);
+    box-shadow: 0 0 0 0 rgb(253 129 204 / 0);
   }
 }
-@keyframes fixnow-marquee {
+@keyframes kaarigar-marquee {
   from {
     transform: translateX(0);
   }
@@ -337,13 +451,13 @@
 }
 
 .animate-float {
-  animation: fixnow-float 6s ease-in-out infinite;
+  animation: kaarigar-float 6s ease-in-out infinite;
 }
 .animate-pulse-ring {
-  animation: fixnow-pulse-ring 2.4s ease-out infinite;
+  animation: kaarigar-pulse-ring 2.4s ease-out infinite;
 }
 .animate-marquee {
-  animation: fixnow-marquee 38s linear infinite;
+  animation: kaarigar-marquee 38s linear infinite;
 }
 
 /* Skeleton shimmer */
@@ -363,7 +477,7 @@
     rgb(255 255 255 / 0.35),
     transparent
   );
-  animation: fixnow-shimmer 1.6s infinite;
+  animation: kaarigar-shimmer 1.6s infinite;
 }
 .dark .skeleton::after {
   background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.08), transparent);
@@ -388,4 +502,72 @@
 .grad-frame:hover > .grad-ring,
 .grad-frame:focus-within > .grad-ring {
   opacity: 1;
+}
+
+/* ------------------------------------------------------------------ *
+ * Script and direction — Urdu (ur) and Sindhi (sd)
+ *
+ * Deliberately unlayered: normal declarations outside @layer outrank
+ * everything inside Tailwind's utilities layer, which is how these rules can
+ * neutralise the Latin-specific `tracking-[-…]` and `leading-[…]` utilities
+ * without every component having to drop them.
+ * ------------------------------------------------------------------ */
+
+/* Sora and Inter carry no Arabic-script glyphs, so the display and body faces
+   are swapped wholesale — appending to the stack would let the Latin fallback
+   win and render tofu boxes. */
+html:lang(ur) {
+  --font-display: 'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif;
+  --font-sans: 'Noto Naskh Arabic', 'Noto Nastaliq Urdu', serif;
+}
+
+html:lang(sd) {
+  --font-display: 'Noto Naskh Arabic', serif;
+  --font-sans: 'Noto Naskh Arabic', ui-sans-serif, system-ui, serif;
+}
+
+/* Arabic script joins letter to letter: negative tracking collides them, and
+   Latin display faces have no such need. */
+html:lang(ur) body,
+html:lang(ur) *,
+html:lang(sd) body,
+html:lang(sd) * {
+  letter-spacing: normal;
+}
+
+/* Nastaliq is tall and sits low — the display leading used for Sora clips its
+   ascenders and descenders. Naskh (Sindhi) needs less correction. */
+html:lang(ur) h1,
+html:lang(ur) h2,
+html:lang(ur) h3,
+html:lang(ur) h4,
+html:lang(ur) h5 {
+  line-height: 1.8;
+}
+
+html:lang(sd) h1,
+html:lang(sd) h2,
+html:lang(sd) h3,
+html:lang(sd) h4,
+html:lang(sd) h5 {
+  line-height: 1.45;
+}
+
+html:lang(ur) p,
+html:lang(sd) p {
+  line-height: 1.85;
+}
+
+/* Prices, codes and dates are Latin runs; inside an RTL sentence they must keep
+   their own order (2,500 not 005,2). */
+html[dir='rtl'] .tabular-nums,
+html[dir='rtl'] .ltr-keep {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+/* Placeholders inherit the field direction, which mis-centers Latin search
+   hints in an RTL box. */
+html[dir='rtl'] ::placeholder {
+  text-align: right;
 }

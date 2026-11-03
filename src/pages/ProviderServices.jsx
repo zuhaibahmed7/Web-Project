@@ -168,7 +168,7 @@ export default function ProviderServices() {
       <PageHeader
         eyebrow="Catalogue"
         title="Services & prices"
-        description="Everything customers can book from you. Prices are indicative starting points — the final amount is agreed on site, and FixNow never charges through the platform."
+        description="Everything customers can book from you. Prices are indicative starting points — the final amount is agreed on site, and Kaarigar never charges through the platform."
         actions={
           <Button icon={Plus} onClick={openCreate}>
             Add service
@@ -176,13 +176,13 @@ export default function ProviderServices() {
         }
       />
 
-      <div className="mb-6 grid gap-4 sm:grid-cols-3">
+      <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
         <Card padding="sm" className="flex items-center gap-3">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-sm bg-brand-500/12 text-brand-600 dark:text-brand-300">
             <Briefcase className="h-[18px] w-[18px]" aria-hidden="true" />
           </span>
           <span>
-            <span className="block text-[11px] font-bold tracking-[0.14em] text-content-muted uppercase">Live services</span>
+            <span className="block text-[12px] font-bold tracking-[0.14em] text-content-muted uppercase">Live services</span>
             <span className="mt-1 block font-display text-[18px] leading-none font-extrabold tabular-nums">{services.length}</span>
           </span>
         </Card>
@@ -191,7 +191,7 @@ export default function ProviderServices() {
             <Wallet className="h-[18px] w-[18px]" aria-hidden="true" />
           </span>
           <span>
-            <span className="block text-[11px] font-bold tracking-[0.14em] text-content-muted uppercase">Price range</span>
+            <span className="block text-[12px] font-bold tracking-[0.14em] text-content-muted uppercase">Price range</span>
             <span className="mt-1 block font-display text-[15px] leading-tight font-extrabold tabular-nums">
               {cheapest === null ? 'Add a service' : cheapest === dearest ? formatPKR(cheapest) : `${formatPKR(cheapest)} – ${formatPKR(dearest)}`}
             </span>
@@ -202,7 +202,7 @@ export default function ProviderServices() {
             <Tag className="h-[18px] w-[18px]" aria-hidden="true" />
           </span>
           <span>
-            <span className="block text-[11px] font-bold tracking-[0.14em] text-content-muted uppercase">On active bookings</span>
+            <span className="block text-[12px] font-bold tracking-[0.14em] text-content-muted uppercase">On active bookings</span>
             <span className="mt-1 block font-display text-[18px] leading-none font-extrabold tabular-nums">
               {Object.values(usage).reduce((a, b) => a + b, 0)}
             </span>
@@ -228,10 +228,10 @@ export default function ProviderServices() {
         <>
           {/* Desktop: compact table. Mobile: stacked cards — same data, same actions. */}
           <Card padding="none" className="hidden overflow-hidden lg:block">
-            <table className="w-full text-left text-[13.5px]">
+            <table className="w-full text-left text-[14px]">
               <caption className="sr-only">Your services, indicative prices and actions</caption>
               <thead>
-                <tr className="border-b border-line bg-canvas-2/60 text-[11px] font-bold tracking-[0.12em] text-content-muted uppercase">
+                <tr className="border-b border-line bg-canvas-2/60 text-[12px] font-bold tracking-[0.12em] text-content-muted uppercase">
                   <th scope="col" className="px-5 py-3">Service</th>
                   <th scope="col" className="px-5 py-3">Indicative price</th>
                   <th scope="col" className="px-5 py-3">Bookings using it</th>
@@ -243,7 +243,7 @@ export default function ProviderServices() {
                   <tr key={service.id} className="transition-colors hover:bg-canvas-2/50">
                     <td className="px-5 py-4 align-top">
                       <p className="font-bold text-content">{service.name}</p>
-                      <p className="mt-1 max-w-prose text-[12.5px] leading-relaxed text-content-muted">
+                      <p className="mt-1 max-w-prose text-[13px] leading-relaxed text-content-muted">
                         {service.description || 'No description yet — add one so customers know the scope.'}
                       </p>
                     </td>
@@ -257,7 +257,7 @@ export default function ProviderServices() {
                           {usage[service.id]} active
                         </Badge>
                       ) : (
-                        <span className="text-[12.5px] text-content-muted">None</span>
+                        <span className="text-[13px] text-content-muted">None</span>
                       )}
                     </td>
                     <td className="px-5 py-4 align-top">
@@ -301,7 +301,7 @@ export default function ProviderServices() {
                       )}
                     </div>
                     {service.description && (
-                      <p className="mt-2.5 text-[12.5px] leading-relaxed text-content-muted">{service.description}</p>
+                      <p className="mt-2.5 text-[13px] leading-relaxed text-content-muted">{service.description}</p>
                     )}
                     <div className="mt-3.5 flex gap-2">
                       <Button size="sm" variant="outline" icon={Pencil} onClick={() => openEdit(service)}>
@@ -317,7 +317,7 @@ export default function ProviderServices() {
             ))}
           </ul>
 
-          <p className="mt-5 flex items-start gap-2 text-[12.5px] leading-relaxed text-content-muted">
+          <p className="mt-5 flex items-start gap-2 text-[13px] leading-relaxed text-content-muted">
             <CircleAlert className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
             Prices shown to customers are indicative starting points only. Keep them realistic — search results list your
             lowest price first, and an estimate far off the mark hurts your rating.
@@ -368,7 +368,7 @@ export default function ProviderServices() {
             maxLength={220}
             showCount
           />
-          <div className="grid gap-x-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
             <Input
               id="service-price"
               label="Indicative price"
@@ -439,6 +439,7 @@ function normalizeUnit(unit) {
     rft: 'item',
     point: 'item',
     step: 'item',
+    door: 'item',
   };
   return map[unit] ?? 'visit';
 }

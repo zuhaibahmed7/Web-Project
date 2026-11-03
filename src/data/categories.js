@@ -1,6 +1,7 @@
 // The 7 service categories from the SRS (section 7.4.4, UC-01).
 // `icon` is a key resolved to a Lucide component in components/ui/CategoryIcon.jsx
-// so this file stays plain data.
+// so this file stays plain data. The full-colour tile artwork lives separately in
+// src/assets/icons/index.js, keyed by `slug`.
 
 export const CATEGORIES = [
   {
@@ -12,7 +13,7 @@ export const CATEGORIES = [
     description:
       'Burst pipes, dripping taps, blocked drains, water-motor fitting and bathroom leakage repaired by verified plumbers.',
     from: 800,
-    accent: ['#3B82F6', '#00D4C8'],
+    accent: ['#4A6FD0', '#09318D'],
   },
   {
     id: 'cat-electrical',
@@ -23,7 +24,7 @@ export const CATEGORIES = [
     description:
       'Faulty switches, short circuits, new wiring, distribution boards, fans, lights and UPS / inverter installation.',
     from: 900,
-    accent: ['#FFB020', '#FF7A1A'],
+    accent: ['#FD81CC', '#F0479F'],
   },
   {
     id: 'cat-ac-repair',
@@ -34,7 +35,7 @@ export const CATEGORIES = [
     description:
       'Split and window AC servicing, gas refilling, PCB repair, installation and annual maintenance contracts.',
     from: 2500,
-    accent: ['#00D4C8', '#6C5CE7'],
+    accent: ['#8AA9EA', '#4A6FD0'],
   },
   {
     id: 'cat-cleaning',
@@ -45,7 +46,7 @@ export const CATEGORIES = [
     description:
       'Full home deep cleaning, kitchen and bathroom scrubbing, sofa and carpet shampoo, water-tank and disinfection service.',
     from: 1500,
-    accent: ['#6C5CE7', '#00D4C8'],
+    accent: ['#09318D', '#0B1C46'],
   },
   {
     id: 'cat-painting',
@@ -56,7 +57,7 @@ export const CATEGORIES = [
     description:
       'Wall preparation, emerald/emulsion painting, weather-coat exterior work, wood polish and waterproofing.',
     from: 2000,
-    accent: ['#FF7A1A', '#FFB020'],
+    accent: ['#FB6CC2', '#09318D'],
   },
   {
     id: 'cat-carpentry',
@@ -67,7 +68,7 @@ export const CATEGORIES = [
     description:
       'Door and lock repair, wardrobe and kitchen cabinet work, furniture assembly, hinges, handles and custom fittings.',
     from: 1200,
-    accent: ['#0F1535', '#6C5CE7'],
+    accent: ['#F0479F', '#0B1C46'],
   },
   {
     id: 'cat-mechanics',
@@ -78,7 +79,7 @@ export const CATEGORIES = [
     description:
       'On-site car and bike servicing, battery jump-start, tyre change, oil service, tuning and computer diagnostics.',
     from: 1000,
-    accent: ['#EF4444', '#FFB020'],
+    accent: ['#2A4A8F', '#FD81CC'],
   },
 ];
 
@@ -93,6 +94,7 @@ export const CATEGORY_BY_ID = CATEGORIES.reduce((acc, c) => {
 }, {});
 
 // Cities covered by the marketplace — used for the location filter.
+// Metros first, then the Sindh block: Hyderabad, Sukkur and the interior towns.
 export const CITIES = [
   'Karachi',
   'Lahore',
@@ -104,4 +106,13 @@ export const CITIES = [
   'Quetta',
   'Hyderabad',
   'Sukkur',
+  'Larkana',
+  'Khairpur',
+  'Shikarpur',
+  'Ghotki',
+  'Nawabshah',
+  'Naushahro Feroze',
+  'Moro',
+  'Gambat',
+  'Ranipur',
 ];

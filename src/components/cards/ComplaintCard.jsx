@@ -35,7 +35,7 @@ export function ComplaintCard({ complaint, complainantName, providerName, action
         </span>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <p className="font-display text-[11px] font-bold tracking-[0.12em] text-content-muted uppercase">
+            <p className="font-display text-[12px] font-bold tracking-[0.12em] text-content-muted uppercase">
               {complaint.code}
             </p>
             <Badge tone={status.tone} size="sm">
@@ -54,13 +54,13 @@ export function ComplaintCard({ complaint, complainantName, providerName, action
         <p className="text-[14px] leading-relaxed text-content-soft text-pretty">{complaint.details}</p>
 
         {complaint.resolution && (
-          <p className="mt-4 rounded-sm border-l-2 border-completed bg-completed/8 px-4 py-3 text-[13px] leading-relaxed text-content-soft">
+          <p className="mt-4 rounded-sm border-s-2 border-completed bg-completed/8 px-4 py-3 text-[13px] leading-relaxed text-content-soft">
             <span className="font-bold text-content">Resolution</span>
             <span className="mt-1 block text-content-muted">{complaint.resolution}</span>
           </p>
         )}
 
-        <dl className="mt-4 grid gap-x-6 gap-y-2 text-[12.5px] sm:grid-cols-3">
+        <dl className="mt-4 grid grid-cols-1 gap-x-6 gap-y-2 text-[13px] sm:grid-cols-3">
           <div>
             <dt className="text-content-muted">Raised by</dt>
             <dd className="font-semibold">{complainantName ?? 'Customer'}</dd>

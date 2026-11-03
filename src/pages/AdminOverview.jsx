@@ -39,9 +39,9 @@ import { StatusBadge, Badge } from '../components/ui/Badge';
 
 // Brand series colours. Fixed hex (not Tailwind tokens) because SVG fill
 // attributes cannot resolve CSS custom properties reliably.
-const VIOLET = '#6C5CE7';
-const AQUA = '#00D4C8';
-const AMBER = '#FFB020';
+const BLUE = '#09318D';
+const BLUE_BRIGHT = '#4A6FD0';
+const PINK = '#FD81CC';
 
 const ATTENTION_TONES = {
   amber: 'border-glow-400/40 bg-glow-400/8',
@@ -93,7 +93,7 @@ export default function AdminOverview() {
         .filter((c) => c.bookings > 0)
         .map((c, i) => ({
           ...c,
-          fill: [VIOLET, AQUA, AMBER][i % 3],
+          fill: [BLUE, BLUE_BRIGHT, PINK][i % 3],
         })),
     [stats.byCategory]
   );
@@ -181,7 +181,7 @@ export default function AdminOverview() {
             </Link>
             <Link
               to="/admin/bookings"
-              className="inline-flex h-10 items-center gap-2 rounded-sm grad-brand px-4 text-[13px] font-bold text-white shadow-[0_10px_26px_-14px_rgb(108_92_231_/_0.9)] transition-[filter] hover:brightness-105"
+              className="inline-flex h-10 items-center gap-2 rounded-sm grad-brand px-4 text-[13px] font-bold text-white shadow-[0_10px_26px_-14px_rgb(9_49_141_/_0.9)] transition-[filter] hover:brightness-105"
             >
               <CalendarDays className="h-4 w-4" aria-hidden="true" />
               Bookings ledger
@@ -283,7 +283,7 @@ export default function AdminOverview() {
             </Badge>
           </div>
 
-          <ul className="grid gap-px bg-line md:grid-cols-3">
+          <ul className="grid grid-cols-1 gap-px bg-line md:grid-cols-3">
             {attentionItems.map((item) => (
               <li key={item.key} className="bg-surface">
                 <Link
@@ -298,10 +298,10 @@ export default function AdminOverview() {
                       aria-hidden="true"
                     />
                     <span className="min-w-0 flex-1">
-                      <span className="block font-display text-[14.5px] leading-snug font-bold text-content">
+                      <span className="block font-display text-[15px] leading-snug font-bold text-content">
                         {item.title}
                       </span>
-                      <span className="mt-1 block text-[12.5px] leading-relaxed text-content-muted">{item.detail}</span>
+                      <span className="mt-1 block text-[13px] leading-relaxed text-content-muted">{item.detail}</span>
                     </span>
                     <span
                       className={`grid h-8 min-w-8 shrink-0 place-items-center rounded-full px-2 text-[13px] font-extrabold tabular-nums ${
@@ -315,7 +315,7 @@ export default function AdminOverview() {
                       {item.count}
                     </span>
                   </span>
-                  <span className="mt-auto inline-flex items-center gap-1.5 text-[12.5px] font-bold text-brand-600 dark:text-brand-300">
+                  <span className="mt-auto inline-flex items-center gap-1.5 text-[13px] font-bold text-brand-600 dark:text-brand-300">
                     {item.cta}
                     <ArrowRight
                       className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
@@ -330,12 +330,12 @@ export default function AdminOverview() {
       </Reveal>
 
       {/* ------------------------------------------------------------- charts */}
-      <div className="mt-8 grid gap-4 lg:grid-cols-2">
+      <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Reveal>
           <Card padding="none" className="h-full">
             <div className="border-b border-line px-5 py-4">
               <h2 className="font-display text-[16px] font-bold tracking-[-0.02em]">Bookings by status</h2>
-              <p className="mt-1 text-[12.5px] text-content-muted">
+              <p className="mt-1 text-[13px] text-content-muted">
                 The four lifecycle stages that still occupy capacity. Rejected and cancelled bookings are terminal and
                 counted in Reports instead.
               </p>
@@ -362,7 +362,7 @@ export default function AdminOverview() {
           <Card padding="none" className="h-full">
             <div className="border-b border-line px-5 py-4">
               <h2 className="font-display text-[16px] font-bold tracking-[-0.02em]">Demand, last 14 days</h2>
-              <p className="mt-1 text-[12.5px] text-content-muted">
+              <p className="mt-1 text-[13px] text-content-muted">
                 Requests created per day against requests completed the same day.
               </p>
             </div>
@@ -371,12 +371,12 @@ export default function AdminOverview() {
                 <AreaChart data={trendSeries} margin={{ top: 4, right: 12, bottom: 0, left: -18 }}>
                   <defs>
                     <linearGradient id="ov-bookings" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor={VIOLET} stopOpacity={0.55} />
-                      <stop offset="100%" stopColor={VIOLET} stopOpacity={0.04} />
+                      <stop offset="0%" stopColor={BLUE} stopOpacity={0.55} />
+                      <stop offset="100%" stopColor={BLUE} stopOpacity={0.04} />
                     </linearGradient>
                     <linearGradient id="ov-completed" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor={AQUA} stopOpacity={0.5} />
-                      <stop offset="100%" stopColor={AQUA} stopOpacity={0.03} />
+                      <stop offset="0%" stopColor={BLUE_BRIGHT} stopOpacity={0.5} />
+                      <stop offset="100%" stopColor={BLUE_BRIGHT} stopOpacity={0.03} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid stroke="currentColor" strokeOpacity={0.18} vertical={false} />
@@ -387,7 +387,7 @@ export default function AdminOverview() {
                     type="monotone"
                     dataKey="bookings"
                     name="Created"
-                    stroke={VIOLET}
+                    stroke={BLUE}
                     strokeWidth={2}
                     fill="url(#ov-bookings)"
                     dot={false}
@@ -397,7 +397,7 @@ export default function AdminOverview() {
                     type="monotone"
                     dataKey="completed"
                     name="Completed"
-                    stroke={AQUA}
+                    stroke={BLUE_BRIGHT}
                     strokeWidth={2}
                     fill="url(#ov-completed)"
                     dot={false}
@@ -408,11 +408,11 @@ export default function AdminOverview() {
             </div>
             <p className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-line px-5 py-3 text-[12px] text-content-muted">
               <span className="inline-flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full" style={{ backgroundColor: VIOLET }} aria-hidden="true" />
+                <span className="h-2 w-2 rounded-full" style={{ backgroundColor: BLUE }} aria-hidden="true" />
                 Created
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full" style={{ backgroundColor: AQUA }} aria-hidden="true" />
+                <span className="h-2 w-2 rounded-full" style={{ backgroundColor: BLUE_BRIGHT }} aria-hidden="true" />
                 Completed
               </span>
             </p>
@@ -420,12 +420,12 @@ export default function AdminOverview() {
         </Reveal>
       </div>
 
-      <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
+      <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
         <Reveal>
           <Card padding="none" className="h-full">
             <div className="border-b border-line px-5 py-4">
               <h2 className="font-display text-[16px] font-bold tracking-[-0.02em]">Share of bookings by category</h2>
-              <p className="mt-1 text-[12.5px] text-content-muted">Categories with at least one request.</p>
+              <p className="mt-1 text-[13px] text-content-muted">Categories with at least one request.</p>
             </div>
             {categorySeries.length === 0 ? (
               <p className="px-5 py-10 text-center text-[13px] text-content-muted">No bookings recorded yet.</p>
@@ -451,9 +451,9 @@ export default function AdminOverview() {
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
-                <ul className="grid gap-x-4 gap-y-1.5 border-t border-line px-5 py-4 sm:grid-cols-2">
+                <ul className="grid grid-cols-1 gap-x-4 gap-y-1.5 border-t border-line px-5 py-4 sm:grid-cols-2">
                   {categorySeries.map((row) => (
-                    <li key={row.id} className="flex items-center gap-2 text-[12.5px]">
+                    <li key={row.id} className="flex items-center gap-2 text-[13px]">
                       <span className="h-2.5 w-2.5 shrink-0 rounded-xs" style={{ backgroundColor: row.fill }} aria-hidden="true" />
                       <span className="truncate text-content-soft">{row.name}</span>
                       <span className="ml-auto shrink-0 font-bold tabular-nums text-content">{row.bookings}</span>
@@ -470,11 +470,11 @@ export default function AdminOverview() {
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line px-5 py-4">
               <div>
                 <h2 className="font-display text-[16px] font-bold tracking-[-0.02em]">Recent activity</h2>
-                <p className="mt-1 text-[12.5px] text-content-muted">Newest updated bookings first.</p>
+                <p className="mt-1 text-[13px] text-content-muted">Newest updated bookings first.</p>
               </div>
               <Link
                 to="/admin/bookings"
-                className="inline-flex items-center gap-1.5 text-[12.5px] font-bold text-brand-600 hover:text-aqua-600 dark:text-brand-300 dark:hover:text-aqua-300"
+                className="inline-flex items-center gap-1.5 text-[13px] font-bold text-brand-600 hover:text-aqua-600 dark:text-brand-300 dark:hover:text-aqua-300"
               >
                 All bookings
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -497,11 +497,11 @@ export default function AdminOverview() {
                           <span className="font-display text-[13px] font-bold tracking-[-0.01em] text-content">
                             {booking.code}
                           </span>
-                          <span className="truncate text-[12.5px] text-content-muted">
+                          <span className="truncate text-[13px] text-content-muted">
                             {provider?.name ?? 'Provider removed'} · {customer?.name ?? 'Customer'}
                           </span>
                         </span>
-                        <span className="mt-0.5 block text-[11.5px] text-content-muted">
+                        <span className="mt-0.5 block text-[12px] text-content-muted">
                           {formatDate(booking.date)} · {relativeTime(booking.updatedAt)}
                           {active ? ' · still running' : ''}
                         </span>

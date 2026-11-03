@@ -91,7 +91,7 @@ export default function MyReviews() {
             secondaryAction={<Button variant="outline" to="/app/bookings">See my bookings</Button>}
           />
         ) : (
-          <ul className="grid gap-4 lg:grid-cols-2">
+          <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             {pending.map((booking, i) => {
               const provider = findProvider(state, booking.providerId);
               const service = provider?.services?.find((s) => s.id === booking.serviceId);
@@ -109,7 +109,7 @@ export default function MyReviews() {
                         </div>
                       </div>
 
-                      <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-line pt-4 text-[12.5px]">
+                      <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-line pt-4 text-[13px]">
                         <div>
                           <dt className="flex items-center gap-1.5 text-content-muted">
                             <CalendarDays className="h-3.5 w-3.5" aria-hidden="true" />
@@ -128,7 +128,7 @@ export default function MyReviews() {
                         </div>
                       </dl>
 
-                      <p className="mt-4 rounded-sm bg-canvas-2 px-3 py-2.5 text-[12.5px] leading-relaxed text-content-muted">
+                      <p className="mt-4 rounded-sm bg-canvas-2 px-3 py-2.5 text-[13px] leading-relaxed text-content-muted">
                         Rate the work out of five and add a sentence about punctuality, price and finish. It publishes
                         on {provider?.name ?? 'the provider'}’s public profile.
                       </p>
@@ -172,7 +172,7 @@ export default function MyReviews() {
             action={<Button to="/browse">Find a service to book</Button>}
           />
         ) : (
-          <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
             <ul className="flex flex-col gap-4">
               {written.map((review, i) => {
                 const provider = findProvider(state, review.providerId);
@@ -188,7 +188,7 @@ export default function MyReviews() {
 
             <Reveal delay={0.08}>
               <Card className="lg:sticky lg:top-24">
-                <p className="flex items-center gap-2 text-[11px] font-bold tracking-[0.14em] text-content-muted uppercase">
+                <p className="flex items-center gap-2 text-[12px] font-bold tracking-[0.14em] text-content-muted uppercase">
                   <MessageSquareMore className="h-3.5 w-3.5" aria-hidden="true" />
                   How you rate
                 </p>
@@ -197,20 +197,20 @@ export default function MyReviews() {
                   <span className="ml-1.5 text-[15px] font-bold text-content-muted">/ 5</span>
                 </p>
                 <Rating value={summary.average} count={summary.count} size="md" className="mt-2.5" />
-                <p className="mt-3 text-[12.5px] leading-relaxed text-content-muted">
+                <p className="mt-3 text-[13px] leading-relaxed text-content-muted">
                   Average of the ratings you have given across {summary.count} completed job
                   {summary.count === 1 ? '' : 's'}.
                 </p>
 
                 <div className="mt-5 border-t border-line pt-4">
-                  <p className="mb-3 text-[11px] font-bold tracking-[0.14em] text-content-muted uppercase">
+                  <p className="mb-3 text-[12px] font-bold tracking-[0.14em] text-content-muted uppercase">
                     Your star split
                   </p>
                   <RatingBreakdown breakdown={summary.breakdown} total={summary.count} />
                 </div>
 
                 {summary.best && (
-                  <div className="mt-5 rounded-sm bg-canvas-2 px-3.5 py-3 text-[12.5px] leading-relaxed text-content-muted">
+                  <div className="mt-5 rounded-sm bg-canvas-2 px-3.5 py-3 text-[13px] leading-relaxed text-content-muted">
                     <p className="font-bold text-content-soft">Best-rated by you</p>
                     <p className="mt-1">
                       <Link

@@ -105,7 +105,7 @@ export function ConfirmDialog({ open, onClose, onConfirm, title, message, confir
           <button
             type="button"
             onClick={onClose}
-            className="h-10 rounded-sm border border-line px-4 text-[13.5px] font-semibold text-content-soft transition-colors hover:bg-canvas-2"
+            className="h-10 rounded-sm border border-line px-4 text-[14px] font-semibold text-content-soft transition-colors hover:bg-canvas-2"
           >
             Keep it
           </button>
@@ -116,7 +116,7 @@ export function ConfirmDialog({ open, onClose, onConfirm, title, message, confir
               onClose();
             }}
             className={cn(
-              'h-10 rounded-sm px-4 text-[13.5px] font-semibold text-white transition-[filter,transform] hover:brightness-110 active:scale-95',
+              'h-10 rounded-sm px-4 text-[14px] font-semibold text-white transition-[filter,transform] hover:brightness-110 active:scale-95',
               tone === 'danger' ? 'bg-rejected' : 'bg-brand-500'
             )}
           >
@@ -125,7 +125,7 @@ export function ConfirmDialog({ open, onClose, onConfirm, title, message, confir
         </>
       }
     >
-      <p className="text-[14.5px] leading-relaxed text-content-soft">{message}</p>
+      <p className="text-[15px] leading-relaxed text-content-soft">{message}</p>
     </Modal>
   );
 }

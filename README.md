@@ -1,4 +1,4 @@
-# FixNow — Find. Book. Fix.
+# Kaarigar — Find. Book. Fixed.
 
 A frontend-only prototype of a Pakistani home-service marketplace: households find a verified
 plumber, electrician, AC technician, cleaner, painter, carpenter or mechanic, book a slot, and
@@ -24,7 +24,7 @@ npm run preview    # serve the built bundle
 Requires Node 18+. No environment variables, no API keys, no database.
 
 **Reset the demo at any time:** account menu (top right) → *Reset demo data*, or
-*My profile* → *Reset demo data*. This clears `fixnow.state.v3` and re-seeds every booking,
+*My profile* → *Reset demo data*. This clears `kaarigar.state.v3` and re-seeds every booking,
 review, complaint and provider from `/src/data`.
 
 ---
@@ -35,9 +35,9 @@ review, complaint and provider from `/src/data`.
 
 | Role | Email | Password | What they can do |
 | --- | --- | --- | --- |
-| Customer | `customer@fixnow.pk` | `customer123` | Search, book, cancel while Pending, review, complain |
-| Service provider | `provider@fixnow.pk` | `provider123` | Owns **Bilal Electrical Works** — accept/reject, progress jobs, manage services, prices, availability, public profile |
-| Admin | `admin@fixnow.pk` | `admin123` | Users, provider verification, categories, bookings ledger, complaint desk, reports |
+| Customer | `customer@kaarigar.pk` | `customer123` | Search, book, cancel while Pending, review, complain |
+| Service provider | `provider@kaarigar.pk` | `provider123` | Owns **Bilal Electrical Works** — accept/reject, progress jobs, manage services, prices, availability, public profile |
+| Admin | `admin@kaarigar.pk` | `admin123` | Users, provider verification, categories, bookings ledger, complaint desk, reports |
 
 Guests can browse the whole marketplace but every booking, review, complaint and dashboard
 redirects them to `/login`.
@@ -110,7 +110,7 @@ so the UI can't disagree with the reducer:
   public score on publish.
 - Only **verified** providers appear publicly; pending and rejected listings stay in the admin queue.
 - Booking slots are filtered by the provider's working days and arrival windows.
-- Prices are indicative and always in **PKR**; FixNow never takes a payment.
+- Prices are indicative and always in **PKR**; Kaarigar never takes a payment.
 - Guests browse freely but cannot book, review, complain or open a dashboard.
 - Search & filter by service, provider, area, city, starting price, minimum rating and availability.
 
@@ -120,24 +120,41 @@ so the UI can't disagree with the reducer:
 
 Palette (CSS custom properties in `src/index.css`, exposed as Tailwind tokens):
 
-| SRS colour | Token in `src/index.css` | Use |
+| Token in `src/index.css` | Value | Use |
 | --- | --- | --- |
-| Midnight Indigo `#0F1535` | `ink-800`, light-mode `--c-content` | Headings, dark surfaces |
-| Electric Violet `#6C5CE7` | `brand-500` | Primary action, links, gradients |
-| Aqua Teal `#00D4C8` | `aqua-400` | Secondary accent, success, gradients |
-| Warm Amber `#FFB020` | `glow-400` (the amber scale is named *glow* so it never clashes with Tailwind's `amber`) | Highlights, warnings |
-| Soft Cloud `#F6F7FF` | `cloud-100`, light-mode `--c-canvas` | Page background |
-| Slate `#64748B` | light-mode `--c-content-muted` | Muted text |
+| `ink-950` | `#02061A` | Dark-mode canvas |
+| `ink-800` | `#0B1C46` | Headings, light-mode `--c-content`, dark surfaces (navbar, footer, logo tile) |
+| `brand-500` | `#09318D` | Deep blue — primary action, links, active states |
+| `brand-400` | `#4A6FD0` | Lighter blue, gradient end, accent on navy |
+| `aqua-300` / `aqua-400` | `#FD81CC` / `#FB6CC2` | Bubblegum pink — highlights on dark surfaces |
+| `aqua-600` / `aqua-700` | `#D21F8B` / `#A3186B` | The same pink deepened, for text and icons on white |
+| `glow-400` / `glow-500` | `#F0479F` / `#D92A80` | Hot magenta — rating stars, review CTAs, "attention" badges |
+| `cloud-100` | `#F4F7FD` | Light-mode `--c-canvas`, page background |
+| light `--c-content-muted` | `#55679A` | Muted text, held at 5.1:1 on `cloud-100` |
+
+`aqua` and `glow` are legacy token names kept so component classes stay put — they now carry the two
+pink ramps rather than teal and orange. Each ramp runs light-to-dark, so the low shades serve the navy
+theme and the high shades serve the white one. `grad-brand` (primary buttons, white text) deliberately
+stays inside the blue range end to end rather than running into pink, which would drop white label text
+below AA; `grad-text` does sweep blue→magenta and carries a `.dark` override for the same reason.
 
 Semantic surfaces (`canvas`, `canvas-2`, `surface`, `surface-2`, `line`, `content`,
 `content-soft`, `content-muted`) are declared with `@theme inline` so the same utility classes
 resolve to light values on `:root` and dark values under `.dark`.
 
-Status colours follow the SRS: Pending `#F5B301`, Accepted `#3B82F6`, In Progress `#FF7A1A`,
+Booking status colours are semantic rather than decorative and are deliberately untouched by the brand
+palette: Pending `#F5B301`, Accepted `#3B82F6`, In Progress `#FF7A1A`,
 Completed `#10B981`, Rejected `#EF4444`, Cancelled `#94A3B8`.
 
+Photography: `public/images/pro-at-work.jpg` and `public/images/pro-at-board.jpg` — electricians on
+the job, CC0 from StockSnap, so no attribution is required. `.hero-scene` lays a photograph under a
+colour scrim: the image is duotoned by blending its luminosity over a flat brand blue, then faded out
+behind the column of copy with a mask so text never fights it. Used on the landing hero, and with the
+`--ink` variant (which shades with ink rather than the page canvas) on the sign-in story panel and the
+provider pitch card. Override `--hero-photo` on a `.hero-photo` element to swap in a different image.
+
 Typography: **Sora** for display/headings, **Inter** for body, on a single tight scale.
-Light mode is the default; the toggle in the navbar persists to `fixnow.theme`.
+Light mode is the default; the toggle in the navbar persists to `kaarigar.theme`.
 
 Component library (`src/components/ui`, `src/components/cards`): Button, Input/Textarea/Select
 (each renders its own labelled `Field`), Modal + ConfirmDialog, Toast stack, Badge/StatusBadge,
@@ -175,7 +192,7 @@ src/
   hooks/                 useTilt, useCountUp, useTheme, useMediaQuery, useDismiss, useCanRender3D
 ```
 
-State keys: `fixnow.state.v3` (everything) and `fixnow.theme`. Bump `STATE_VERSION` in
+State keys: `kaarigar.state.v3` (everything) and `kaarigar.theme`. Bump `STATE_VERSION` in
 `src/data/seed.js` when the shape changes and old saved states are discarded automatically.
 
 ---
@@ -193,7 +210,8 @@ State keys: `fixnow.state.v3` (everything) and `fixnow.theme`. Bump `STATE_VERSI
   cancel-while-pending, rejection with reason, review validation, complaint fan-out to admins,
   provider verification, price/availability edits, sign-up, role redirects, filters and the theme
   toggle were each exercised end to end.
-- Not verified here: pixel-level appearance and responsiveness at 375/768/1280. The browser used
-  for testing reported a 0×0 hidden viewport, so `requestAnimationFrame` never ticked — visual
-  screenshots, animated transitions and scroll-triggered counters cannot be observed in that
-  environment. Open `npm run dev` in a normal browser to check those.
+- Verified visually: headless Chrome screenshots of the landing, browse and sign-in screens in
+  light and dark at 1280, plus same-origin 375/768 iframes, and every route was measured for
+  horizontal overflow at 375 (none). The in-app browser reports a 0×0 hidden viewport, so
+  `requestAnimationFrame`-driven checks — screenshots, scroll reveals, animated counters — have to
+  go through headless Chrome; open `npm run dev` for a hands-on pass.

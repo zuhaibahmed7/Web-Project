@@ -1,9 +1,9 @@
 {
-  "name": "fixnow",
+  "name": "kaarigar",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "FixNow — Find. Book. Fix. A home service marketplace for Pakistan (frontend prototype).",
+  "description": "Kaarigar — Find. Book. Fixed. A home service marketplace for Pakistan (frontend prototype).",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

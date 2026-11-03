@@ -4,17 +4,17 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#0F1535" />
+    <meta name="theme-color" content="#09318D" />
     <meta
       name="description"
-      content="FixNow — Find. Book. Fix. Pakistan's home service marketplace for plumbing, electrical, AC repair, cleaning, painting, carpentry and mechanics."
+      content="Kaarigar — Find. Book. Fixed. Pakistan's home service marketplace for plumbing, electrical, AC repair, cleaning, painting, carpentry and mechanics."
     />
-    <title>FixNow — Find. Book. Fix.</title>
+    <title>Kaarigar — Find. Book. Fixed.</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -22,11 +22,26 @@
       // Apply the saved theme before React mounts so there is no flash of the wrong colours.
       (function () {
         try {
-          var saved = localStorage.getItem('fixnow.theme');
+          var saved = localStorage.getItem('kaarigar.theme');
           var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           if (saved === 'dark' || (!saved && prefersDark)) document.documentElement.classList.add('dark');
         } catch (e) {
           /* localStorage unavailable — fall back to light mode */
+        }
+      })();
+
+      // Same idea for the language: Urdu and Sindhi are right-to-left, and the
+      // direction has to be on <html> before the first paint or the layout jumps.
+      (function () {
+        var SUPPORTED = { ur: 1, sd: 1 };
+        try {
+          var lang = localStorage.getItem('kaarigar.lang');
+          if (SUPPORTED[lang]) {
+            document.documentElement.lang = lang;
+            document.documentElement.dir = 'rtl';
+          }
+        } catch (e) {
+          /* localStorage unavailable — stay English, left-to-right */
         }
       })();
     </script>

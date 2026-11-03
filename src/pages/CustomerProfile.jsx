@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BellRing, CalendarDays, IdCard, KeyRound, LogOut, Mail, MonitorSmartphone, Phone, RotateCcw, Save, ShieldCheck } from 'lucide-react';
+import { BellRing, CalendarDays, IdCard, KeyRound, LogOut, Mail, MonitorSmartphone, Phone, RotateCcw, Save, ShieldCheck, Trash2 } from 'lucide-react';
 import { useStore } from '../store/StoreContext';
 import { CITIES } from '../data/categories';
 import { required, runValidation, hasErrors, validPhone } from '../utils/validation';
@@ -14,6 +14,7 @@ import { Avatar } from '../components/ui/Avatar';
 import { Input, Select, Toggle } from '../components/ui/Input';
 import { ConfirmDialog } from '../components/ui/Modal';
 import { Reveal } from '../components/ui/Reveal';
+import { UndoButton } from '../components/ui/UndoButton';
 import { useToast } from '../components/ui/Toast';
 
 // Preference defaults for a fresh account. Nothing is sent anywhere — see the
@@ -42,7 +43,7 @@ const PREF_ROWS = [
 ];
 
 export default function CustomerProfile() {
-  const { state, currentUser, updateUser, resetDemoData, logout } = useStore();
+  const { state, currentUser, updateUser, resetDemoData, logout, deleteAccount } = useStore();
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -96,6 +97,15 @@ export default function CustomerProfile() {
     updateUser(currentUser.id, { preferences: { ...prefs, [key]: value } });
   };
 
+  const removeAccount = () => {
+    const { name } = currentUser;
+    deleteAccount(currentUser.id);
+    navigate('/', { replace: true });
+    toast.warning(`${name}'s account and its bookings, reviews and complaints are gone from this browser.`, {
+      title: 'Account deleted',
+    });
+  };
+
   return (
     <>
       <PageHeader
@@ -123,7 +133,7 @@ export default function CustomerProfile() {
               <p className="font-display text-[20px] leading-tight font-extrabold tracking-[-0.02em]">
                 {currentUser.name}
               </p>
-              <p className="mt-1 truncate text-[13.5px] text-content-muted">{currentUser.email}</p>
+              <p className="mt-1 truncate text-[14px] text-content-muted">{currentUser.email}</p>
               <div className="mt-2.5 flex flex-wrap items-center gap-2">
                 <Badge tone="brand" icon={IdCard}>
                   {currentUser.role}
@@ -144,7 +154,7 @@ export default function CustomerProfile() {
                 { k: 'Reviews', v: stats.reviews },
               ].map((item) => (
                 <div key={item.k}>
-                  <dt className="text-[11px] font-bold tracking-[0.12em] text-content-muted uppercase">{item.k}</dt>
+                  <dt className="text-[12px] font-bold tracking-[0.12em] text-content-muted uppercase">{item.k}</dt>
                   <dd className="mt-1 font-display text-[22px] leading-none font-extrabold tabular-nums">{item.v}</dd>
                 </div>
               ))}
@@ -153,7 +163,7 @@ export default function CustomerProfile() {
         </Card>
       </Reveal>
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:items-start">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:items-start">
         {/* --------------------------------------------------------- details */}
         <Reveal>
           <Card>
@@ -197,7 +207,7 @@ export default function CustomerProfile() {
                   Login email
                 </p>
                 <p className="mt-1.5 select-all text-[14px] font-bold">{currentUser.email}</p>
-                <p className="mt-1.5 text-[12.5px] leading-relaxed text-content-muted">
+                <p className="mt-1.5 text-[13px] leading-relaxed text-content-muted">
                   Read-only. In this prototype the email is the login key that matches a seeded account, so changing it
                   here would sign you out of the record you are looking at. There is no password-reset flow because
                   there is no mail server.
@@ -224,7 +234,7 @@ export default function CustomerProfile() {
                   >
                     Discard
                   </Button>
-                  <p className="text-[12.5px] font-semibold text-glow-600 dark:text-glow-300">Unsaved changes</p>
+                  <p className="text-[13px] font-semibold text-glow-600 dark:text-glow-300">Unsaved changes</p>
                 </>
               )}
             </div>
@@ -240,7 +250,7 @@ export default function CustomerProfile() {
                 Notification preferences
               </h2>
               <p className="mt-1.5 mb-5 text-[13px] leading-relaxed text-content-muted">
-                Demo-only switches: they persist against your account in this browser, but FixNow sends no email, SMS
+                Demo-only switches: they persist against your account in this browser, but Kaarigar sends no email, SMS
                 or push from here. The in-app bell is real; the other two channels are represented, not implemented.
               </p>
 
@@ -306,8 +316,9 @@ export default function CustomerProfile() {
             <div className="min-w-0 max-w-xl">
               <h2 className="font-display text-[17px] font-bold tracking-[-0.02em] text-rejected">Danger zone</h2>
               <p className="mt-1.5 text-[13px] leading-relaxed text-content-muted">
-                Resetting rebuilds the seed data — every booking, review, complaint and profile edit in this browser is
-                replaced by the original demo state, including this account. Signing out only ends the session.
+                Signing out only ends the session. Deleting your account removes it from this browser along with its
+                bookings, reviews and complaints — you get a few seconds to change your mind before it goes. Resetting
+                rebuilds the seed data, which is also how a deleted demo account comes back.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -318,6 +329,9 @@ export default function CustomerProfile() {
               }}>
                 Sign out
               </Button>
+              <UndoButton icon={Trash2} seconds={5} onConfirm={removeAccount}>
+                Delete my account
+              </UndoButton>
               <Button variant="danger" icon={RotateCcw} onClick={() => setConfirmReset(true)}>
                 Reset demo data
               </Button>

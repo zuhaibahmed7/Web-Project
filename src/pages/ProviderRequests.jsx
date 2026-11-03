@@ -246,7 +246,7 @@ function RequestRow({ booking, index, state, onAccept, onReject }) {
                 requested {relativeTime(booking.createdAt)}
                 {isPast(booking) ? ' · date already passed' : ''}
               </span>
-              <span className="ml-auto inline-flex items-center gap-1.5 text-[13.5px] font-bold tabular-nums">
+              <span className="ml-auto inline-flex items-center gap-1.5 text-[14px] font-bold tabular-nums">
                 <Wallet className="h-3.5 w-3.5 text-content-muted" aria-hidden="true" />
                 {booking.estimate ? formatPKR(booking.estimate) : 'Estimate pending'}
               </span>
@@ -261,14 +261,14 @@ function RequestRow({ booking, index, state, onAccept, onReject }) {
                       <User className="h-3.5 w-3.5 shrink-0 text-content-muted" aria-hidden="true" />
                       {customer?.name ?? 'Customer account removed'}
                     </p>
-                    <p className="truncate text-[12.5px] text-content-muted">
+                    <p className="truncate text-[13px] text-content-muted">
                       {service} · {categoryNameFor(state, booking)}
                     </p>
                   </div>
                   {customer?.phone && (
                     <a
                       href={`tel:${customer.phone}`}
-                      className="ml-auto inline-flex h-9 shrink-0 items-center gap-1.5 rounded-sm border border-line px-3 text-[12.5px] font-bold text-content-soft transition-colors hover:border-brand-500/50 hover:text-brand-600 dark:hover:text-brand-300"
+                      className="ml-auto inline-flex h-9 shrink-0 items-center gap-1.5 rounded-sm border border-line px-3 text-[13px] font-bold text-content-soft transition-colors hover:border-brand-500/50 hover:text-brand-600 dark:hover:text-brand-300"
                       aria-label={`Call ${customer.name} on ${customer.phone}`}
                     >
                       <Phone className="h-3.5 w-3.5" aria-hidden="true" />
@@ -277,7 +277,7 @@ function RequestRow({ booking, index, state, onAccept, onReject }) {
                   )}
                 </div>
 
-                <dl className="grid gap-2 text-[13px] sm:grid-cols-2">
+                <dl className="grid grid-cols-1 gap-2 text-[13px] sm:grid-cols-2">
                   <Detail icon={CalendarDays} label="Preferred date">
                     {formatDate(booking.date, { weekday: 'long' })}
                   </Detail>
@@ -291,7 +291,7 @@ function RequestRow({ booking, index, state, onAccept, onReject }) {
 
                 {booking.description && (
                   <p className="rounded-sm border-l-2 border-brand-500/50 bg-brand-500/6 px-4 py-3 text-[13px] leading-relaxed text-content-soft">
-                    <span className="mb-1 flex items-center gap-1.5 text-[11px] font-bold tracking-[0.12em] text-content-muted uppercase">
+                    <span className="mb-1 flex items-center gap-1.5 text-[12px] font-bold tracking-[0.12em] text-content-muted uppercase">
                       <MessageSquareQuote className="h-3 w-3" aria-hidden="true" /> Customer note
                     </span>
                     {booking.description}
@@ -322,12 +322,12 @@ function RequestRow({ booking, index, state, onAccept, onReject }) {
                         {ACTION_META[next].label}
                       </Button>
                     ))}
-                    <p className="text-[11.5px] leading-snug text-content-muted">
+                    <p className="text-[12px] leading-snug text-content-muted">
                       Estimates are indicative. Confirm the final price on site.
                     </p>
                   </div>
                 ) : (
-                  <div className="rounded-sm border border-line bg-canvas-2/60 px-4 py-3 text-[12.5px] leading-relaxed text-content-muted">
+                  <div className="rounded-sm border border-line bg-canvas-2/60 px-4 py-3 text-[13px] leading-relaxed text-content-muted">
                     <span className="mb-1 block font-bold text-content">No action available</span>
                     {booking.status === STATUS.REJECTED
                       ? 'Rejected is final — the customer can send a fresh request.'
@@ -351,7 +351,7 @@ function RequestRow({ booking, index, state, onAccept, onReject }) {
 function Detail({ icon: Icon, label, children, className = '' }) {
   return (
     <div className={className}>
-      <dt className="text-[11px] font-bold tracking-[0.12em] text-content-muted uppercase">{label}</dt>
+      <dt className="text-[12px] font-bold tracking-[0.12em] text-content-muted uppercase">{label}</dt>
       <dd className="mt-1 flex items-start gap-1.5 text-content-soft">
         <Icon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-content-muted" aria-hidden="true" />
         <span>{children}</span>

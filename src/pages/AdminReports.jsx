@@ -14,11 +14,11 @@ import { Rating, RatingBreakdown } from '../components/ui/Rating';
 import { EmptyState } from '../components/ui/EmptyState';
 import { cn } from '../utils/cn';
 
-const VIOLET = '#6C5CE7';
-const AQUA = '#00D4C8';
-const AMBER = '#FFB020';
+const BLUE = '#09318D';
+const BLUE_BRIGHT = '#4A6FD0';
+const PINK = '#FD81CC';
 
-const PALETTE = [VIOLET, AQUA, AMBER, '#3B82F6', '#FF7A1A', '#10B981', '#EF4444'];
+const PALETTE = [BLUE, BLUE_BRIGHT, PINK, '#082A78', '#F0479F', '#8AA9EA', '#0B1C46'];
 
 // Every figure on this screen is printed with its formula and the raw numbers it
 // came from, so a viva examiner can verify the arithmetic without opening code.
@@ -44,21 +44,21 @@ function Metric({ label, value, formula, numbers, tone = 'brand', icon: Icon, to
           </span>
         )}
         <div className="min-w-0 flex-1">
-          <p className="text-[11px] font-bold tracking-[0.12em] text-content-muted uppercase">{label}</p>
+          <p className="text-[12px] font-bold tracking-[0.12em] text-content-muted uppercase">{label}</p>
           <p className="mt-1 font-display text-[24px] leading-none font-extrabold tracking-[-0.03em] tabular-nums">
             {value}
           </p>
         </div>
       </div>
       <div className="flex flex-1 flex-col gap-2 px-5 py-4">
-        <p className="rounded-sm bg-canvas-2/70 px-3 py-2 font-mono text-[11.5px] leading-relaxed break-words text-content-soft">
+        <p className="rounded-sm bg-canvas-2/70 px-3 py-2 font-mono text-[12px] leading-relaxed break-words text-content-soft">
           {formula}
         </p>
-        <p className="text-[12.5px] leading-relaxed text-content-muted">{numbers}</p>
+        <p className="text-[13px] leading-relaxed text-content-muted">{numbers}</p>
         {to && (
           <Link
             to={to}
-            className="mt-auto inline-flex items-center gap-1.5 text-[12.5px] font-bold text-brand-600 hover:text-aqua-600 dark:text-brand-300"
+            className="mt-auto inline-flex items-center gap-1.5 text-[13px] font-bold text-brand-600 hover:text-aqua-600 dark:text-brand-300"
           >
             {cta ?? 'Open screen'}
           </Link>
@@ -287,7 +287,7 @@ export default function AdminReports() {
             <Card padding="none" className="overflow-hidden">
               <div className="border-b border-line px-5 py-4">
                 <h2 className="font-display text-[17px] font-bold tracking-[-0.02em]">Bookings by status</h2>
-                <p className="mt-1 text-[12.5px] text-content-muted">
+                <p className="mt-1 text-[13px] text-content-muted">
                   Each share is count ÷ {total} total bookings, rounded to one decimal. The six lifecycle states are
                   mutually exclusive and sum to the full ledger.
                 </p>
@@ -299,7 +299,7 @@ export default function AdminReports() {
                     Booking counts per status with the percentage of the total ledger and the worked calculation.
                   </caption>
                   <thead>
-                    <tr className="border-b border-line bg-canvas-2/60 text-[11px] font-bold tracking-[0.1em] text-content-muted uppercase">
+                    <tr className="border-b border-line bg-canvas-2/60 text-[12px] font-bold tracking-[0.1em] text-content-muted uppercase">
                       <th scope="col" className="px-5 py-3">Status</th>
                       <th scope="col" className="px-3 py-3 text-right">Count</th>
                       <th scope="col" className="px-3 py-3 text-right">% of total</th>
@@ -317,7 +317,7 @@ export default function AdminReports() {
                         </th>
                         <td className="px-3 py-3 text-right font-bold tabular-nums">{row.count}</td>
                         <td className="px-3 py-3 text-right tabular-nums text-content-soft">{row.pct}%</td>
-                        <td className="px-5 py-3 font-mono text-[11.5px] text-content-muted">
+                        <td className="px-5 py-3 font-mono text-[12px] text-content-muted">
                           {row.count} ÷ {total} = {row.pct}%
                         </td>
                       </tr>
@@ -328,7 +328,7 @@ export default function AdminReports() {
                       </th>
                       <td className="px-3 py-3 text-right font-extrabold tabular-nums">{total}</td>
                       <td className="px-3 py-3 text-right font-bold tabular-nums text-content-soft">100%</td>
-                      <td className="px-5 py-3 font-mono text-[11.5px] text-content-muted">
+                      <td className="px-5 py-3 font-mono text-[12px] text-content-muted">
                         Σ counts = {statusRows.reduce((s, r) => s + r.count, 0)}
                       </td>
                     </tr>
@@ -339,12 +339,12 @@ export default function AdminReports() {
           </Reveal>
 
           {/* ---------------------------------------------------- chart + ratings */}
-          <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
+          <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
             <Reveal>
               <Card padding="none" className="h-full">
                 <div className="border-b border-line px-5 py-4">
                   <h2 className="font-display text-[16px] font-bold tracking-[-0.02em]">Bookings per category</h2>
-                  <p className="mt-1 text-[12.5px] text-content-muted">
+                  <p className="mt-1 text-[13px] text-content-muted">
                     A booking is attributed to its provider&rsquo;s category. Categories with zero bookings are kept so
                     supply gaps stay visible.
                   </p>
@@ -368,7 +368,7 @@ export default function AdminReports() {
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
-                <p className="border-t border-line px-5 py-3 text-[12.5px] text-content-muted">
+                <p className="border-t border-line px-5 py-3 text-[13px] text-content-muted">
                   Busiest category:{' '}
                   <span className="font-bold text-content">
                     {busiestCategory ? busiestCategory.name : 'None yet'}
@@ -386,7 +386,7 @@ export default function AdminReports() {
               <Card padding="none" className="h-full">
                 <div className="border-b border-line px-5 py-4">
                   <h2 className="font-display text-[16px] font-bold tracking-[-0.02em]">Rating distribution</h2>
-                  <p className="mt-1 text-[12.5px] text-content-muted">
+                  <p className="mt-1 text-[13px] text-content-muted">
                     All {state.reviews.length} reviews, counted per star band.
                   </p>
                 </div>
@@ -430,7 +430,7 @@ export default function AdminReports() {
                 <h2 className="font-display text-[16px] font-bold tracking-[-0.02em]">
                   Provider acceptance rate — top 5
                 </h2>
-                <p className="mt-1 text-[12.5px] text-content-muted">
+                <p className="mt-1 text-[13px] text-content-muted">
                   Formula: bookings that left <code className="font-mono">pending</code> ÷ all bookings for that
                   provider. Providers with no bookings are excluded, since 0 ÷ 0 is undefined.
                 </p>
@@ -449,11 +449,11 @@ export default function AdminReports() {
                       <div className="min-w-0 flex-1">
                         <Link
                           to={`/provider/${row.slug}`}
-                          className="truncate font-display text-[14.5px] font-bold tracking-[-0.02em] hover:text-brand-600 dark:hover:text-brand-300"
+                          className="truncate font-display text-[15px] font-bold tracking-[-0.02em] hover:text-brand-600 dark:hover:text-brand-300"
                         >
                           {row.name}
                         </Link>
-                        <p className="mt-0.5 truncate font-mono text-[11.5px] text-content-muted">
+                        <p className="mt-0.5 truncate font-mono text-[12px] text-content-muted">
                           {row.accepted} ÷ {row.total} = {row.acceptancePct}%
                         </p>
                       </div>
@@ -477,7 +477,7 @@ export default function AdminReports() {
             <Card padding="none" className="overflow-hidden">
               <div className="border-b border-line px-5 py-4">
                 <h2 className="font-display text-[16px] font-bold tracking-[-0.02em]">Per-provider performance</h2>
-                <p className="mt-1 text-[12.5px] text-content-muted">
+                <p className="mt-1 text-[13px] text-content-muted">
                   Completion column = completed ÷ accepted bookings for that provider. Active counts pending, accepted
                   and in-progress bookings together. Sorted by booking volume.
                 </p>
@@ -490,7 +490,7 @@ export default function AdminReports() {
                     rate and completion rate.
                   </caption>
                   <thead>
-                    <tr className="border-b border-line bg-canvas-2/60 text-[11px] font-bold tracking-[0.1em] text-content-muted uppercase">
+                    <tr className="border-b border-line bg-canvas-2/60 text-[12px] font-bold tracking-[0.1em] text-content-muted uppercase">
                       <th scope="col" className="px-5 py-3">Business</th>
                       <th scope="col" className="px-3 py-3">Category</th>
                       <th scope="col" className="px-3 py-3">City</th>
@@ -513,7 +513,7 @@ export default function AdminReports() {
                             >
                               {row.name}
                             </Link>
-                            <span className="mt-0.5 block text-[11.5px] text-content-muted">
+                            <span className="mt-0.5 block text-[12px] text-content-muted">
                               {row.verification} · {row.total} booking{row.total === 1 ? '' : 's'}
                             </span>
                           </th>
@@ -550,7 +550,7 @@ export default function AdminReports() {
                         <div className="min-w-0">
                           <Link
                             to={`/provider/${row.slug}`}
-                            className="block truncate font-display text-[14.5px] font-bold tracking-[-0.02em] hover:text-brand-600 dark:hover:text-brand-300"
+                            className="block truncate font-display text-[15px] font-bold tracking-[-0.02em] hover:text-brand-600 dark:hover:text-brand-300"
                           >
                             {row.name}
                           </Link>
@@ -585,7 +585,7 @@ export default function AdminReports() {
                         </div>
                         <div className="col-span-2">
                           <dt className="text-content-muted">Complete</dt>
-                          <dd className="font-mono text-[11.5px] text-content">
+                          <dd className="font-mono text-[12px] text-content">
                             {row.accepted
                               ? `${row.completedBookings} ÷ ${row.accepted} = ${row.completionPct}%`
                               : 'no accepted bookings yet'}
@@ -599,10 +599,10 @@ export default function AdminReports() {
           </Reveal>
 
           {/* ------------------------------------------------------------ footnotes */}
-          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
             <Card padding="sm">
               <h2 className="font-display text-[14px] font-bold tracking-[-0.02em]">Definitions used above</h2>
-              <ul className="mt-2 space-y-1.5 text-[12.5px] leading-relaxed text-content-muted">
+              <ul className="mt-2 space-y-1.5 text-[13px] leading-relaxed text-content-muted">
                 <li>
                   <span className="font-semibold text-content">Decided booking</span> — anything past{' '}
                   <code className="font-mono">pending</code>; the provider has accepted, rejected or the flow has moved
@@ -622,7 +622,7 @@ export default function AdminReports() {
             </Card>
             <Card padding="sm">
               <h2 className="font-display text-[14px] font-bold tracking-[-0.02em]">Data provenance</h2>
-              <p className="mt-2 text-[12.5px] leading-relaxed text-content-muted">
+              <p className="mt-2 text-[13px] leading-relaxed text-content-muted">
                 Nothing here is hard-coded: all figures are recomputed from <code className="font-mono">state</code>{' '}
                 on render, so approving a provider, completing a job or resolving a complaint changes these numbers
                 immediately. Ratings derive from the reviews list rather than a stored field, and revenue counts only

@@ -6,12 +6,12 @@ import * as THREE from 'three';
 // Low-poly workshop tools, assembled from primitives so nothing has to be
 // downloaded. Each piece uses flat shading for the faceted look.
 const PALETTE = {
-  violet: '#6C5CE7',
-  teal: '#00D4C8',
-  amber: '#FFB020',
-  orange: '#FF7A1A',
-  blue: '#3B82F6',
-  ink: '#1a2150',
+  violet: '#09318D',
+  teal: '#4A6FD0',
+  amber: '#FD81CC',
+  orange: '#E0399C',
+  blue: '#8AA9EA',
+  ink: '#0b1c46',
   steel: '#aab3d4',
 };
 
@@ -114,7 +114,7 @@ export function Nut({ color = PALETTE.orange }) {
 
 // Dark centre for the nut so the hex ring reads as a hole.
 function MeshHole() {
-  return <meshStandardMaterial color="#05081a" metalness={0.2} roughness={0.8} flatShading />;
+  return <meshStandardMaterial color="#02061a" metalness={0.2} roughness={0.8} flatShading />;
 }
 
 export function PipeElbow({ color = PALETTE.teal }) {

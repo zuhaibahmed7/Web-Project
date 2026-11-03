@@ -127,7 +127,7 @@ export default function AdminComplaints() {
               >
                 <span className="flex items-center gap-2">
                   <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: meta.color }} aria-hidden="true" />
-                  <span className="truncate text-[11px] font-bold tracking-[0.1em] text-content-muted uppercase">
+                  <span className="truncate text-[12px] font-bold tracking-[0.1em] text-content-muted uppercase">
                     {meta.label}
                   </span>
                 </span>
@@ -146,7 +146,7 @@ export default function AdminComplaints() {
                 tab === 'all' ? 'border-brand-500/50 bg-brand-500/8' : 'border-line hover:border-line-strong hover:bg-canvas-2'
               }`}
             >
-              <span className="text-[11px] font-bold tracking-[0.1em] text-content-muted uppercase">All</span>
+              <span className="text-[12px] font-bold tracking-[0.1em] text-content-muted uppercase">All</span>
               <span className="mt-1 block font-display text-[20px] leading-none font-extrabold tabular-nums">
                 {counts.all}
               </span>
@@ -200,7 +200,7 @@ export default function AdminComplaints() {
         </div>
       </Card>
 
-      <p className="mt-3 text-[12.5px] text-content-muted">
+      <p className="mt-3 text-[13px] text-content-muted">
         Showing {rows.length} complaint{rows.length === 1 ? '' : 's'} — sorted high priority first, then newest.
       </p>
 
@@ -287,7 +287,7 @@ export default function AdminComplaints() {
                       {booking && (
                         <Link
                           to={`/booking/${booking.id}`}
-                          className="ml-auto inline-flex items-center gap-1.5 text-[12.5px] font-bold text-brand-600 hover:text-aqua-600 dark:text-brand-300"
+                          className="ml-auto inline-flex items-center gap-1.5 text-[13px] font-bold text-brand-600 hover:text-aqua-600 dark:text-brand-300"
                         >
                           Booking {booking.code} · {formatDate(booking.date)}
                         </Link>
@@ -301,7 +301,7 @@ export default function AdminComplaints() {
         </div>
       )}
 
-      <p className="mt-6 flex items-start gap-2 text-[12.5px] leading-relaxed text-content-muted">
+      <p className="mt-6 flex items-start gap-2 text-[13px] leading-relaxed text-content-muted">
         <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-500" aria-hidden="true" />
         Resolution notes are stored on the complaint record and shown back to the customer in their own complaints
         screen, so the wording should stay factual and actionable. Last desk activity{' '}

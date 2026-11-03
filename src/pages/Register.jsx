@@ -14,6 +14,7 @@ import {
 import { useStore } from '../store/StoreContext';
 import { CATEGORIES, CITIES } from '../data/categories';
 import { DASHBOARD_PATH } from '../utils/nav';
+import { useI18n } from '../i18n/useI18n';
 import {
   runValidation,
   hasErrors,
@@ -33,35 +34,28 @@ import { useToast } from '../components/ui/Toast';
 const ROLES = [
   {
     value: 'customer',
-    label: 'I need a service',
-    sub: 'Browse providers, book, review',
+    labelKey: 'auth.roleCustomer',
+    subKey: 'auth.roleCustomerSub',
     icon: User,
     tone: 'brand',
   },
   {
     value: 'provider',
-    label: 'I offer a service',
-    sub: 'Publish services and answer requests',
+    labelKey: 'auth.roleProvider',
+    subKey: 'auth.roleProviderSub',
     icon: Building,
     tone: 'aqua',
   },
 ];
 
 const PERKS = {
-  customer: [
-    'Compare indicative PKR prices side by side',
-    'Track every request from Pending to Completed',
-    'Cancel for free while a request is still Pending',
-  ],
-  provider: [
-    'An administrator verifies you before customers see your business',
-    'Accept or decline each request with a reason',
-    'Publish the days and slots you can genuinely keep',
-  ],
+  customer: ['auth.perkCustomer1', 'auth.perkCustomer2', 'auth.perkCustomer3'],
+  provider: ['auth.perkProvider1', 'auth.perkProvider2', 'auth.perkProvider3'],
 };
 
 export default function Register() {
   const { register } = useStore();
+  const { t } = useI18n();
   const navigate = useNavigate();
   const toast = useToast();
 
@@ -97,7 +91,7 @@ export default function Register() {
       phone: validPhone,
       city: (v) => required(v, 'City'),
       password: validPassword,
-      confirm: (v) => (v !== values.password ? 'Passwords do not match.' : ''),
+      confirm: (v) => (v !== values.password ? t('auth.passwordMismatch') : ''),
     };
     if (role === 'provider') {
       rules.businessName = (v) => required(v, 'Business name') || minLength(v, 3, 'Business name');
@@ -111,15 +105,15 @@ export default function Register() {
     setFormError('');
     const result = register({ ...values, role, yearsExperience: Number(values.yearsExperience) || 1 });
     if (!result.ok) {
-      setFormError(result.error);
+      setFormError(t(result.key, null, result.error));
       return;
     }
 
     toast.success(
       role === 'provider'
-        ? 'Account created. An administrator will verify your business shortly.'
-        : `Welcome to FixNow, ${result.user.name.split(' ')[0]}.`,
-      { title: 'Account created' }
+        ? t('auth.accountCreatedProvider')
+        : t('auth.accountCreatedCustomer', { name: result.user.name.split(' ')[0] }),
+      { title: t('auth.accountCreatedTitle') }
     );
     navigate(DASHBOARD_PATH[result.user.role], { replace: true });
   };
@@ -128,26 +122,25 @@ export default function Register() {
     <div className="relative overflow-hidden">
       <div className="dot-grid pointer-events-none absolute inset-0 opacity-50" aria-hidden="true" />
       <div
-        className="pointer-events-none absolute -top-32 left-1/3 h-96 w-96 rounded-full bg-[radial-gradient(circle,rgb(0_212_200_/_0.18),transparent_65%)] blur-2xl"
+        className="pointer-events-none absolute -top-32 start-1/3 h-96 w-96 rounded-full bg-[radial-gradient(circle,rgb(253_129_204_/_0.18),transparent_65%)] blur-2xl"
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto grid max-w-[84rem] gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_23rem] lg:px-8 lg:py-16">
+      <div className="relative mx-auto grid grid-cols-1 max-w-[84rem] gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_23rem] lg:px-8 lg:py-16">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-          <p className="text-[11px] font-bold tracking-[0.2em] text-brand-500 uppercase dark:text-brand-300">
-            Create your account
+          <p className="text-[12px] font-bold tracking-[0.2em] text-brand-500 uppercase dark:text-brand-300">
+            {t('auth.registerEyebrow')}
           </p>
           <h1 className="mt-3 font-display text-[32px] leading-[1.04] font-extrabold tracking-[-0.04em] sm:text-[42px]">
-            Two kinds of member.
-            <span className="block grad-text">One marketplace.</span>
+            {t('auth.registerTitle1')}
+            <span className="block grad-text">{t('auth.registerTitle2')}</span>
           </h1>
           <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-content-muted text-pretty">
-            Registering is instant in this prototype — the account is stored in your browser so you can switch between
-            roles and watch the same data move across all three dashboards.
+            {t('auth.registerBody')}
           </p>
 
           {/* Role choice changes the form itself, so it sits above the fields. */}
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+          <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
             {ROLES.map((r) => {
               const active = role === r.value;
               return (
@@ -157,7 +150,7 @@ export default function Register() {
                   onClick={() => setRole(r.value)}
                   aria-pressed={active}
                   className={cn(
-                    'grad-frame group relative flex items-start gap-3.5 overflow-hidden rounded-xl p-4 text-left transition-[border-color,background-color,transform] duration-300 active:scale-[0.99]',
+                    'grad-frame group relative flex items-start gap-3.5 overflow-hidden rounded-xl p-4 text-start transition-[border-color,background-color,transform] duration-300 active:scale-[0.99]',
                     active ? 'glass border-brand-500/45 shadow-lift' : 'glass-2 hover:border-brand-500/30'
                   )}
                 >
@@ -175,11 +168,11 @@ export default function Register() {
                     <r.icon className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <span className="min-w-0">
-                    <span className="block font-display text-[15.5px] font-bold">{r.label}</span>
-                    <span className="mt-1 block text-[12.5px] leading-snug text-content-muted">{r.sub}</span>
+                    <span className="block font-display text-[16px] font-bold">{t(r.labelKey)}</span>
+                    <span className="mt-1 block text-[13px] leading-snug text-content-muted">{t(r.subKey)}</span>
                   </span>
                   {active && (
-                    <CircleCheck className="mt-0.5 ml-auto h-4 w-4 shrink-0 text-brand-500" aria-hidden="true" />
+                    <CircleCheck className="mt-0.5 ms-auto h-4 w-4 shrink-0 text-brand-500" aria-hidden="true" />
                   )}
                 </button>
               );
@@ -187,47 +180,47 @@ export default function Register() {
           </div>
 
           <form onSubmit={onSubmit} className="mt-7 space-y-4" noValidate>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Input
-                label="Full name"
+                label={t('auth.fullName')}
                 required
                 autoComplete="name"
-                placeholder="Ayesha Khan"
+                placeholder={t('auth.fullNamePlaceholder')}
                 value={values.name}
                 onChange={set('name')}
                 error={errors.name}
               />
               <Input
-                label="Email address"
+                label={t('auth.email')}
                 type="email"
                 required
                 icon={Mail}
                 autoComplete="email"
-                placeholder="you@example.pk"
+                placeholder={t('auth.emailPlaceholder')}
                 value={values.email}
                 onChange={set('email')}
                 error={errors.email}
               />
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Input
-                label="Mobile number"
+                label={t('auth.phone')}
                 type="tel"
                 autoComplete="tel"
-                placeholder="03001234567"
-                hint="Pakistani format — optional in this demo."
+                placeholder={t('auth.phonePlaceholder')}
+                hint={t('auth.phoneHint')}
                 value={values.phone}
                 onChange={set('phone')}
                 error={errors.phone}
               />
               <Select
-                label="City"
+                label={t('common.city')}
                 required
                 value={values.city}
                 onChange={set('city')}
                 error={errors.city}
-                placeholder="Select your city"
+                placeholder={t('auth.cityPlaceholder')}
                 options={CITIES.map((c) => ({ value: c, label: c }))}
               />
             </div>
@@ -236,65 +229,65 @@ export default function Register() {
               <div className="glass rounded-xl p-4">
                 <div className="mb-4 flex items-center gap-2">
                   <Briefcase className="h-4 w-4 text-aqua-600 dark:text-aqua-300" aria-hidden="true" />
-                  <h2 className="font-display text-[14px] font-bold">Business details</h2>
-                  <Badge tone="amber" size="sm" className="ml-auto">
-                    Needs verification
+                  <h2 className="font-display text-[14px] font-bold">{t('auth.businessDetails')}</h2>
+                  <Badge tone="amber" size="sm" className="ms-auto">
+                    {t('auth.needsVerification')}
                   </Badge>
                 </div>
 
-                <div className="grid gap-4 sm:grid-cols-2">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <Input
-                    label="Business name"
+                    label={t('auth.businessName')}
                     required
-                    placeholder="Bilal Electrical Works"
+                    placeholder={t('auth.businessNamePlaceholder')}
                     value={values.businessName}
                     onChange={set('businessName')}
                     error={errors.businessName}
                   />
                   <Select
-                    label="Main service category"
+                    label={t('auth.mainCategory')}
                     required
                     value={values.categoryId}
                     onChange={set('categoryId')}
                     error={errors.categoryId}
-                    placeholder="Choose a category"
-                    options={CATEGORIES.map((c) => ({ value: c.id, label: c.name }))}
+                    placeholder={t('auth.chooseCategory')}
+                    options={CATEGORIES.map((c) => ({ value: c.id, label: t(`category.${c.id}`, null, c.name) }))}
                   />
                 </div>
 
-                <div className="mt-4 grid gap-4 sm:grid-cols-[10rem_minmax(0,1fr)]">
+                <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-[10rem_minmax(0,1fr)]">
                   <Input
-                    label="Years of experience"
+                    label={t('auth.years')}
                     type="number"
                     min="0"
                     max="60"
-                    placeholder="5"
+                    placeholder={t('auth.yearsPlaceholder')}
                     value={values.yearsExperience}
                     onChange={set('yearsExperience')}
                   />
                   <Input
-                    label="Areas you cover"
-                    placeholder="Gulshan, DHA, Clifton"
-                    hint="Separate with commas — customers search on these."
+                    label={t('auth.areas')}
+                    placeholder={t('auth.areasPlaceholder')}
+                    hint={t('auth.areasHint')}
                     value={values.areas}
                     onChange={set('areas')}
                   />
                 </div>
 
-                <div className="mt-4 grid gap-4">
+                <div className="mt-4 grid grid-cols-1 gap-4">
                   <Input
-                    label="One-line tagline"
-                    placeholder="Same-day wiring fixes and DB boards"
+                    label={t('auth.tagline')}
+                    placeholder={t('auth.taglinePlaceholder')}
                     value={values.tagline}
                     onChange={set('tagline')}
                   />
                   <Textarea
-                    label="About your business"
+                    label={t('auth.bio')}
                     rows={3}
                     maxLength={280}
                     showCount
-                    placeholder="Tools you carry, guarantees you give, the jobs you decline…"
-                    hint="Optional now — you can edit the public profile later."
+                    placeholder={t('auth.bioPlaceholder')}
+                    hint={t('auth.bioHint')}
                     value={values.bio}
                     onChange={set('bio')}
                   />
@@ -302,24 +295,24 @@ export default function Register() {
               </div>
             )}
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Input
-                label="Password"
+                label={t('auth.password')}
                 type="password"
                 required
                 autoComplete="new-password"
-                placeholder="At least 6 characters"
-                hint="Demo only — stored in your browser, never sent anywhere."
+                placeholder={t('auth.passwordNew')}
+                hint={t('auth.passwordHint')}
                 value={values.password}
                 onChange={set('password')}
                 error={errors.password}
               />
               <Input
-                label="Confirm password"
+                label={t('auth.confirmPassword')}
                 type="password"
                 required
                 autoComplete="new-password"
-                placeholder="Repeat it"
+                placeholder={t('auth.passwordRepeat')}
                 value={values.confirm}
                 onChange={set('confirm')}
                 error={errors.confirm}
@@ -336,13 +329,13 @@ export default function Register() {
             )}
 
             <Button type="submit" size="lg" full iconRight={ArrowRight}>
-              {role === 'provider' ? 'Create provider account' : 'Create customer account'}
+              {role === 'provider' ? t('auth.createProvider') : t('auth.createCustomer')}
             </Button>
 
-            <p className="text-center text-[13.5px] text-content-muted">
-              Already registered?{' '}
+            <p className="text-center text-[14px] text-content-muted">
+              {t('auth.alreadyRegistered')}{' '}
               <Link to="/login" className="font-semibold text-brand-600 hover:underline dark:text-brand-300">
-                Sign in instead
+                {t('auth.signInInstead')}
               </Link>
             </p>
           </form>
@@ -351,43 +344,45 @@ export default function Register() {
         <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
           <Card>
             <h2 className="font-display text-[16px] font-bold">
-              {role === 'provider' ? 'What happens after you register' : 'What you can do straight away'}
+              {role === 'provider' ? t('auth.asideProviderTitle') : t('auth.asideCustomerTitle')}
             </h2>
             <ul className="mt-4 space-y-3">
-              {PERKS[role].map((line) => (
-                <li key={line} className="flex gap-2.5 text-[13.5px] leading-snug text-content-soft">
+              {PERKS[role].map((key) => (
+                <li key={key} className="flex gap-2.5 text-[14px] leading-snug text-content-soft">
                   <CircleCheck className="mt-0.5 h-4 w-4 shrink-0 text-aqua-500" aria-hidden="true" />
-                  {line}
+                  {t(key, {
+                    pending: t('status.pending'),
+                    completed: t('status.completed'),
+                    status: t('status.pending'),
+                  })}
                 </li>
               ))}
             </ul>
 
             {role === 'provider' ? (
-              <div className="mt-5 flex gap-3 rounded-sm bg-pending/10 p-3.5 text-[12.5px] leading-snug text-[#8a6500] dark:text-glow-300">
+              <div className="mt-5 flex gap-3 rounded-sm bg-pending/10 p-3.5 text-[13px] leading-snug text-[#8a6500] dark:text-pending">
                 <ShieldCheck className="h-4 w-4 shrink-0" aria-hidden="true" />
                 <p>
-                  Your listing stays hidden until an administrator approves it. Sign in as{' '}
-                  <span className="font-mono">admin@fixnow.pk</span> to watch the verification queue work.
+                  {t('auth.verifyNoteA')}{' '}
+                  <span dir="ltr" className="font-mono">
+                    admin@kaarigar.pk
+                  </span>{' '}
+                  {t('auth.verifyNoteB')}
                 </p>
               </div>
             ) : (
-              <div className="mt-5 flex gap-3 rounded-sm bg-brand-500/8 p-3.5 text-[12.5px] leading-snug text-content-soft">
+              <div className="mt-5 flex gap-3 rounded-sm bg-brand-500/8 p-3.5 text-[13px] leading-snug text-content-soft">
                 <Wrench className="h-4 w-4 shrink-0 text-brand-500" aria-hidden="true" />
-                <p>
-                  Guests can browse everything; an account is only needed to send a booking (business rule BRL-01).
-                </p>
+                <p>{t('auth.guestNote')}</p>
               </div>
             )}
           </Card>
 
           <Card padding="md" className="bg-canvas-2/40">
-            <h2 className="font-display text-[15px] font-bold">Try the seeded accounts</h2>
-            <p className="mt-2 text-[13px] leading-relaxed text-content-muted">
-              You do not have to register to explore — the sign-in page offers a customer, a provider and an admin
-              account with data already in flight.
-            </p>
+            <h2 className="font-display text-[15px] font-bold">{t('auth.seededTitle')}</h2>
+            <p className="mt-2 text-[13px] leading-relaxed text-content-muted">{t('auth.seededBody')}</p>
             <Button to="/login" variant="outline" size="sm" className="mt-4" full>
-              Use a demo account
+              {t('auth.useDemo')}
             </Button>
           </Card>
         </aside>

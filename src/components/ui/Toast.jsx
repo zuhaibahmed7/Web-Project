@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useMemo, useState } from 'react
 import { AnimatePresence, motion } from 'framer-motion';
 import { CircleCheck, TriangleAlert, CircleX, Info, X } from 'lucide-react';
 import { cn } from '../../utils/cn';
+import { useI18n } from '../../i18n/useI18n';
 
 const ToastContext = createContext(null);
 
@@ -10,11 +11,12 @@ let seq = 0;
 const TONES = {
   success: { icon: CircleCheck, ring: 'ring-completed/35', bar: 'bg-completed', tint: 'text-completed' },
   error: { icon: CircleX, ring: 'ring-rejected/35', bar: 'bg-rejected', tint: 'text-rejected dark:text-[#ff8a8a]' },
-  warning: { icon: TriangleAlert, ring: 'ring-pending/40', bar: 'bg-pending', tint: 'text-[#a27400] dark:text-glow-300' },
+  warning: { icon: TriangleAlert, ring: 'ring-pending/40', bar: 'bg-pending', tint: 'text-[#a27400] dark:text-pending' },
   info: { icon: Info, ring: 'ring-brand-500/35', bar: 'bg-brand-500', tint: 'text-brand-600 dark:text-brand-300' },
 };
 
 export function ToastProvider({ children }) {
+  const { isRtl } = useI18n();
   const [toasts, setToasts] = useState([]);
 
   const dismiss = useCallback((id) => {
@@ -48,7 +50,7 @@ export function ToastProvider({ children }) {
     <ToastContext.Provider value={value}>
       {children}
       <div
-        className="pointer-events-none fixed inset-x-3 bottom-3 z-200 flex flex-col items-center gap-2 sm:inset-x-auto sm:right-5 sm:bottom-5 sm:items-end"
+        className="pointer-events-none fixed inset-x-3 bottom-3 z-200 flex flex-col items-center gap-2 sm:inset-x-auto sm:end-5 sm:bottom-5 sm:items-end"
         role="region"
         aria-label="Notifications"
         aria-live="polite"
@@ -63,18 +65,18 @@ export function ToastProvider({ children }) {
                 layout
                 initial={{ opacity: 0, y: 22, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, x: 30, scale: 0.96 }}
+                exit={{ opacity: 0, x: isRtl ? -30 : 30, scale: 0.96 }}
                 transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
                 className={cn(
-                  'glass pointer-events-auto relative flex w-full max-w-sm items-start gap-3 overflow-hidden rounded-md p-3.5 pl-4 ring-1',
+                  'glass pointer-events-auto relative flex w-full max-w-sm items-start gap-3 overflow-hidden rounded-md p-3.5 ps-4 ring-1',
                   tone.ring
                 )}
               >
-                <span className={cn('absolute inset-y-0 left-0 w-[3px]', tone.bar)} aria-hidden="true" />
+                <span className={cn('absolute inset-y-0 start-0 w-[3px]', tone.bar)} aria-hidden="true" />
                 <Icon className={cn('mt-0.5 h-4.5 w-4.5 shrink-0', tone.tint)} aria-hidden="true" />
                 <div className="min-w-0 flex-1">
                   {t.title && (
-                    <p className="font-display text-[13.5px] font-bold tracking-[-0.01em] text-content">{t.title}</p>
+                    <p className="font-display text-[14px] font-bold tracking-[-0.01em] text-content">{t.title}</p>
                   )}
                   <p className="text-[13px] leading-snug text-content-soft">{t.message}</p>
                 </div>

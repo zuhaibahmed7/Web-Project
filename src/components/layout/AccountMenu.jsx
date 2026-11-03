@@ -54,22 +54,25 @@ export function AccountMenu({ variant = 'bar' }) {
         aria-expanded={open}
         aria-haspopup="menu"
         className={cn(
-          'group flex items-center gap-2 rounded-sm border border-line bg-surface-2 py-1.5 pr-2 pl-1.5',
+          'group flex items-center gap-2 rounded-sm border border-line bg-surface-2 py-1.5 pe-2 ps-1.5',
           'transition-[border-color,background-color,transform] duration-300 hover:border-brand-500/40 active:scale-95',
           open && 'border-brand-500/50 bg-brand-500/8'
         )}
       >
         <Avatar name={currentUser.name} size="sm" />
         {variant === 'bar' && (
-          <span className="hidden text-left sm:block">
+          <span className="hidden text-start sm:block">
             <span className="block max-w-32 truncate text-[13px] leading-tight font-semibold">
               {currentUser.name.split(' ')[0]}
             </span>
-            <span className="block text-[11px] leading-tight text-content-muted">{ROLE_LABEL[currentUser.role]}</span>
+            <span className="block text-[12px] leading-tight text-content-muted">{ROLE_LABEL[currentUser.role]}</span>
           </span>
         )}
         <ChevronDown
-          className={cn('h-4 w-4 text-content-muted transition-transform duration-300', open && 'rotate-180')}
+          className={cn(
+            'hidden h-4 w-4 text-content-muted transition-transform duration-300 sm:block',
+            open && 'rotate-180'
+          )}
           aria-hidden="true"
         />
       </button>
@@ -82,7 +85,7 @@ export function AccountMenu({ variant = 'bar' }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.97 }}
             transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            className="glass absolute right-0 z-150 mt-2 w-72 origin-top-right overflow-hidden rounded-xl shadow-lift"
+            className="glass absolute end-0 z-150 mt-2 w-72 origin-top-right rtl:origin-top-left overflow-hidden rounded-xl shadow-lift"
           >
             <div className="flex items-center gap-3 border-b border-line px-4 py-3.5">
               <Avatar name={currentUser.name} size="md" verified={currentUser.role === 'provider'} />
@@ -93,7 +96,7 @@ export function AccountMenu({ variant = 'bar' }) {
             </div>
 
             <div className="px-2 py-2">
-              <Badge tone={currentUser.role === 'admin' ? 'brand' : 'aqua'} className="ml-2 mb-1">
+              <Badge tone={currentUser.role === 'admin' ? 'brand' : 'aqua'} className="ms-2 mb-1">
                 {ROLE_LABEL[currentUser.role]}
               </Badge>
               {items.map((item) => (
@@ -110,7 +113,7 @@ export function AccountMenu({ variant = 'bar' }) {
                   <item.icon className="h-4 w-4 text-content-muted" aria-hidden="true" />
                   {item.label}
                   {item.hint > 0 && (
-                    <span className="ml-auto grid h-5 min-w-5 place-items-center rounded-full bg-brand-500 px-1 text-[10px] font-bold text-white">
+                    <span className="ms-auto grid h-5 min-w-5 place-items-center rounded-full bg-brand-500 px-1 text-[11px] font-bold text-white">
                       {item.hint}
                     </span>
                   )}

@@ -47,7 +47,7 @@ export function NotificationRow({ notification, onRead, compact = false }) {
           <span className={cn('truncate text-sm', unread ? 'font-semibold text-content' : 'font-medium text-content-soft')}>
             {notification.title}
           </span>
-          <span className="ml-auto shrink-0 text-[11px] whitespace-nowrap text-content-muted">
+          <span dir="ltr" className="ms-auto shrink-0 text-[12px] whitespace-nowrap text-content-muted">
             {relativeTime(notification.createdAt)}
           </span>
         </span>
@@ -60,7 +60,7 @@ export function NotificationRow({ notification, onRead, compact = false }) {
   );
 
   const tone = cn(
-    'flex w-full gap-3 rounded-sm p-3 text-left transition-colors',
+    'flex w-full gap-3 rounded-sm p-3 text-start transition-colors',
     unread ? 'bg-brand-500/6 hover:bg-brand-500/10' : 'hover:bg-canvas-2'
   );
 
@@ -122,7 +122,7 @@ export function NotificationBell() {
       >
         {unread > 0 ? <BellRing className="h-[18px] w-[18px]" /> : <Bell className="h-[18px] w-[18px]" />}
         {unread > 0 && (
-          <span className="absolute -top-1.5 -right-1.5 grid h-5 min-w-5 place-items-center rounded-full bg-rejected px-1 text-[10px] font-bold text-white ring-2 ring-canvas">
+          <span className="absolute -top-1.5 -right-1.5 grid h-5 min-w-5 place-items-center rounded-full bg-rejected px-1 text-[11px] font-bold text-white ring-2 ring-canvas">
             {unread > 9 ? '9+' : unread}
           </span>
         )}
@@ -135,7 +135,7 @@ export function NotificationBell() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.97 }}
             transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            className="glass absolute right-0 z-150 mt-2 w-[min(92vw,22rem)] origin-top-right overflow-hidden rounded-xl shadow-lift"
+            className="glass absolute end-0 z-150 mt-2 w-[min(92vw,22rem)] origin-top-right rtl:origin-top-left overflow-hidden rounded-xl shadow-lift"
           >
             <div className="flex items-center justify-between border-b border-line px-4 py-3">
               <p className="font-display text-sm font-bold">Notifications</p>

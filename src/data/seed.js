@@ -9,7 +9,9 @@ import { buildSeedReviews, CUSTOMER_SEED_REVIEWS } from './reviews';
 import { SEED_COMPLAINTS } from './complaints';
 import { isoFromToday } from '../utils/date';
 
-export const STATE_VERSION = 3;
+// Bumped to 4 with the blue/pink palette: category accent gradients live in the
+// seeded state, so saved v3 states must be discarded to re-seed the new colours.
+export const STATE_VERSION = 4;
 
 export function createInitialState() {
   const reviews = [...buildSeedReviews(PROVIDERS), ...CUSTOMER_SEED_REVIEWS];

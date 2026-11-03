@@ -13,7 +13,7 @@ export function PageHeader({ eyebrow, title, description, actions, back, backLab
           to={back}
           className="group mb-4 inline-flex items-center gap-2 text-[13px] font-semibold text-content-muted transition-colors hover:text-content"
         >
-          <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+          <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1 rtl:-scale-x-100 rtl:group-hover:translate-x-1" />
           {backLabel ?? 'Back'}
         </Link>
       )}
@@ -21,7 +21,7 @@ export function PageHeader({ eyebrow, title, description, actions, back, backLab
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="min-w-0">
             {eyebrow && (
-              <p className="mb-2 text-[11px] font-bold tracking-[0.18em] text-brand-500 uppercase dark:text-brand-300">
+              <p className="mb-2 text-[12px] font-bold tracking-[0.18em] text-brand-500 uppercase dark:text-brand-300">
                 {eyebrow}
               </p>
             )}

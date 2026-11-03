@@ -113,7 +113,7 @@ export default function ProviderJobs() {
       <PageHeader
         eyebrow="Work board"
         title="Active jobs"
-        description="Start work when you arrive on site and mark the job completed when the customer signs off. Providers cannot cancel or reopen a booking — that stays with the customer and the FixNow team."
+        description="Start work when you arrive on site and mark the job completed when the customer signs off. Providers cannot cancel or reopen a booking — that stays with the customer and the Kaarigar team."
         actions={
           <Button variant="secondary" size="sm" to="/partner/requests">
             Request queue
@@ -121,7 +121,7 @@ export default function ProviderJobs() {
         }
       />
 
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <SummaryTile label="Waiting to start" value={scheduled.length} icon={CalendarDays} tone="brand" />
         <SummaryTile label="Work in progress" value={running.length} icon={Clock} tone="amber" />
         <SummaryTile label="Completed value" value={formatPKR(completedValue)} icon={Wallet} tone="success" />
@@ -164,13 +164,13 @@ export default function ProviderJobs() {
               <CircleCheckBig className="h-4 w-4" aria-hidden="true" />
             </span>
             <span className="min-w-0 flex-1">
-              <span id="completed-jobs" className="block font-display text-[15.5px] font-bold tracking-[-0.02em]">
+              <span id="completed-jobs" className="block font-display text-[16px] font-bold tracking-[-0.02em]">
                 Recently completed
                 <span className="ml-2 inline-flex items-center rounded-full bg-canvas-2 px-2 py-0.5 align-middle text-[12px] font-bold text-content-soft">
                   {completed.length}
                 </span>
               </span>
-              <span className="mt-0.5 block text-[12.5px] text-content-muted">
+              <span className="mt-0.5 block text-[13px] text-content-muted">
                 Closed out by you. Only the customer can rate these jobs.
               </span>
             </span>
@@ -216,7 +216,7 @@ function JobGroup({ title, hint, bookings, state, emptyIcon, emptyTitle, emptyDe
           <h2 className="font-display text-[19px] font-bold tracking-[-0.02em] sm:text-[22px]">{title}</h2>
           <p className="mt-1 text-[13px] text-content-muted">{hint}</p>
         </div>
-        <span className="text-[12.5px] font-semibold text-content-muted">{bookings.length} job{bookings.length === 1 ? '' : 's'}</span>
+        <span className="text-[13px] font-semibold text-content-muted">{bookings.length} job{bookings.length === 1 ? '' : 's'}</span>
       </div>
 
       {bookings.length === 0 ? (
@@ -261,7 +261,7 @@ function JobRow({ booking, state, onAction, tone = 'brand', collapsible = false 
             )}
             {!collapsible && (today || overdue) && (
               <span
-                className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-bold ring-1 ring-inset ${
+                className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[12px] font-bold ring-1 ring-inset ${
                   overdue
                     ? 'bg-rejected/12 text-rejected ring-rejected/30'
                     : 'bg-brand-500/12 text-brand-600 ring-brand-500/28 dark:text-brand-300'
@@ -279,7 +279,7 @@ function JobRow({ booking, state, onAction, tone = 'brand', collapsible = false 
                 <User className="h-3.5 w-3.5 shrink-0 text-content-muted" aria-hidden="true" />
                 {customer?.name ?? 'Customer account removed'}
               </p>
-              <p className="truncate text-[12.5px] text-content-muted">
+              <p className="truncate text-[13px] text-content-muted">
                 {service?.name ?? 'Service removed'}
                 {service?.unit ? ` · ${formatPKR(service.price)} per ${service.unit}` : ''}
               </p>
@@ -288,7 +288,7 @@ function JobRow({ booking, state, onAction, tone = 'brand', collapsible = false 
               <a
                 href={`tel:${customer.phone}`}
                 aria-label={`Call ${customer.name} on ${customer.phone}`}
-                className="ml-auto inline-flex h-9 shrink-0 items-center gap-1.5 rounded-sm border border-line px-3 text-[12.5px] font-bold text-content-soft transition-colors hover:border-brand-500/50 hover:text-brand-600 dark:hover:text-brand-300"
+                className="ml-auto inline-flex h-9 shrink-0 items-center gap-1.5 rounded-sm border border-line px-3 text-[13px] font-bold text-content-soft transition-colors hover:border-brand-500/50 hover:text-brand-600 dark:hover:text-brand-300"
               >
                 <Phone className="h-3.5 w-3.5" aria-hidden="true" />
                 Call
@@ -296,7 +296,7 @@ function JobRow({ booking, state, onAction, tone = 'brand', collapsible = false 
             )}
           </div>
 
-          <dl className="grid gap-2 text-[13px] sm:grid-cols-2">
+          <dl className="grid grid-cols-1 gap-2 text-[13px] sm:grid-cols-2">
             <Detail icon={CalendarDays} label="Scheduled">
               {formatDate(booking.date, { weekday: 'long' })}
             </Detail>
@@ -337,7 +337,7 @@ function JobRow({ booking, state, onAction, tone = 'brand', collapsible = false 
               ))}
             </div>
           ) : (
-            <div className="rounded-sm border border-line bg-canvas-2/60 px-4 py-3 text-[12.5px] leading-relaxed text-content-muted">
+            <div className="rounded-sm border border-line bg-canvas-2/60 px-4 py-3 text-[13px] leading-relaxed text-content-muted">
               {collapsible ? (
                 <>
                   <span className="mb-1 block font-bold text-content">Awaiting customer review</span>
@@ -350,14 +350,14 @@ function JobRow({ booking, state, onAction, tone = 'brand', collapsible = false 
               ) : (
                 <>
                   <span className="mb-1 block font-bold text-content">Nothing to do here</span>
-                  This stage is handled by the customer or the FixNow team.
+                  This stage is handled by the customer or the Kaarigar team.
                 </>
               )}
             </div>
           )}
 
           {tone === 'amber' && !collapsible && (
-            <p className="flex items-start gap-1.5 text-[11.5px] leading-snug text-content-muted">
+            <p className="flex items-start gap-1.5 text-[12px] leading-snug text-content-muted">
               <Briefcase className="mt-0.5 h-3 w-3 shrink-0" aria-hidden="true" />
               Marking a job completed is final — double-check the work before you tap it.
             </p>
@@ -371,7 +371,7 @@ function JobRow({ booking, state, onAction, tone = 'brand', collapsible = false 
 function Detail({ icon: Icon, label, children, className = '' }) {
   return (
     <div className={className}>
-      <dt className="text-[11px] font-bold tracking-[0.12em] text-content-muted uppercase">{label}</dt>
+      <dt className="text-[12px] font-bold tracking-[0.12em] text-content-muted uppercase">{label}</dt>
       <dd className="mt-1 flex items-start gap-1.5 text-content-soft">
         <Icon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-content-muted" aria-hidden="true" />
         <span>{children}</span>
@@ -392,7 +392,7 @@ function SummaryTile({ label, value, icon: Icon, tone }) {
         <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
       </span>
       <span className="min-w-0">
-        <span className="block text-[11px] font-bold tracking-[0.14em] text-content-muted uppercase">{label}</span>
+        <span className="block text-[12px] font-bold tracking-[0.14em] text-content-muted uppercase">{label}</span>
         <span className="mt-1 block font-display text-[18px] leading-none font-extrabold tracking-[-0.03em] tabular-nums">
           {value}
         </span>

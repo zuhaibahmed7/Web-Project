@@ -36,7 +36,7 @@ function RailLink({ item, badge, onNavigate }) {
           />
           <span className="relative truncate">{item.label}</span>
           {badge > 0 && (
-            <span className="relative ml-auto grid h-5 min-w-5 place-items-center rounded-full bg-brand-500 px-1 text-[10px] font-bold text-white">
+            <span className="relative ms-auto grid h-5 min-w-5 place-items-center rounded-full bg-brand-500 px-1 text-[11px] font-bold text-white">
               {badge > 9 ? '9+' : badge}
             </span>
           )}
@@ -55,7 +55,7 @@ export function DashboardShell({ children }) {
   const badgeFor = (to) => (to === '/notifications' ? unread : 0);
 
   return (
-    <div className="mx-auto grid max-w-[88rem] gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[15rem_1fr] lg:gap-8 lg:px-8 lg:py-8">
+    <div className="mx-auto grid grid-cols-1 max-w-[88rem] gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[15rem_1fr] lg:gap-8 lg:px-8 lg:py-8">
       {/* Desktop rail */}
       <aside className="hidden lg:block">
         <div className="glass sticky top-24 overflow-hidden rounded-xl p-3">
@@ -100,7 +100,7 @@ export function DashboardShell({ children }) {
               <item.icon className="h-3.5 w-3.5" aria-hidden="true" />
               {item.label}
               {badgeFor(item.to) > 0 && item.to === '/notifications' && (
-                <span className="grid h-4 min-w-4 place-items-center rounded-full bg-rejected px-1 text-[9px] font-bold text-white">
+                <span className="grid h-4 min-w-4 place-items-center rounded-full bg-rejected px-1 text-[11px] font-bold text-white">
                   {badgeFor(item.to)}
                 </span>
               )}

@@ -125,7 +125,7 @@ export default function MyBookings() {
             action={<Button to="/browse">Find a service</Button>}
             secondaryAction={
               <Button variant="outline" to="/how-it-works">
-                How FixNow works
+                How Kaarigar works
               </Button>
             }
           />
@@ -188,7 +188,7 @@ export default function MyBookings() {
                         !canReview(booking, hasReviewForBooking(state, booking.id)) && (
                           <Link
                             to={`/provider/${provider?.slug ?? ''}`}
-                            className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-brand-600 hover:text-aqua-600 dark:text-brand-300"
+                            className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-brand-600 hover:text-aqua-600 dark:text-brand-300"
                           >
                             <CalendarDays className="h-3.5 w-3.5" aria-hidden="true" />
                             Book {provider?.name ?? 'this provider'} again

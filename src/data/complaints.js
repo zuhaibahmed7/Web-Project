@@ -5,7 +5,7 @@ import { isoFromToday } from '../utils/date';
 
 export const COMPLAINT_STATUSES = {
   open: { label: 'Open', color: '#EF4444', tone: 'bg-rejected/12 text-rejected ring-rejected/30 dark:text-[#ff8a8a]' },
-  in_review: { label: 'In review', color: '#F5B301', tone: 'bg-pending/12 text-[#8a6500] ring-pending/30 dark:text-glow-300' },
+  in_review: { label: 'In review', color: '#F5B301', tone: 'bg-pending/12 text-[#8a6500] ring-pending/30 dark:text-pending' },
   resolved: { label: 'Resolved', color: '#10B981', tone: 'bg-completed/12 text-completed ring-completed/30 dark:text-[#4ade9f]' },
   dismissed: { label: 'Dismissed', color: '#94A3B8', tone: 'bg-cancelled/20 text-slate-600 ring-cancelled/40 dark:text-slate-300' },
 };

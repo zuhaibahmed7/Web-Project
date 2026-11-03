@@ -44,13 +44,13 @@ export function BookingCard({
               {booking.code}
             </Link>
             <StatusBadge status={booking.status} size="sm" />
-            <span className="ml-auto inline-flex items-center gap-1.5 text-[13px] font-bold">
+            <span className="ms-auto inline-flex items-center gap-1.5 text-[13px] font-bold">
               <Wallet className="h-3.5 w-3.5 text-content-muted" aria-hidden="true" />
               {booking.estimate ? formatPKR(booking.estimate) : 'Estimate pending'}
             </span>
           </div>
 
-          <div className="grid gap-4 px-4 py-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:px-5">
+          <div className="grid grid-cols-1 gap-4 px-4 py-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:px-5">
             <div className="min-w-0 space-y-3">
               <div className="flex items-center gap-3">
                 <Avatar name={counterparty ?? '?'} size="sm" />
@@ -63,13 +63,13 @@ export function BookingCard({
                     )}
                     {counterparty ?? 'Provider removed'}
                   </p>
-                  <p className="truncate text-[12.5px] text-content-muted">
+                  <p className="truncate text-[13px] text-content-muted">
                     {serviceName ?? booking.serviceName} · {booking.city}
                   </p>
                 </div>
               </div>
 
-              <div className="grid gap-2 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 <MetaRow icon={CalendarDays}>{formatDate(booking.date)}</MetaRow>
                 <MetaRow icon={Clock}>{formatTime(booking.time)}</MetaRow>
                 <MetaRow icon={MapPin}>{booking.address}</MetaRow>

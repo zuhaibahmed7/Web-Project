@@ -220,7 +220,7 @@ export default function BookingDetail() {
     setIssueOpen(false);
     setIssue({ subject: '', details: '', priority: 'medium' });
     setIssueErrors({});
-    toast.success('Reported to the FixNow support desk. Every admin has been notified.', {
+    toast.success('Reported to the Kaarigar support desk. Every admin has been notified.', {
       title: 'Issue reported',
     });
   }
@@ -322,7 +322,7 @@ export default function BookingDetail() {
                 </Button>
               )}
               {actions.length === 0 && !mayReview && (
-                <p className="rounded-sm border border-line bg-canvas px-4 py-2.5 text-[12.5px] text-content-muted">
+                <p className="rounded-sm border border-line bg-canvas px-4 py-2.5 text-[13px] text-content-muted">
                   No action for your role at this stage.
                 </p>
               )}
@@ -331,13 +331,13 @@ export default function BookingDetail() {
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-[84rem] gap-6 px-4 pt-7 sm:px-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8 lg:px-8">
+      <div className="mx-auto grid grid-cols-1 max-w-[84rem] gap-6 px-4 pt-7 sm:px-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8 lg:px-8">
         <div className="space-y-6">
           <Reveal>
             <Card padding="lg">
               <div className="mb-6 flex items-center justify-between gap-4">
                 <h2 className="font-display text-[16px] font-bold tracking-[-0.02em]">Progress</h2>
-                <p className="text-[12.5px] text-content-muted">
+                <p className="text-[13px] text-content-muted">
                   {booking.status === STATUS.COMPLETED
                     ? 'All four stages cleared.'
                     : 'Stages update as each side acts — this view is shared by customer, provider and admin.'}
@@ -350,7 +350,7 @@ export default function BookingDetail() {
           <Reveal>
             <Card padding="lg">
               <h2 className="mb-5 font-display text-[16px] font-bold tracking-[-0.02em]">Job details</h2>
-              <dl className="grid gap-5 sm:grid-cols-2">
+              <dl className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <Detail icon={MapPin} label="Service address" wide>
                   {booking.address}
                   {booking.city ? `, ${booking.city}` : ''}
@@ -363,7 +363,7 @@ export default function BookingDetail() {
                 </Detail>
                 <Detail icon={Wallet} label="Indicative estimate">
                   {booking.estimate ? formatPKR(booking.estimate) : 'Agreed on site'}
-                  <span className="mt-1 block text-[11.5px] text-content-muted">
+                  <span className="mt-1 block text-[12px] text-content-muted">
                     Final price is confirmed by the provider after inspection (BRL-09).
                   </span>
                 </Detail>
@@ -375,19 +375,19 @@ export default function BookingDetail() {
               </dl>
 
               {booking.description && (
-                <div className="mt-5 rounded-sm border-l-2 border-brand-500/50 bg-brand-500/6 px-4 py-3">
-                  <p className="mb-1 flex items-center gap-1.5 text-[11px] font-bold tracking-[0.12em] text-content-muted uppercase">
+                <div className="mt-5 rounded-sm border-s-2 border-brand-500/50 bg-brand-500/6 px-4 py-3">
+                  <p className="mb-1 flex items-center gap-1.5 text-[12px] font-bold tracking-[0.12em] text-content-muted uppercase">
                     <MessageSquareQuote className="h-3 w-3" aria-hidden="true" />
                     {role === 'customer' ? 'Your note to the provider' : 'Customer note'}
                   </p>
-                  <p className="text-[13.5px] leading-relaxed text-content-soft">{booking.description}</p>
+                  <p className="text-[14px] leading-relaxed text-content-soft">{booking.description}</p>
                 </div>
               )}
 
               {(booking.rejectReason || booking.cancelReason) && (
                 <div
                   className={cn(
-                    'mt-5 rounded-sm border px-4 py-3 text-[13.5px] leading-relaxed',
+                    'mt-5 rounded-sm border px-4 py-3 text-[14px] leading-relaxed',
                     booking.status === STATUS.REJECTED
                       ? 'border-rejected/35 bg-rejected/8'
                       : 'border-cancelled/40 bg-cancelled/10'
@@ -410,7 +410,7 @@ export default function BookingDetail() {
               <p className="mb-5 text-[13px] text-content-muted">
                 Every status change is recorded with who made it and when.
               </p>
-              <ol className="relative space-y-5 border-l border-line pl-6">
+              <ol className="relative space-y-5 border-s border-line ps-6">
                 {booking.timeline.map((entry, i) => {
                   const stepMeta = STATUS_META[entry.status];
                   const isLast = i === booking.timeline.length - 1;
@@ -419,7 +419,7 @@ export default function BookingDetail() {
                       <span
                         aria-hidden="true"
                         className={cn(
-                          'absolute top-1 -left-[30px] grid h-3.5 w-3.5 place-items-center rounded-full ring-4',
+                          'absolute top-1 -start-[30px] grid h-3.5 w-3.5 place-items-center rounded-full ring-4',
                           'ring-canvas',
                           isLast ? 'animate-pulse-ring' : ''
                         )}
@@ -428,13 +428,13 @@ export default function BookingDetail() {
                       <p className="text-[14px] font-bold">
                         {statusLabel(entry.status)}
                         {isLast && (
-                          <Badge tone="brand" size="sm" className="ml-2">
+                          <Badge tone="brand" size="sm" className="ms-2">
                             Current
                           </Badge>
                         )}
                       </p>
-                      <p className="mt-0.5 text-[12.5px] text-content-muted">
-                        {formatDateTime(entry.at)} · by {entry.by === 'customer' ? 'the customer' : entry.by === 'provider' ? 'the provider' : 'FixNow admin'}
+                      <p className="mt-0.5 text-[13px] text-content-muted">
+                        {formatDateTime(entry.at)} · by {entry.by === 'customer' ? 'the customer' : entry.by === 'provider' ? 'the provider' : 'Kaarigar admin'}
                       </p>
                     </li>
                   );
@@ -465,10 +465,10 @@ export default function BookingDetail() {
           {!review && role === 'customer' && (
             <Reveal>
               <Card padding="lg" id="review" className="bg-canvas-2/60">
-                <h2 className="mb-2 font-display text-[15.5px] font-bold tracking-[-0.02em]">
+                <h2 className="mb-2 font-display text-[16px] font-bold tracking-[-0.02em]">
                   {booking.status === STATUS.COMPLETED ? 'Rate this job' : 'Reviews open after completion'}
                 </h2>
-                <p className="text-[13.5px] leading-relaxed text-content-muted">
+                <p className="text-[14px] leading-relaxed text-content-muted">
                   {booking.status === STATUS.COMPLETED
                     ? 'Your rating is published on the provider profile immediately and is part of their public score.'
                     : reviewNote ||
@@ -488,7 +488,7 @@ export default function BookingDetail() {
         <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
           <Card padding="none" className="overflow-hidden">
             <div className="border-b border-line bg-canvas-2/60 px-5 py-3">
-              <p className="text-[11px] font-bold tracking-[0.16em] text-content-muted uppercase">
+              <p className="text-[12px] font-bold tracking-[0.16em] text-content-muted uppercase">
                 {role === 'customer' ? 'Your provider' : 'Customer'}
               </p>
             </div>
@@ -511,7 +511,7 @@ export default function BookingDetail() {
                     </>
                   )}
                   {role !== 'customer' && customer && (
-                    <p className="mt-1.5 text-[12.5px] text-content-muted">
+                    <p className="mt-1.5 text-[13px] text-content-muted">
                       {customer.email} · joined {formatDate(customer.joinedAt, { month: 'short', year: 'numeric' })}
                     </p>
                   )}
@@ -521,7 +521,7 @@ export default function BookingDetail() {
               {counterparty?.phone && (
                 <a
                   href={`tel:${counterparty.phone}`}
-                  className="mt-4 flex h-11 items-center justify-center gap-2 rounded-sm bg-ink-800 text-[13.5px] font-bold text-white transition-colors hover:bg-ink-700 dark:bg-white dark:text-ink-800 dark:hover:bg-cloud-200"
+                  className="mt-4 flex h-11 items-center justify-center gap-2 rounded-sm bg-ink-800 text-[14px] font-bold text-white transition-colors hover:bg-ink-700 dark:bg-white dark:text-ink-800 dark:hover:bg-cloud-200"
                 >
                   <Phone className="h-4 w-4" aria-hidden="true" />
                   Call {(counterpartyName ?? '').split(' ')[0] || 'them'}
@@ -534,7 +534,7 @@ export default function BookingDetail() {
                 </Button>
               )}
               {role === 'provider' && service && (
-                <p className="mt-4 flex items-start gap-2 text-[12.5px] leading-relaxed text-content-muted">
+                <p className="mt-4 flex items-start gap-2 text-[13px] leading-relaxed text-content-muted">
                   <CategoryIcon
                     icon={category?.icon}
                     categoryId={provider?.categoryId}
@@ -548,11 +548,11 @@ export default function BookingDetail() {
           </Card>
 
           <Card padding="lg">
-            <p className="mb-3 flex items-center gap-2 font-display text-[14.5px] font-bold tracking-[-0.01em]">
+            <p className="mb-3 flex items-center gap-2 font-display text-[15px] font-bold tracking-[-0.01em]">
               <ShieldAlert className="h-4 w-4 text-brand-500" aria-hidden="true" />
               What happens next
             </p>
-            <ul className="space-y-2.5 text-[12.5px] leading-relaxed text-content-muted">
+            <ul className="space-y-2.5 text-[13px] leading-relaxed text-content-muted">
               {NEXT_STEPS[booking.status]?.[role === 'provider' ? 'provider' : role === 'admin' ? 'admin' : 'customer']?.map(
                 (line) => (
                   <li key={line} className="flex gap-2">
@@ -566,15 +566,15 @@ export default function BookingDetail() {
 
           {role === 'customer' && (
             <Card padding="lg" className="bg-canvas-2/60">
-              <p className="mb-2 flex items-center gap-2 font-display text-[14.5px] font-bold tracking-[-0.01em]">
+              <p className="mb-2 flex items-center gap-2 font-display text-[15px] font-bold tracking-[-0.01em]">
                 <Flag className="h-4 w-4 text-rejected" aria-hidden="true" />
                 Something went wrong?
               </p>
-              <p className="text-[12.5px] leading-relaxed text-content-muted">
-                Report the provider or this booking and the FixNow support desk will review it with the full history.
+              <p className="text-[13px] leading-relaxed text-content-muted">
+                Report the provider or this booking and the Kaarigar support desk will review it with the full history.
               </p>
               {complaint ? (
-                <div className="mt-3 rounded-sm border border-line bg-canvas px-4 py-3 text-[12.5px]">
+                <div className="mt-3 rounded-sm border border-line bg-canvas px-4 py-3 text-[13px]">
                   <p className="font-bold">
                     {complaint.code} · {complaint.subject}
                   </p>
@@ -607,8 +607,8 @@ export default function BookingDetail() {
           )}
 
           <Card padding="lg">
-            <p className="mb-3 text-[11px] font-bold tracking-[0.16em] text-content-muted uppercase">Reference</p>
-            <dl className="space-y-2 text-[12.5px]">
+            <p className="mb-3 text-[12px] font-bold tracking-[0.16em] text-content-muted uppercase">Reference</p>
+            <dl className="space-y-2 text-[13px]">
               <RefRow label="Booking ID" value={booking.id} />
               <RefRow label="Created" value={formatDateTime(booking.createdAt)} />
               <RefRow label="Updated" value={formatDateTime(booking.updatedAt)} />
@@ -761,7 +761,7 @@ export default function BookingDetail() {
               setIssueErrors((x) => ({ ...x, details: '' }));
             }}
             error={issueErrors.details}
-            placeholder="Say what happened, when, and what you would like FixNow to do."
+            placeholder="Say what happened, when, and what you would like Kaarigar to do."
           />
           <div>
             <p className="mb-2 text-[13px] font-semibold text-content-soft">How urgent is it?</p>
@@ -835,7 +835,7 @@ const NEXT_STEPS = {
 function Detail({ icon: Icon, label, children, wide = false }) {
   return (
     <div className={cn(wide && 'sm:col-span-2')}>
-      <dt className="text-[11px] font-bold tracking-[0.12em] text-content-muted uppercase">{label}</dt>
+      <dt className="text-[12px] font-bold tracking-[0.12em] text-content-muted uppercase">{label}</dt>
       <dd className="mt-1.5 flex items-start gap-2 text-[14px] leading-relaxed text-content-soft">
         <Icon className="mt-0.5 h-4 w-4 shrink-0 text-content-muted" aria-hidden="true" />
         <span>{children}</span>
@@ -848,7 +848,7 @@ function RefRow({ label, value }) {
   return (
     <div className="flex items-baseline justify-between gap-3">
       <dt className="text-content-muted">{label}</dt>
-      <dd className="text-right font-semibold break-all">{value}</dd>
+      <dd className="text-end font-semibold break-all">{value}</dd>
     </div>
   );
 }

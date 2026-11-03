@@ -1,18 +1,22 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Clock, Star, ArrowRight, Briefcase } from 'lucide-react';
+import { useI18n } from '../../i18n/useI18n';
 import { formatPKR, formatDayShort } from '../../utils/format';
 import { TiltCard } from '../ui/Card';
 import { Avatar } from '../ui/Avatar';
 import { Badge, VerificationBadge } from '../ui/Badge';
+import { categoryArt } from '../../assets/icons/index.js';
 import { CategoryIcon } from '../ui/CategoryIcon';
 
 // The marketplace listing card. Everything shown here is derived from the store,
 // so a new review or a status change appears immediately.
 export function ProviderCard({ provider, compact = false }) {
-  const [from, to] = provider.category?.accent ?? ['#6C5CE7', '#00D4C8'];
+  const { t } = useI18n();
+  const [from, to] = provider.category?.accent ?? ['#09318D', '#4A6FD0'];
+  const art = categoryArt(provider.category?.slug);
   const priceLabel =
     provider.minPrice === null
-      ? 'Price on request'
+      ? t('card.priceOnRequest')
       : provider.minPrice === provider.maxPrice
         ? formatPKR(provider.minPrice)
         : `${formatPKR(provider.minPrice)} – ${formatPKR(provider.maxPrice)}`;
@@ -24,13 +28,22 @@ export function ProviderCard({ provider, compact = false }) {
         className="absolute inset-x-0 top-0 h-24"
         style={{ background: `linear-gradient(125deg, ${from}2e, ${to}1f 55%, transparent)` }}
       />
-      <span className="absolute top-4 right-4 grid h-9 w-9 place-items-center rounded-full bg-canvas-2 text-brand-500 ring-1 ring-line">
-        <CategoryIcon icon={provider.category?.icon} className="h-4 w-4" />
-      </span>
+      {art ? (
+        <span
+          aria-hidden="true"
+          className="absolute top-4 end-4 grid h-11 w-11 place-items-center overflow-hidden rounded-md bg-white ring-1 ring-line shadow-hair"
+        >
+          <img src={art} alt="" loading="lazy" decoding="async" className="h-full w-full object-contain" />
+        </span>
+      ) : (
+        <span className="absolute top-4 end-4 grid h-9 w-9 place-items-center rounded-full bg-canvas-2 text-brand-500 ring-1 ring-line">
+          <CategoryIcon icon={provider.category?.icon} className="h-4 w-4" />
+        </span>
+      )}
 
       <div className="relative flex gap-4 p-5">
         <Avatar name={provider.name} size="lg" ring />
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0 flex-1 pe-12">
           <h3 className="truncate font-display text-[17px] leading-tight font-bold">
             <Link to={`/provider/${provider.slug}`} className="transition-colors hover:text-brand-600">
               {provider.name}
@@ -46,7 +59,7 @@ export function ProviderCard({ provider, compact = false }) {
               </span>
             ) : (
               <Badge tone="neutral" size="sm">
-                New on FixNow
+                {t('card.newOn')}
               </Badge>
             )}
             <VerificationBadge status={provider.verificationStatus} />
@@ -66,18 +79,21 @@ export function ProviderCard({ provider, compact = false }) {
           <p className="mt-2 flex items-center gap-2">
             <Briefcase className="h-3.5 w-3.5 shrink-0 text-content-muted" aria-hidden="true" />
             <span className="truncate">
-              {provider.services.length} service{provider.services.length === 1 ? '' : 's'} ·{' '}
-              {provider.jobsCompleted} jobs done
+              {t(provider.services.length === 1 ? 'card.serviceOne' : 'card.serviceN', {
+                count: provider.services.length,
+              })}
+              {' · '}
+              {t('card.jobsDone', { count: provider.jobsCompleted })}
             </span>
           </p>
           <p className="mt-2 flex items-center gap-2">
             <Clock className="h-3.5 w-3.5 shrink-0 text-content-muted" aria-hidden="true" />
             {provider.nextAvailable ? (
               <span className="font-semibold text-aqua-700 dark:text-aqua-300">
-                Next slot {formatDayShort(provider.nextAvailable)}
+                {t('card.nextSlot', { day: formatDayShort(provider.nextAvailable) })}
               </span>
             ) : (
-              <span className="text-content-muted">No open slots this week</span>
+              <span className="text-content-muted">{t('card.noSlots')}</span>
             )}
           </p>
         </div>
@@ -85,15 +101,15 @@ export function ProviderCard({ provider, compact = false }) {
 
       <div className="mt-auto flex items-end justify-between gap-3 border-t border-line px-5 py-4">
         <div className="min-w-0">
-          <p className="text-[10.5px] font-bold tracking-[0.14em] text-content-muted uppercase">Indicative</p>
+          <p className="text-[11px] font-bold tracking-[0.14em] text-content-muted uppercase">{t('card.indicative')}</p>
           <p className="truncate font-display text-[15px] font-bold">{priceLabel}</p>
         </div>
         <Link
           to={`/provider/${provider.slug}`}
-          className="group inline-flex h-10 shrink-0 items-center gap-1.5 rounded-sm grad-brand px-4 text-[13px] font-bold text-white shadow-[0_10px_26px_-14px_rgb(108_92_231_/_0.9)] transition-[transform,filter] duration-300 hover:brightness-105 active:scale-95"
+          className="group inline-flex h-10 shrink-0 items-center gap-1.5 rounded-sm grad-brand px-4 text-[13px] font-bold text-white shadow-[0_10px_26px_-14px_rgb(9_49_141_/_0.9)] transition-[transform,filter] duration-300 hover:brightness-105 active:scale-95"
         >
-          View & book
-          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+          {t('card.viewBook')}
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
         </Link>
       </div>
     </TiltCard>

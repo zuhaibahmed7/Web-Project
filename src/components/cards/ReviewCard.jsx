@@ -9,7 +9,7 @@ export function ReviewCard({ review, providerName, showCustomer = true, classNam
   return (
     <article className={cn('glass relative overflow-hidden rounded-lg p-5', className)}>
       <Quote
-        className="absolute -top-2 right-3 h-14 w-14 text-brand-500/10"
+        className="absolute -top-2 end-3 h-14 w-14 text-brand-500/10 rtl:-scale-x-100"
         aria-hidden="true"
         strokeWidth={1.2}
       />
@@ -21,7 +21,7 @@ export function ReviewCard({ review, providerName, showCustomer = true, classNam
           </p>
           <p className="text-[12px] text-content-muted">{formatDate(review.createdAt)}</p>
         </div>
-        <div className="ml-auto shrink-0">
+        <div className="ms-auto shrink-0">
           <Rating value={review.rating} showValue={false} size="sm" />
         </div>
       </header>

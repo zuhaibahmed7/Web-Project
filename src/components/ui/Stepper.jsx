@@ -27,11 +27,11 @@ export function BookingStepper({ booking, className, compact = false }) {
             <div key={step.key} className="relative flex-1">
               {i > 0 && (
                 <span
-                  className="absolute top-[15px] right-1/2 left-[-50%] h-[2px] overflow-hidden rounded-full bg-canvas-2"
+                  className="absolute top-[15px] end-1/2 start-[-50%] h-[2px] overflow-hidden rounded-full bg-canvas-2"
                   aria-hidden="true"
                 >
                   <motion.span
-                    className="block h-full w-full origin-left rounded-full grad-brand"
+                    className="block h-full w-full origin-left rtl:origin-right rounded-full grad-brand"
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: i <= currentStep || isCompleted ? 1 : 0 }}
                     transition={{ duration: 0.5, delay: 0.12 * i, ease: [0.16, 1, 0.3, 1] }}
@@ -57,21 +57,21 @@ export function BookingStepper({ booking, className, compact = false }) {
                   ) : isCurrent ? (
                     <span className="h-2.5 w-2.5 rounded-full bg-white" aria-hidden="true" />
                   ) : (
-                    <span className="text-[11px] font-bold tabular-nums">{i + 1}</span>
+                    <span className="text-[12px] font-bold tabular-nums">{i + 1}</span>
                   )}
                 </motion.span>
 
                 <div className="min-w-0">
                   <p
                     className={cn(
-                      'font-display text-[12.5px] font-bold tracking-[-0.01em]',
+                      'font-display text-[13px] font-bold tracking-[-0.01em]',
                       done || isCurrent ? 'text-content' : 'text-content-muted'
                     )}
                   >
                     {step.label}
                   </p>
                   {!compact && (
-                    <p className="mt-0.5 text-[11px] leading-tight text-content-muted">
+                    <p className="mt-0.5 text-[12px] leading-tight text-content-muted">
                       {entry ? formatDate(entry.at.slice(0, 10), { month: 'short', day: 'numeric' }) : step.hint}
                     </p>
                   )}
@@ -96,7 +96,7 @@ export function BookingStepper({ booking, className, compact = false }) {
           )}
           <div className="min-w-0">
             <p className="font-display text-[13px] font-bold text-content">{meta?.label}</p>
-            <p className="mt-0.5 text-[12.5px] leading-relaxed text-content-soft">
+            <p className="mt-0.5 text-[13px] leading-relaxed text-content-soft">
               {booking.rejectReason || booking.cancelReason || meta?.blurb}
             </p>
           </div>
@@ -148,7 +148,7 @@ export function FormStepper({ steps, current, className }) {
               </span>
               <span
                 className={cn(
-                  'hidden text-[12.5px] font-semibold sm:block',
+                  'hidden text-[13px] font-semibold sm:block',
                   active || done ? 'text-content' : 'text-content-muted'
                 )}
               >

@@ -5,7 +5,7 @@ import { cn } from '../../utils/cn';
 // One button component used everywhere. Pass `to` to render as a router link.
 const VARIANTS = {
   primary:
-    'grad-brand text-white shadow-[0_10px_30px_-12px_rgb(108_92_231_/_0.85)] hover:shadow-[0_16px_40px_-12px_rgb(108_92_231_/_1)] hover:brightness-[1.06]',
+    'grad-brand text-white shadow-[0_10px_30px_-12px_rgb(9_49_141_/_0.85)] hover:shadow-[0_16px_40px_-12px_rgb(9_49_141_/_1)] hover:brightness-[1.06]',
   dark: 'bg-ink-800 text-white hover:bg-ink-700 shadow-hair',
   secondary:
     'glass text-content hover:border-brand-500/45 hover:shadow-lift',
@@ -14,8 +14,8 @@ const VARIANTS = {
   ghost: 'bg-transparent text-content-soft hover:bg-ink-800/6 hover:text-content dark:hover:bg-white/8',
   danger: 'bg-rejected text-white hover:brightness-110 shadow-[0_10px_28px_-14px_rgb(239_68_68_/_0.9)]',
   success: 'bg-completed text-white hover:brightness-110 shadow-[0_10px_28px_-14px_rgb(16_185_129_/_0.9)]',
-  accent: 'bg-aqua-400 text-ink-800 hover:brightness-105 shadow-[0_10px_28px_-14px_rgb(0_212_200_/_0.9)]',
-  amber: 'bg-glow-400 text-ink-800 hover:brightness-105 shadow-[0_10px_28px_-14px_rgb(255_176_32_/_0.9)]',
+  accent: 'bg-aqua-400 text-ink-800 hover:brightness-105 shadow-[0_10px_28px_-14px_rgb(253_129_204_/_0.9)]',
+  amber: 'bg-glow-400 text-ink-800 hover:brightness-105 shadow-[0_10px_28px_-14px_rgb(240_71_159_/_0.9)]',
   quiet: 'bg-canvas-2 text-content hover:bg-cloud-300 dark:hover:bg-ink-700',
   neutral: 'border border-line-strong bg-canvas-2 text-content-soft hover:bg-cloud-300 dark:hover:bg-ink-700',
 };
@@ -58,12 +58,12 @@ export function Button({
       {loading ? (
         <LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" />
       ) : (
-        Icon && <Icon className={cn('h-4 w-4 shrink-0', IconRight ? '' : '-ml-0.5')} aria-hidden="true" />
+        Icon && <Icon className={cn('h-4 w-4 shrink-0', IconRight ? '' : '-ms-0.5')} aria-hidden="true" />
       )}
       {children}
       {IconRight && !loading && (
         <IconRight
-          className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5"
+          className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5"
           aria-hidden="true"
         />
       )}
@@ -105,7 +105,7 @@ export function LinkButton({ to, children, className, icon: Icon = ArrowRight, .
       {...rest}
     >
       {children}
-      <Icon className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+      <Icon className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 rtl:-scale-x-100 rtl:group-hover:-translate-x-1" />
     </Link>
   );
 }

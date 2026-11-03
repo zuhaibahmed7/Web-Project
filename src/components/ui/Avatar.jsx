@@ -5,7 +5,7 @@ import { cn } from '../../utils/cn';
 export function Avatar({ name = '', size = 'md', ring = false, className, verified = false }) {
   const [from, to] = gradientFor(name);
   const sizes = {
-    xs: 'h-7 w-7 text-[10px]',
+    xs: 'h-7 w-7 text-[11px]',
     sm: 'h-9 w-9 text-[12px]',
     md: 'h-11 w-11 text-[14px]',
     lg: 'h-14 w-14 text-[17px]',

@@ -1,4 +1,5 @@
 import { cn } from '../../utils/cn';
+import { useI18n } from '../../i18n/useI18n';
 import { STATUS_META } from '../../utils/booking';
 
 // Generic pill badge.
@@ -17,7 +18,7 @@ export function Badge({ children, tone = 'neutral', size = 'md', className, icon
     <span
       className={cn(
         'inline-flex items-center gap-1.5 rounded-full font-semibold ring-1 ring-inset',
-        size === 'sm' ? 'px-2 py-0.5 text-[11px]' : 'px-2.5 py-1 text-[12px]',
+        size === 'sm' ? 'px-2 py-0.5 text-[12px]' : 'px-2.5 py-1 text-[12px]',
         tones[tone],
         className
       )}
@@ -36,7 +37,7 @@ export function StatusBadge({ status, size = 'md', showDot = true, className }) 
     <span
       className={cn(
         'inline-flex items-center gap-1.5 rounded-full font-semibold ring-1 ring-inset',
-        size === 'sm' ? 'px-2 py-0.5 text-[11px]' : 'px-2.5 py-1 text-[12px]',
+        size === 'sm' ? 'px-2 py-0.5 text-[12px]' : 'px-2.5 py-1 text-[12px]',
         meta.tone,
         className
       )}
@@ -51,15 +52,16 @@ export function StatusBadge({ status, size = 'md', showDot = true, className }) 
 }
 
 export function VerificationBadge({ status, className }) {
+  const { t } = useI18n();
   const map = {
-    verified: { tone: 'success', label: 'Verified' },
-    pending: { tone: 'amber', label: 'Pending review' },
-    rejected: { tone: 'danger', label: 'Rejected' },
+    verified: { tone: 'success', key: 'common.verified' },
+    pending: { tone: 'amber', key: 'common.pendingReview' },
+    rejected: { tone: 'danger', key: 'status.rejected' },
   };
   const cfg = map[status] ?? map.pending;
   return (
     <Badge tone={cfg.tone} size="sm" className={className}>
-      {cfg.label}
+      {t(cfg.key)}
     </Badge>
   );
 }

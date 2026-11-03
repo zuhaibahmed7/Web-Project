@@ -10,7 +10,7 @@ import { Stagger, StaggerItem } from '../components/ui/Reveal';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { Field, Input, Select, Textarea } from '../components/ui/Input';
-import { CategoryIcon } from '../components/ui/CategoryIcon';
+import { CategoryIcon, ICONS } from '../components/ui/CategoryIcon';
 import { ConfirmDialog, Modal } from '../components/ui/Modal';
 import { EmptyState } from '../components/ui/EmptyState';
 import { useToast } from '../components/ui/Toast';
@@ -18,8 +18,12 @@ import { cn } from '../utils/cn';
 
 // The icon keys CategoryIcon.jsx can actually resolve — offering anything else
 // would render a fallback tile and misrepresent the category.
-const ICON_KEYS = ['droplets', 'zap', 'snowflake', 'sparkles', 'roller', 'hammer', 'car', 'wrench'];
-const ICON_OPTIONS = ICON_KEYS.map((key) => ({ value: key, label: key.charAt(0).toUpperCase() + key.slice(1) }));
+const ICON_KEYS = Object.keys(ICONS);
+const ICON_OPTIONS = ICON_KEYS.map((key) => ({
+  value: key,
+  label: key.charAt(0).toUpperCase() + key.slice(1),
+  icon: ICONS[key],
+}));
 
 const slugify = (value) =>
   value
@@ -35,8 +39,8 @@ const BLANK = {
   tagline: '',
   description: '',
   from: '',
-  accentFrom: '#6C5CE7',
-  accentTo: '#00D4C8',
+  accentFrom: '#09318D',
+  accentTo: '#4A6FD0',
 };
 
 export default function AdminCategories() {
@@ -103,8 +107,8 @@ export default function AdminCategories() {
       tagline: category.tagline ?? '',
       description: category.description ?? '',
       from: String(category.from ?? ''),
-      accentFrom: category.accent?.[0] ?? '#6C5CE7',
-      accentTo: category.accent?.[1] ?? '#00D4C8',
+      accentFrom: category.accent?.[0] ?? '#09318D',
+      accentTo: category.accent?.[1] ?? '#4A6FD0',
     });
     setSlugTouched(true);
     setErrors({});
@@ -192,7 +196,7 @@ export default function AdminCategories() {
         }
       />
 
-      <div className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-[12.5px] text-content-muted">
+      <div className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-content-muted">
         <span className="inline-flex items-center gap-1.5 font-semibold text-content">
           <Layers className="h-3.5 w-3.5" aria-hidden="true" />
           {state.categories.length} categories
@@ -215,9 +219,9 @@ export default function AdminCategories() {
           action={<Button icon={Plus} onClick={openCreate}>Add the first category</Button>}
         />
       ) : (
-        <Stagger className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <Stagger className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {rows.map(({ category, providers, bookings }) => {
-            const [from, to] = category.accent ?? ['#6C5CE7', '#00D4C8'];
+            const [from, to] = category.accent ?? ['#09318D', '#4A6FD0'];
             return (
               <StaggerItem key={category.id}>
                 <Card padding="none" className="relative flex h-full flex-col overflow-hidden">
@@ -242,21 +246,21 @@ export default function AdminCategories() {
                     </div>
                   </div>
 
-                  <p className="relative px-5 text-[12.5px] leading-relaxed text-content-soft line-clamp-3">
+                  <p className="relative px-5 text-[13px] leading-relaxed text-content-soft line-clamp-3">
                     {category.description}
                   </p>
 
                   <dl className="relative mt-4 grid grid-cols-3 gap-px border-y border-line bg-line">
                     <div className="bg-surface px-3 py-2.5">
-                      <dt className="text-[10.5px] font-bold tracking-[0.1em] text-content-muted uppercase">From</dt>
+                      <dt className="text-[11px] font-bold tracking-[0.1em] text-content-muted uppercase">From</dt>
                       <dd className="mt-0.5 text-[13px] font-bold tabular-nums">{formatPKR(category.from)}</dd>
                     </div>
                     <div className="bg-surface px-3 py-2.5">
-                      <dt className="text-[10.5px] font-bold tracking-[0.1em] text-content-muted uppercase">Pros</dt>
+                      <dt className="text-[11px] font-bold tracking-[0.1em] text-content-muted uppercase">Pros</dt>
                       <dd className="mt-0.5 text-[13px] font-bold tabular-nums">{providers.length}</dd>
                     </div>
                     <div className="bg-surface px-3 py-2.5">
-                      <dt className="text-[10.5px] font-bold tracking-[0.1em] text-content-muted uppercase">Bookings</dt>
+                      <dt className="text-[11px] font-bold tracking-[0.1em] text-content-muted uppercase">Bookings</dt>
                       <dd className="mt-0.5 text-[13px] font-bold tabular-nums">{bookings}</dd>
                     </div>
                   </dl>
@@ -269,7 +273,7 @@ export default function AdminCategories() {
                       <Badge tone="brand" size="sm" icon={Wallet}>
                         {formatPKR(category.from)}
                       </Badge>
-                      <span className="ml-auto inline-flex items-center gap-1.5 text-[11.5px] text-content-muted">
+                      <span className="ml-auto inline-flex items-center gap-1.5 text-[12px] text-content-muted">
                         Accent
                         <span className="flex overflow-hidden rounded-xs ring-1 ring-line" aria-hidden="true">
                           <span className="h-4 w-4" style={{ backgroundColor: from }} />
@@ -357,7 +361,7 @@ export default function AdminCategories() {
           </>
         }
       >
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Input
             label="Name"
             required
@@ -427,7 +431,7 @@ export default function AdminCategories() {
           <div className="sm:col-span-2">
             <Field label="Accent gradient" htmlFor="accent-from" hint="Two colours, used for the tile wash and rings.">
               <div className="flex items-center gap-3">
-                <label className="flex items-center gap-2 text-[12.5px] font-semibold text-content-soft">
+                <label className="flex items-center gap-2 text-[13px] font-semibold text-content-soft">
                   <input
                     id="accent-from"
                     type="color"
@@ -438,7 +442,7 @@ export default function AdminCategories() {
                   />
                   {values.accentFrom}
                 </label>
-                <label className="flex items-center gap-2 text-[12.5px] font-semibold text-content-soft">
+                <label className="flex items-center gap-2 text-[13px] font-semibold text-content-soft">
                   <input
                     type="color"
                     value={values.accentTo}
@@ -460,7 +464,7 @@ export default function AdminCategories() {
 
         {/* Live preview so the admin sees the tile they are creating. */}
         <div className="mt-5 rounded-md border border-line bg-canvas-2/50 p-4">
-          <p className="mb-3 text-[11px] font-bold tracking-[0.12em] text-content-muted uppercase">Preview</p>
+          <p className="mb-3 text-[12px] font-bold tracking-[0.12em] text-content-muted uppercase">Preview</p>
           <div className="flex items-center gap-3">
             <span
               aria-hidden="true"
@@ -471,7 +475,7 @@ export default function AdminCategories() {
             </span>
             <div className="min-w-0">
               <p className="truncate font-display text-[15px] font-bold">{values.name || 'Category name'}</p>
-              <p className="truncate text-[12.5px] text-content-muted">
+              <p className="truncate text-[13px] text-content-muted">
                 {values.tagline || 'Short promise shown under the name'} · from{' '}
                 {Number.isFinite(Number(values.from)) ? formatPKR(values.from) : 'PKR —'}
               </p>

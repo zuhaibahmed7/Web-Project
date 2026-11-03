@@ -25,7 +25,7 @@ export function Rating({ value = 0, count, size = 'sm', className, showValue = t
         })}
       </span>
       {showValue && (
-        <span className="text-[12.5px] font-semibold tabular-nums text-content">
+        <span className="text-[13px] font-semibold tabular-nums text-content">
           {value ? value.toFixed(1) : 'New'}
         </span>
       )}
@@ -68,11 +68,11 @@ export function RatingInput({ value = 0, onChange, label = 'Rating', error, clas
             />
           </button>
         ))}
-        <span className="ml-2 text-[13px] font-semibold text-content-soft">
+        <span className="ms-2 text-[13px] font-semibold text-content-soft">
           {shown ? RATING_WORDS[shown] : 'Tap a star'}
         </span>
       </div>
-      {error && <p className="text-[12.5px] font-medium text-rejected dark:text-[#ff8a8a]">{error}</p>}
+      {error && <p className="text-[13px] font-medium text-rejected dark:text-[#ff8a8a]">{error}</p>}
     </div>
   );
 }

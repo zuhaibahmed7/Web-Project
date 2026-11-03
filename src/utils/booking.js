@@ -14,7 +14,7 @@ export const STATUS_META = {
   pending: {
     label: 'Pending',
     color: '#F5B301',
-    tone: 'bg-pending/12 text-[#8a6500] ring-pending/30 dark:text-glow-300',
+    tone: 'bg-pending/12 text-[#8a6500] ring-pending/30 dark:text-pending',
     dot: 'bg-pending',
     blurb: 'Waiting for the provider to respond.',
     step: 0,

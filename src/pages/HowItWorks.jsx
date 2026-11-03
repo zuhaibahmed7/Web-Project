@@ -76,7 +76,7 @@ const ROLES = [
     key: 'guest',
     label: 'Guest',
     icon: Compass,
-    tone: 'from-[#8B78F5] to-[#4CE8DE]',
+    tone: 'from-[#4A6FD0] to-[#8AA9EA]',
     can: [
       'Browse every verified provider, its services and indicative PKR prices',
       'Read real reviews and ratings collected from completed jobs',
@@ -91,7 +91,7 @@ const ROLES = [
     key: 'customer',
     label: 'Customer',
     icon: Users,
-    tone: 'from-[#6C5CE7] to-[#00D4C8]',
+    tone: 'from-[#09318D] to-[#4A6FD0]',
     can: [
       'Request a service for a chosen date, time slot and address',
       'Cancel a request yourself only while it is still Pending (BRL-05)',
@@ -104,7 +104,7 @@ const ROLES = [
     key: 'provider',
     label: 'Service provider',
     icon: Wrench,
-    tone: 'from-[#FFB020] to-[#FF7A1A]',
+    tone: 'from-[#FD81CC] to-[#F0479F]',
     can: [
       'Accept or reject incoming requests, with a reason for a rejection',
       'Start work and mark it completed as the job moves on site',
@@ -119,7 +119,7 @@ const ROLES = [
     key: 'admin',
     label: 'Administrator',
     icon: ShieldCheck,
-    tone: 'from-[#10B981] to-[#3B82F6]',
+    tone: 'from-[#4A6FD0] to-[#0B1C46]',
     can: [
       'Verify or reject pending provider applications',
       'Move any booking forward and cancel an accepted one when needed',
@@ -132,8 +132,8 @@ const ROLES = [
 
 const FAQS = [
   {
-    q: 'Do I pay through FixNow?',
-    a: 'No. Every price you see is indicative and comes from the provider’s own service list, shown as "from PKR …". Payment is settled directly with the provider once the work is done. The estimate on a booking is a record of what was quoted, not a charge, and FixNow never touches your card or bank details.',
+    q: 'Do I pay through Kaarigar?',
+    a: 'No. Every price you see is indicative and comes from the provider’s own service list, shown as "from PKR …". Payment is settled directly with the provider once the work is done. The estimate on a booking is a record of what was quoted, not a charge, and Kaarigar never touches your card or bank details.',
   },
   {
     q: 'Can I cancel any booking?',
@@ -166,7 +166,7 @@ const FAQS = [
 function SectionHeading({ eyebrow, title, lead, className }) {
   return (
     <div className={cn('max-w-2xl', className)}>
-      <p className="text-[11px] font-bold tracking-[0.18em] text-brand-500 uppercase dark:text-brand-300">
+      <p className="text-[12px] font-bold tracking-[0.18em] text-brand-500 uppercase dark:text-brand-300">
         {eyebrow}
       </p>
       <h2 className="mt-2.5 font-display text-[26px] leading-[1.08] font-extrabold sm:text-[32px]">{title}</h2>
@@ -189,7 +189,7 @@ function LifecycleJourney() {
             <TiltCard tilt={4} className="h-full" contentClassName="flex h-full flex-col p-5">
               <div className="flex items-center gap-3">
                 <span
-                  className="grid h-11 w-11 shrink-0 place-items-center rounded-full font-display text-[15px] font-extrabold text-white shadow-[0_10px_24px_-14px_rgb(15_21_53_/_0.9)]"
+                  className="grid h-11 w-11 shrink-0 place-items-center rounded-full font-display text-[15px] font-extrabold text-white shadow-[0_10px_24px_-14px_rgb(11_28_70_/_0.9)]"
                   style={{ backgroundColor: meta.color }}
                   aria-hidden="true"
                 >
@@ -205,14 +205,14 @@ function LifecycleJourney() {
                 </div>
               </div>
 
-              <p className="mt-4 text-[13.5px] leading-relaxed text-content-soft text-pretty">{detail.you}</p>
+              <p className="mt-4 text-[14px] leading-relaxed text-content-soft text-pretty">{detail.you}</p>
 
               <div className="mt-auto pt-4">
-                <p className="rounded-sm bg-canvas-2 px-3 py-2.5 text-[12.5px] leading-relaxed text-content-muted">
+                <p className="rounded-sm bg-canvas-2 px-3 py-2.5 text-[13px] leading-relaxed text-content-muted">
                   <span className="font-bold text-content-soft">On screen: </span>
                   {detail.sees}
                 </p>
-                <p className="mt-3 inline-flex items-center gap-1.5 text-[11.5px] font-bold tracking-[0.1em] text-brand-500 uppercase dark:text-brand-300">
+                <p className="mt-3 inline-flex items-center gap-1.5 text-[12px] font-bold tracking-[0.1em] text-brand-500 uppercase dark:text-brand-300">
                   {isLast ? <Star className="h-3 w-3" aria-hidden="true" /> : <ArrowRight className="h-3 w-3" aria-hidden="true" />}
                   {step.hint}
                 </p>
@@ -237,10 +237,10 @@ export default function HowItWorks() {
       {/* ---------------------------------------------------------- (a) intro */}
       <Band tone="grad" className="noise overflow-hidden">
         <div className="mx-auto max-w-[84rem] px-4 pt-14 pb-12 sm:px-6 sm:pt-20 lg:px-8">
-          <div className="grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+          <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
             <div className="min-w-0">
               <Badge tone="glass" size="sm" icon={Wrench}>
-                Find. Book. Fix. — the whole lifecycle, in plain words
+                Find. Book. Fixed. — the whole lifecycle, in plain words
               </Badge>
 
               <h1 className="mt-5 font-display text-[38px] leading-[0.98] font-extrabold tracking-[-0.04em] sm:text-[54px] lg:text-[62px]">
@@ -252,7 +252,7 @@ export default function HowItWorks() {
               </h1>
 
               <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-content-soft text-pretty">
-                FixNow replaces the WhatsApp chain, the unverified contractor and the argument over the bill. You
+                Kaarigar replaces the WhatsApp chain, the unverified contractor and the argument over the bill. You
                 search a verified professional, send one structured request, watch it move through four honest
                 statuses, and rate the work afterwards. Here is exactly how each stage behaves — including the two
                 ways a booking can end early.
@@ -274,7 +274,7 @@ export default function HowItWorks() {
                   { k: 'Cheapest visit', v: formatPKR(cheapest) },
                 ].map((item) => (
                   <div key={item.k}>
-                    <dt className="text-[11px] font-bold tracking-[0.14em] text-content-muted uppercase">{item.k}</dt>
+                    <dt className="text-[12px] font-bold tracking-[0.14em] text-content-muted uppercase">{item.k}</dt>
                     <dd className="mt-1 font-display text-[22px] font-extrabold tabular-nums">{item.v}</dd>
                   </div>
                 ))}
@@ -285,7 +285,7 @@ export default function HowItWorks() {
             <Reveal delay={0.12} y={26}>
               <Card padding="none" className="overflow-hidden">
                 <div className="dot-grid border-b border-line px-5 py-4">
-                  <p className="font-display text-[11px] font-bold tracking-[0.18em] text-content-muted uppercase">
+                  <p className="font-display text-[12px] font-bold tracking-[0.18em] text-content-muted uppercase">
                     Three moves, one flow
                   </p>
                 </div>
@@ -295,19 +295,19 @@ export default function HowItWorks() {
                       icon: Search,
                       word: 'Find',
                       text: 'Seven categories, filtered by city, price, rating and who actually has a slot this week.',
-                      tint: '#6C5CE7',
+                      tint: '#09318D',
                     },
                     {
                       icon: ListChecks,
                       word: 'Book',
                       text: 'One request carries the date, slot, address and fault description. No calling around.',
-                      tint: '#00B8AD',
+                      tint: '#09318D',
                     },
                     {
                       icon: Wrench,
                       word: 'Fix',
                       text: 'The provider runs the status, you settle the bill in PKR, and the review keeps everyone honest.',
-                      tint: '#FF7A1A',
+                      tint: '#E0399C',
                     },
                   ].map((row) => (
                     <li key={row.word} className="flex items-start gap-4 px-5 py-5">
@@ -320,12 +320,12 @@ export default function HowItWorks() {
                       </span>
                       <div className="min-w-0">
                         <p className="font-display text-[17px] font-extrabold tracking-[-0.02em]">{row.word}</p>
-                        <p className="mt-1 text-[13.5px] leading-relaxed text-content-muted text-pretty">{row.text}</p>
+                        <p className="mt-1 text-[14px] leading-relaxed text-content-muted text-pretty">{row.text}</p>
                       </div>
                     </li>
                   ))}
                 </ul>
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 bg-canvas-2/60 px-5 py-4 text-[12.5px] text-content-muted">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 bg-canvas-2/60 px-5 py-4 text-[13px] text-content-muted">
                   <span className="inline-flex items-center gap-1.5">
                     <Wallet className="h-3.5 w-3.5" aria-hidden="true" />
                     Prices are indicative
@@ -376,7 +376,7 @@ export default function HowItWorks() {
             />
           </Reveal>
 
-          <div className="mt-9 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {STATUS_ORDER.map((key, i) => {
               const meta = STATUS_META[key];
               return (
@@ -384,13 +384,13 @@ export default function HowItWorks() {
                   <Card className="h-full">
                     <div className="flex items-center gap-2.5">
                       <span className={cn('h-2.5 w-2.5 shrink-0 rounded-full', meta.dot)} aria-hidden="true" />
-                      <p className="font-display text-[15.5px] font-bold">{meta.label}</p>
-                      <span className="ml-auto text-[11px] font-bold tabular-nums text-content-muted">
+                      <p className="font-display text-[16px] font-bold">{meta.label}</p>
+                      <span className="ms-auto text-[12px] font-bold tabular-nums text-content-muted">
                         Step {meta.step + 1}/4
                       </span>
                     </div>
-                    <p className="mt-2.5 text-[13.5px] leading-relaxed text-content-soft text-pretty">{meta.blurb}</p>
-                    <p className="mt-3 border-t border-line pt-3 text-[12.5px] leading-relaxed text-content-muted">
+                    <p className="mt-2.5 text-[14px] leading-relaxed text-content-soft text-pretty">{meta.blurb}</p>
+                    <p className="mt-3 border-t border-line pt-3 text-[13px] leading-relaxed text-content-muted">
                       {STEP_DETAIL[key].sees}
                     </p>
                   </Card>
@@ -404,7 +404,7 @@ export default function HowItWorks() {
               Off the happy path — terminal states
             </h3>
           </Reveal>
-          <div className="grid gap-4 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             {DEAD_ENDS.map((end, i) => {
               const meta = STATUS_META[end.status];
               return (
@@ -421,14 +421,14 @@ export default function HowItWorks() {
                         <end.icon className="h-4 w-4" />
                       </span>
                       <div className="min-w-0">
-                        <p className="flex flex-wrap items-center gap-2 font-display text-[15.5px] font-bold">
+                        <p className="flex flex-wrap items-center gap-2 font-display text-[16px] font-bold">
                           {meta.label}
                           <Badge tone={end.status === STATUS.REJECTED ? 'danger' : 'neutral'} size="sm">
                             Terminal
                           </Badge>
                         </p>
-                        <p className="mt-2 text-[13.5px] leading-relaxed text-content-soft text-pretty">{end.what}</p>
-                        <p className="mt-2.5 text-[12.5px] leading-relaxed text-content-muted">
+                        <p className="mt-2 text-[14px] leading-relaxed text-content-soft text-pretty">{end.what}</p>
+                        <p className="mt-2.5 text-[13px] leading-relaxed text-content-muted">
                           <span className="font-bold text-content-soft">What you do next: </span>
                           {end.next}
                         </p>
@@ -452,7 +452,7 @@ export default function HowItWorks() {
           />
         </Reveal>
 
-        <Stagger className="mt-9 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <Stagger className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {ROLES.map((role, i) => (
             <StaggerItem key={role.key} as="div" className="h-full">
               <Card padding="none" className="flex h-full flex-col overflow-hidden">
@@ -461,13 +461,13 @@ export default function HowItWorks() {
                 >
                   <role.icon className="h-5 w-5 shrink-0" aria-hidden="true" />
                   <p className="font-display text-[17px] font-extrabold tracking-[-0.02em]">{role.label}</p>
-                  <span className="ml-auto text-[11px] font-bold tracking-[0.12em] uppercase opacity-80">
+                  <span className="ms-auto text-[12px] font-bold tracking-[0.12em] uppercase opacity-80">
                     {i === 0 ? 'No account' : 'Signed in'}
                   </span>
                 </div>
                 <div className="flex flex-1 flex-col gap-4 p-5">
                   <div>
-                    <p className="mb-2 text-[11px] font-bold tracking-[0.14em] text-completed uppercase">May do</p>
+                    <p className="mb-2 text-[12px] font-bold tracking-[0.14em] text-completed uppercase">May do</p>
                     <ul className="flex flex-col gap-2">
                       {role.can.map((line) => (
                         <li key={line} className="flex gap-2 text-[13px] leading-snug text-content-soft">
@@ -478,7 +478,7 @@ export default function HowItWorks() {
                     </ul>
                   </div>
                   <div className="mt-auto border-t border-line pt-4">
-                    <p className="mb-2 text-[11px] font-bold tracking-[0.14em] text-rejected uppercase">Cannot</p>
+                    <p className="mb-2 text-[12px] font-bold tracking-[0.14em] text-rejected uppercase">Cannot</p>
                     <ul className="flex flex-col gap-2">
                       {role.cannot.map((line) => (
                         <li key={line} className="flex gap-2 text-[13px] leading-snug text-content-muted">
@@ -497,7 +497,7 @@ export default function HowItWorks() {
         {/* Categories the responsibility map applies to, with their entry price. */}
         <Reveal delay={0.06}>
           <div className="mt-10">
-            <p className="mb-4 flex items-center gap-2 text-[11px] font-bold tracking-[0.16em] text-content-muted uppercase">
+            <p className="mb-4 flex items-center gap-2 text-[12px] font-bold tracking-[0.16em] text-content-muted uppercase">
               <UserCog className="h-3.5 w-3.5" aria-hidden="true" />
               Seven categories, same rules everywhere
             </p>
@@ -511,8 +511,8 @@ export default function HowItWorks() {
                     <span className="grid h-9 w-9 place-items-center rounded-xs bg-canvas-2 text-brand-500 transition-colors group-hover:bg-brand-500/12">
                       <CategoryIcon icon={cat.icon} className="h-4 w-4" />
                     </span>
-                    <span className="font-display text-[13.5px] leading-tight font-bold">{cat.name}</span>
-                    <span className="text-[11.5px] text-content-muted">from {formatPKR(cat.from)}</span>
+                    <span className="font-display text-[14px] leading-tight font-bold">{cat.name}</span>
+                    <span className="text-[12px] text-content-muted">from {formatPKR(cat.from)}</span>
                   </Link>
                 </li>
               ))}
@@ -524,7 +524,7 @@ export default function HowItWorks() {
       {/* ------------------------------------------------------------ (e) FAQ */}
       <Band tone="cloud">
         <div className="mx-auto max-w-[84rem] px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
             <Reveal>
               <SectionHeading
                 eyebrow="Questions we get asked"
@@ -551,7 +551,7 @@ export default function HowItWorks() {
                           type="button"
                           aria-expanded={open}
                           onClick={() => setOpenFaq(open ? '' : faq.q)}
-                          className="flex w-full items-center gap-4 px-5 py-4 text-left"
+                          className="flex w-full items-center gap-4 px-5 py-4 text-start"
                         >
                           <span className="min-w-0 flex-1 font-display text-[15px] leading-snug font-bold tracking-[-0.01em]">
                             {faq.q}
@@ -592,10 +592,10 @@ export default function HowItWorks() {
       <Band tone="ink" className="noise relative overflow-hidden">
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_120%_at_15%_-10%,rgb(108_92_231_/_0.55),transparent_60%),radial-gradient(60%_120%_at_90%_110%,rgb(0_212_200_/_0.35),transparent_60%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_120%_at_15%_-10%,rgb(9_49_141_/_0.55),transparent_60%),radial-gradient(60%_120%_at_90%_110%,rgb(253_129_204_/_0.35),transparent_60%)]"
         />
         <div className="relative mx-auto max-w-[84rem] px-4 py-16 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
             <Reveal>
               <h2 className="max-w-xl font-display text-[30px] leading-[1.04] font-extrabold tracking-[-0.035em] text-white sm:text-[40px]">
                 Read enough. Send your first request, or put your tools on the map.
@@ -619,7 +619,7 @@ export default function HowItWorks() {
                   Register as a provider
                 </Button>
               </div>
-              <p className="mt-4 text-[12.5px] text-cloud-300/60 lg:text-right">
+              <p className="mt-4 text-[13px] text-cloud-300/60 lg:text-end">
                 No card details, no payment, no server — this is a frontend prototype.
               </p>
             </Reveal>

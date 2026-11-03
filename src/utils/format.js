@@ -94,14 +94,14 @@ export function initials(name = '') {
 // Every provider avatar is a deterministic gradient so colours are stable per id.
 export function gradientFor(seed = '') {
   const pairs = [
-    ['#6C5CE7', '#00D4C8'],
-    ['#FF7A1A', '#FFB020'],
-    ['#3B82F6', '#6C5CE7'],
-    ['#00B8AD', '#3B82F6'],
-    ['#EF4444', '#FFB020'],
-    ['#6C5CE7', '#FF7A1A'],
-    ['#10B981', '#00D4C8'],
-    ['#0F1535', '#6C5CE7'],
+    ['#09318D', '#4A6FD0'],
+    ['#FD81CC', '#F0479F'],
+    ['#4A6FD0', '#082A78'],
+    ['#F0479F', '#0B1C46'],
+    ['#8AA9EA', '#09318D'],
+    ['#FB6CC2', '#12285C'],
+    ['#2A4A8F', '#FD81CC'],
+    ['#0B1C46', '#4A6FD0'],
   ];
   let sum = 0;
   for (let i = 0; i < seed.length; i += 1) sum += seed.charCodeAt(i);

@@ -22,7 +22,7 @@ export function Card({ children, className, padding = 'md', as: Tag = 'div', ...
 export function TiltCard({ children, className, contentClassName, tilt = 7, glow = true, as = 'div', ...rest }) {
   const reduce = usePrefersReducedMotion();
   const { ref, style, glow: g, handlers } = useTilt({ max: reduce ? 0 : tilt });
-  const glowBackground = useMotionTemplate`radial-gradient(340px circle at ${g.x} ${g.y}, rgb(108 92 231 / 0.16), transparent 65%)`;
+  const glowBackground = useMotionTemplate`radial-gradient(340px circle at ${g.x} ${g.y}, rgb(9 49 141 / 0.16), transparent 65%)`;
   const Tag = motion[as] ?? motion.div;
 
   return (
@@ -56,7 +56,7 @@ export function Band({ children, className, tone = 'default', id }) {
     default: 'bg-transparent',
     cloud: 'bg-canvas-2/70',
     ink: 'bg-ink-800 text-cloud-100',
-    grad: 'bg-[radial-gradient(120%_90%_at_50%_-10%,rgb(108_92_231_/_0.16),transparent_60%)]',
+    grad: 'bg-[radial-gradient(120%_90%_at_50%_-10%,rgb(9_49_141_/_0.16),transparent_60%)]',
   };
   return (
     <section id={id} className={cn('relative w-full', tones[tone], className)}>

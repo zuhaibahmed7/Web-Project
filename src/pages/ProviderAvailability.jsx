@@ -4,7 +4,7 @@ import { useStore } from '../store/StoreContext';
 import { useToast } from '../components/ui/Toast';
 import { decorateProvider, nextAvailableISO } from '../utils/selectors';
 import { formatDate, formatDayShort, formatTime } from '../utils/format';
-import { WEEKDAYS, isoFromToday } from '../utils/date';
+import { WEEKDAYS, nextDays } from '../utils/date';
 import { hasErrors, runValidation, validTime } from '../utils/validation';
 import { PageHeader } from '../components/layout/PageHeader';
 import { Card } from '../components/ui/Card';
@@ -178,7 +178,7 @@ export default function ProviderAvailability() {
         }
       />
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <div className="min-w-0 space-y-6">
           {/* ------------------------------------------------ working days */}
           <Reveal>
@@ -196,7 +196,7 @@ export default function ProviderAvailability() {
                 </Badge>
               </div>
 
-              <ul className="mt-4 grid gap-2.5 sm:grid-cols-2 xl:grid-cols-3" role="group" aria-label="Working days">
+              <ul className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 xl:grid-cols-3" role="group" aria-label="Working days">
                 {DAY_ORDER.map((dow) => (
                   <li key={dow} className="rounded-sm border border-line bg-canvas-2/50 px-3.5 py-2.5">
                     <Toggle
@@ -255,7 +255,7 @@ export default function ProviderAvailability() {
                       <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand-500/12 text-[12px] font-bold text-brand-600 dark:text-brand-300">
                         {i + 1}
                       </span>
-                      <div className="grid min-w-0 flex-1 gap-x-4 gap-y-1 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] sm:items-center">
+                      <div className="grid grid-cols-1 min-w-0 flex-1 gap-x-4 gap-y-1 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] sm:items-center">
                         <Input
                           id={`slot-start-${i}`}
                           label="From"
@@ -278,7 +278,7 @@ export default function ProviderAvailability() {
                         />
                       </div>
                       <div className="flex items-center justify-between gap-3 sm:justify-end">
-                        <span className="text-[12.5px] font-semibold tabular-nums text-content-muted">
+                        <span className="text-[13px] font-semibold tabular-nums text-content-muted">
                           {slot.start && slot.end && slot.end > slot.start
                             ? `${formatTime(slot.start)} – ${formatTime(slot.end)}`
                             : 'Incomplete'}
@@ -296,7 +296,7 @@ export default function ProviderAvailability() {
                 </ul>
               )}
 
-              <p className="mt-4 flex flex-wrap items-center gap-2 text-[12.5px] text-content-muted">
+              <p className="mt-4 flex flex-wrap items-center gap-2 text-[13px] text-content-muted">
                 <Clock className="h-3.5 w-3.5" aria-hidden="true" />
                 {slots.length} slot{slots.length === 1 ? '' : 's'} · about{' '}
                 {busyHours ? `${Math.round(busyHours / 60)} h of daily capacity` : 'no usable capacity'} across{' '}
@@ -314,7 +314,7 @@ export default function ProviderAvailability() {
                 <Button variant="ghost" icon={Repeat} onClick={resetToSaved}>
                   Discard changes
                 </Button>
-                <span className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-glow-700 dark:text-glow-300">
+                <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-glow-700 dark:text-glow-300">
                   <CircleAlert className="h-3.5 w-3.5" aria-hidden="true" /> Unsaved changes
                 </span>
               </>
@@ -325,7 +325,7 @@ export default function ProviderAvailability() {
         {/* ------------------------------------------------ live preview */}
         <div className="min-w-0 space-y-4 lg:sticky lg:top-24 lg:self-start">
           <Card padding="md" className="overflow-hidden">
-            <p className="text-[11px] font-bold tracking-[0.14em] text-content-muted uppercase">What customers see</p>
+            <p className="text-[12px] font-bold tracking-[0.14em] text-content-muted uppercase">What customers see</p>
             <h2 className="mt-2 font-display text-[17px] font-bold tracking-[-0.02em]">Next bookable slot</h2>
             <p className="mt-1.5 font-display text-[20px] leading-tight font-extrabold tracking-[-0.03em]">
               {nextIso ? (
@@ -342,22 +342,33 @@ export default function ProviderAvailability() {
               )}
             </p>
 
-            <div className="mt-4 flex flex-wrap gap-1.5">
-              {DAY_ORDER.map((dow) => (
-                <span
-                  key={dow}
-                  className={`inline-flex h-7 min-w-9 items-center justify-center rounded-full px-2 text-[11.5px] font-bold ${
-                    days.includes(dow)
-                      ? 'grad-brand text-white'
-                      : 'border border-dashed border-line-strong text-content-muted line-through'
-                  }`}
-                >
-                  {WEEKDAYS[dow]}
-                </span>
-              ))}
-            </div>
+            <ul className="mt-4 grid grid-cols-7 gap-1" aria-label="Availability over the next seven days">
+              {nextDays(7).map((d) => {
+                const open = days.includes(d.dow);
+                return (
+                  <li
+                    key={d.iso}
+                    className={`rounded-sm border px-0.5 py-2 text-center ${
+                      open
+                        ? 'grad-brand border-transparent text-white'
+                        : 'border-dashed border-line-strong bg-canvas-2/60 text-content-muted'
+                    } ${d.isToday ? 'ring-2 ring-aqua-400' : ''}`}
+                  >
+                    <span className="block text-[10px] font-bold uppercase">{d.weekday}</span>
+                    <span className="mt-0.5 block font-display text-[16px] leading-none font-extrabold tabular-nums">
+                      {d.day}
+                    </span>
+                    <span className="mt-1 block text-[10px] font-bold">{open ? 'Open' : 'Off'}</span>
+                  </li>
+                );
+              })}
+            </ul>
+            <p className="mt-2 text-[11px] leading-snug text-content-muted">
+              The seven days from today. Filled dates are selectable in the booking form; <span className="font-semibold">Off</span>{' '}
+              dates cannot be booked.
+            </p>
 
-            <ul className="mt-4 space-y-1.5 text-[12.5px]">
+            <ul className="mt-4 space-y-1.5 text-[13px]">
               {[...slots]
                 .sort((a, b) => String(a.start).localeCompare(String(b.start)))
                 .map((slot) => (
@@ -375,22 +386,15 @@ export default function ProviderAvailability() {
               <Sparkles className="h-4 w-4 text-brand-500" aria-hidden="true" />
               Profile card preview
             </p>
-            <p className="mt-1.5 text-[12.5px] leading-relaxed text-content-soft">
+            <p className="mt-1.5 text-[13px] leading-relaxed text-content-soft">
               {preview?.nextAvailable
                 ? `Your listing will show "Next slot ${formatDayShort(preview.nextAvailable)}" — listings with an open slot are ranked higher in search.`
                 : 'Your listing will show "No open slots this week", which pushes you down the results list.'}
             </p>
-            <ul className="mt-3 space-y-1 text-[12px] text-content-muted">
-              <li>Working days: {days.length ? DAY_ORDER.filter((d) => days.includes(d)).map((d) => WEEKDAYS[d]).join(', ') : 'none'}</li>
-              <li>
-                Next seven days:{' '}
-                {Array.from({ length: 7 }, (_, i) => isoFromToday(i))
-                  .filter((iso) => days.includes(new Date(`${iso}T00:00:00`).getDay()))
-                  .slice(0, 4)
-                  .map((iso) => formatDayShort(iso))
-                  .join(' · ') || 'closed'}
-              </li>
-            </ul>
+            <p className="mt-3 text-[12px] text-content-muted">
+              Working days:{' '}
+              {days.length ? DAY_ORDER.filter((d) => days.includes(d)).map((d) => WEEKDAYS[d]).join(', ') : 'none'}
+            </p>
           </Card>
         </div>
       </div>

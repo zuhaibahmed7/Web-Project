@@ -61,7 +61,7 @@ export default function Providers() {
                   Verified listings only
                 </Badge>
                 <h1 className="mt-3 font-display text-[32px] leading-[1.03] font-extrabold tracking-[-0.035em] sm:text-[44px]">
-                  Every professional on FixNow, in one directory
+                  Every professional on Kaarigar, in one directory
                 </h1>
                 <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-content-soft text-pretty">
                   {verified.length} approved businesses across plumbing, electrical, AC, cleaning, painting, carpentry
@@ -80,7 +80,7 @@ export default function Providers() {
                   },
                 ].map((item) => (
                   <div key={item.k}>
-                    <dt className="flex items-center gap-1.5 text-[11px] font-bold tracking-[0.12em] text-content-muted uppercase">
+                    <dt className="flex items-center gap-1.5 text-[12px] font-bold tracking-[0.12em] text-content-muted uppercase">
                       <item.icon className="h-3.5 w-3.5" aria-hidden="true" />
                       {item.k}
                     </dt>
@@ -98,7 +98,7 @@ export default function Providers() {
       {/* ------------------------------------------------------------- filters */}
       <section className="mx-auto max-w-[84rem] px-4 pb-4 sm:px-6 lg:px-8">
         <Card className="relative z-90 mt-6">
-          <div className="grid gap-x-4 gap-y-1 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)_auto]">
+          <div className="grid grid-cols-1 gap-x-4 gap-y-1 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)_auto]">
             <Input
               label="Search providers"
               icon={Search}
@@ -137,7 +137,7 @@ export default function Providers() {
 
           {/* Category chips: horizontal scroll at 375px, wrapped row from sm up. */}
           <div className="mt-4 border-t border-line pt-4">
-            <p className="mb-2.5 text-[11px] font-bold tracking-[0.14em] text-content-muted uppercase">Category</p>
+            <p className="mb-2.5 text-[12px] font-bold tracking-[0.14em] text-content-muted uppercase">Category</p>
             <div className="no-bar -mx-4 flex gap-2 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:px-0">
               <CategoryChip
                 active={filters.categoryId === 'all'}
@@ -162,7 +162,7 @@ export default function Providers() {
       {/* -------------------------------------------------------------- results */}
       <section className="mx-auto max-w-[84rem] px-4 pt-4 pb-16 sm:px-6 lg:px-8">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-[13.5px] text-content-muted" role="status" aria-live="polite">
+          <p className="text-[14px] text-content-muted" role="status" aria-live="polite">
             {loading ? (
               'Loading verified providers…'
             ) : (
@@ -185,7 +185,7 @@ export default function Providers() {
         </div>
 
         {loading ? (
-          <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3" aria-hidden="true">
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3" aria-hidden="true">
             {Array.from({ length: 6 }).map((_, i) => (
               <li key={i}>
                 <ProviderCardSkeleton />
@@ -210,7 +210,7 @@ export default function Providers() {
             }
           />
         ) : (
-          <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {results.map((provider, i) => (
               <li key={provider.id}>
                 <Reveal delay={Math.min(i, 8) * 0.04} y={16}>
@@ -242,14 +242,14 @@ function CategoryChip({ active, onClick, label, count }) {
       className={cn(
         'inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3.5 py-2 text-[13px] font-semibold whitespace-nowrap transition-[background-color,border-color,color,transform] duration-300 active:scale-95',
         active
-          ? 'grad-brand border-transparent text-white shadow-[0_10px_24px_-16px_rgb(108_92_231_/_0.9)]'
+          ? 'grad-brand border-transparent text-white shadow-[0_10px_24px_-16px_rgb(9_49_141_/_0.9)]'
           : 'border-line bg-surface-2 text-content-muted hover:border-brand-500/40 hover:text-content'
       )}
     >
       {label}
       <span
         className={cn(
-          'rounded-full px-1.5 py-0.5 text-[11px] font-bold tabular-nums',
+          'rounded-full px-1.5 py-0.5 text-[12px] font-bold tabular-nums',
           active ? 'bg-white/22 text-white' : 'bg-canvas-2 text-content-muted'
         )}
       >
