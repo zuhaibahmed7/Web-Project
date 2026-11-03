@@ -1,10 +1,9 @@
 // Seed shop / base addresses keyed by provider slug.
 //
-// They live outside the seeded state for the same reason as src/assets/icons:
-// a returning visitor already has providers saved in localStorage, and adding a
-// field to the seed would need a STATE_VERSION bump (wiping their bookings)
-// before it showed up. A provider's own saved `address` — set in the profile
-// editor — always wins over this map.
+// They live outside the seeded state because a returning visitor already has
+// providers saved in localStorage, and adding a field to the seed would need a
+// STATE_VERSION bump (wiping their bookings) before it showed up. A provider's
+// own saved `address` — set in the profile editor — always wins over this map.
 //
 // Illustrative addresses only (DR-08); no real businesses.
 

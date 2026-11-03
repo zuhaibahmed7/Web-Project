@@ -237,13 +237,12 @@ const en = {
   // ---- provider listing card + category tile
   'card.priceOnRequest': 'Price on request',
   'card.newOn': 'New on Kaarigar',
-  'card.serviceOne': '{count} service',
-  'card.serviceN': '{count} services',
-  'card.jobsDone': '{count} jobs done',
+  'card.reviews': '({count} reviews)',
   'card.nextSlot': 'Next slot {day}',
   'card.noSlots': 'No open slots this week',
   'card.indicative': 'Indicative',
-  'card.viewBook': 'View & book',
+  'card.startingFrom': 'Starting from',
+  'card.viewProfile': 'View profile',
   'tile.proOne': '{count} pro',
   'tile.proN': '{count} pros',
   'tile.noPros': 'No pros listed',
@@ -485,6 +484,7 @@ const en = {
     '© {year} Kaarigar — a frontend prototype built for a university software project.',
   'footer.disclaimer':
     'Sample data only. Prices are indicative and shown in PKR; no real payments or accounts exist in this demo.',
+  'footer.photoCredits': 'Category photos:',
 };
 
 const ur = {
@@ -705,13 +705,12 @@ const ur = {
   // ---- provider listing card + category tile
   'card.priceOnRequest': 'قیمت درخواست پر',
   'card.newOn': 'Kaarigar پر نئے',
-  'card.serviceOne': '{count} سروس',
-  'card.serviceN': '{count} سروسز',
-  'card.jobsDone': '{count} مکمل شدہ کام',
+  'card.reviews': '{count} جائزے',
   'card.nextSlot': 'اگلا سلاٹ {day}',
   'card.noSlots': 'اس ہفتے کوئی جگہ خالی نہیں',
   'card.indicative': 'تخمینی',
-  'card.viewBook': 'دیکھیں اور بک کریں',
+  'card.startingFrom': 'شروع کی قیمت',
+  'card.viewProfile': 'پروفائل دیکھیں',
   'tile.proOne': '{count} ماہر',
   'tile.proN': '{count} ماہرین',
   'tile.noPros': 'کوئی ماہر درج نہیں',
@@ -955,6 +954,7 @@ const ur = {
     '© {year} Kaarigar — یونیورسٹی سافٹ ویئر پروجیکٹ کے لیے بنایا گیا فرنٹ اینڈ پروٹوٹائپ۔',
   'footer.disclaimer':
     'صرف نمونہ ڈیٹا۔ قیمتیں تخمینی ہیں اور PKR میں دکھائی جاتی ہیں؛ اس ڈیمو میں کوئی حقیقی ادائیگی یا اکاؤنٹ موجود نہیں۔',
+  'footer.photoCredits': 'زمرو تصاویر:',
 };
 
 const sd = {
@@ -1175,13 +1175,12 @@ const sd = {
   // ---- provider listing card + category tile
   'card.priceOnRequest': 'قيمت درخواست تي',
   'card.newOn': 'Kaarigar تي نوان',
-  'card.serviceOne': '{count} سروس',
-  'card.serviceN': '{count} سروسون',
-  'card.jobsDone': '{count} مڪمل ٿيل ڪم',
+  'card.reviews': '{count} جائزا',
   'card.nextSlot': 'ايندڙ سلاٽ {day}',
   'card.noSlots': 'هن هفتي ڪا جايخالي نه آهي',
   'card.indicative': 'تخميني',
-  'card.viewBook': 'ڏسو ۽ بُڪ ڪريو',
+  'card.startingFrom': 'شروعاتي قيمت',
+  'card.viewProfile': 'پروفائل ڏسو',
   'tile.proOne': '{count} ماهر',
   'tile.proN': '{count} ماهر',
   'tile.noPros': 'ڪو ماهر درج نه آهي',
@@ -1424,6 +1423,7 @@ const sd = {
     '© {year} Kaarigar — يونيورسٽي سافٽ ويئر پروجيڪٽ لاءِ ٺاهيل فرنٽ اينڊ پوٽوٽائپ.',
   'footer.disclaimer':
     'رڳو نموني ڊيٽا. قيمتون تخميني آهن ۽ PKR ۾ ڏيکاريل آهن؛ هن ڊيمو ۾ ڪا به حقيقي ادائگي يا اکائونٽ ناهي.',
+  'footer.photoCredits': 'درجن جون تصويرون:',
 };
 
 export const DICTIONARIES = { en, ur, sd };

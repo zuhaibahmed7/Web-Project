@@ -1,7 +1,7 @@
 // The 7 service categories from the SRS (section 7.4.4, UC-01).
 // `icon` is a key resolved to a Lucide component in components/ui/CategoryIcon.jsx
-// so this file stays plain data. The full-colour tile artwork lives separately in
-// src/assets/icons/index.js, keyed by `slug`.
+// so this file stays plain data. Listing photography is keyed by `slug` in
+// src/assets/photos/index.js.
 
 export const CATEGORIES = [
   {

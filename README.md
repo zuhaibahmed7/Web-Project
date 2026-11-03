@@ -153,6 +153,16 @@ behind the column of copy with a mask so text never fights it. Used on the landi
 `--ink` variant (which shades with ink rather than the page canvas) on the sign-in story panel and the
 provider pitch card. Override `--hero-photo` on a `.hero-photo` element to swap in a different image.
 
+Listing photography is per category: `public/images/trades/<category-slug>.jpg`, read through the
+generated manifest in `src/assets/photos/index.js`. A slug is listed only while its file exists, so a
+card whose category has no photo falls back to that category's own accent gradient rather than
+rendering a broken image. Every file was opened and looked at before it was kept — a licence filter
+cannot tell an archival survey scan or a watermarked advertisement from a photograph of someone doing
+the job. All are public domain or CC0 except two, which are CC BY and credited in the footer as well
+as here: "Sink repair by female plumber" by [TWP Inc.](https://www.flickr.com/photos/163882903@N04/43619960520)
+and "Carpet Deep Clean" by [flossyflotsam](https://www.flickr.com/photos/8260474@N07/5729073512), both
+on Flickr.
+
 Typography: **Sora** for display/headings, **Inter** for body, on a single tight scale.
 Light mode is the default; the toggle in the navbar persists to `kaarigar.theme`.
 

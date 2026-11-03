@@ -91,7 +91,32 @@ export function Footer({ className }) {
         <div
           className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-cloud-300/60 sm:flex-row sm:items-center sm:justify-between"
         >
-          <p>{t('footer.copyright', { year: new Date().getFullYear() })}</p>
+          <div className="space-y-2">
+            <p>{t('footer.copyright', { year: new Date().getFullYear() })}</p>
+            {/* CC BY obliges the credit to travel with the image, so it is stated
+                here as well as in the README. Author names stay untranslated. */}
+            <p className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
+              <span>{t('footer.photoCredits')}</span>
+              <a
+                href="https://www.flickr.com/photos/163882903@N04/43619960520"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-white/25 underline-offset-2 transition-colors duration-300 hover:text-white"
+              >
+                TWP Inc.
+              </a>
+              <span aria-hidden="true">·</span>
+              <a
+                href="https://www.flickr.com/photos/8260474@N07/5729073512"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-white/25 underline-offset-2 transition-colors duration-300 hover:text-white"
+              >
+                flossyflotsam
+              </a>
+              <span className="text-cloud-300/40">CC BY</span>
+            </p>
+          </div>
           <p>{t('footer.disclaimer')}</p>
         </div>
       </div>
